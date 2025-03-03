@@ -52,6 +52,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   addNewEmployee(): void {
+    
     // Implementation pending
   }
 
