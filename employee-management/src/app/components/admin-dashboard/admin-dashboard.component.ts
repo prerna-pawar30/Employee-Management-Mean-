@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -27,6 +27,7 @@ interface Employee {
     MatButtonModule,
     MatIconModule,
     MatSidenavModule, 
+    RouterLink
   ],
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.css'] // ✅ Fixed to correct format
@@ -53,7 +54,7 @@ export class AdminDashboardComponent implements OnInit {
 
   addNewEmployee(): void {
     
-    // Implementation pending
+    this.router.navigate(['admin/employees/add']);
   }
 
   viewEmployee(id: string): void {

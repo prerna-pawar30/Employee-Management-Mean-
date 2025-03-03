@@ -19,7 +19,8 @@ import {  RouterModule } from '@angular/router';
     MatPaginatorModule,
     MatButtonModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   templateUrl: './employee-form.component.html',
   styleUrl: './employee-form.component.css'
