@@ -1,68 +1,57 @@
 <div class="dashboard-container">
-  <!-- Header -->
-  <mat-toolbar color="primary">
-    <span>Admin Dashboard</span>
-    <span class="spacer"></span>
-    <button mat-button (click)="logout()">Logout</button>
-  </mat-toolbar>
-
-  <!-- Main Content -->
-  <mat-sidenav-container>
-    <mat-sidenav-content>
-      <div class="content">
-        <div class="actions">
-          <button mat-raised-button color="primary" (click)="addNewEmployee()">
-            Add New Employee
-          </button>
-        </div>
-
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>Employee List</mat-card-title>
-          </mat-card-header>
-
-          <mat-card-content>
-            <table mat-table [dataSource]="employees" class="mat-elevation-z8">
-              <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let employee"> {{employee.name}} </td>
-              </ng-container>
-
-              <ng-container matColumnDef="email">
-                <th mat-header-cell *matHeaderCellDef> Email </th>
-                <td mat-cell *matCellDef="let employee"> {{employee.email}} </td>
-              </ng-container>
-
-              <ng-container matColumnDef="mobileNumber">
-                <th mat-header-cell *matHeaderCellDef> Mobile Number </th>
-                <td mat-cell *matCellDef="let employee"> {{employee.mobileNumber}} </td>
-              </ng-container>
-
-              <ng-container matColumnDef="project">
-                <th mat-header-cell *matHeaderCellDef> Project </th>
-                <td mat-cell *matCellDef="let employee"> {{employee.project}} </td>
-              </ng-container>
-
-              <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef> Actions </th>
-                <td mat-cell *matCellDef="let employee">
-                  <button mat-icon-button color="primary" (click)="viewEmployee(employee._id)">
-                    <mat-icon>visibility</mat-icon>
-                  </button>
-                </td>
-              </ng-container>
-
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-          </mat-card-content>
-        </mat-card>
+    <mat-toolbar color="primary">
+      <span>Admin Dashboard</span>
+      <span class="spacer"></span>
+      <button mat-button (click)="logout()">Logout</button>
+    </mat-toolbar>
+  
+    <div class="content">
+      <div class="actions">
+        <button mat-raised-button color="primary" (click)="addNewEmployee()">
+          Add New Employee
+        </button>
       </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-
-  <!-- Footer -->
-  <mat-toolbar color="accent" class="footer">
-    <span>&copy; 2025 Admin Dashboard. All Rights Reserved.</span>
-  </mat-toolbar>
-</div>
+  
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Employee List</mat-card-title>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <table mat-table [dataSource]="employees" class="mat-elevation-z8">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let employee"> {{employee.name}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef> Email </th>
+              <td mat-cell *matCellDef="let employee"> {{employee.email}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="mobileNumber">
+              <th mat-header-cell *matHeaderCellDef> Mobile Number </th>
+              <td mat-cell *matCellDef="let employee"> {{employee.mobileNumber}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="project">
+              <th mat-header-cell *matHeaderCellDef> Project </th>
+              <td mat-cell *matCellDef="let employee"> {{employee.project}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Actions </th>
+              <td mat-cell *matCellDef="let employee">
+                <button mat-icon-button color="primary" (click)="viewEmployee(employee._id)">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
