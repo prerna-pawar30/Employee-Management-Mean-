@@ -1,100 +1,66 @@
-import { Component, Input } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatTableModule } from '@angular/material/table';
-import { MatSortModule } from '@angular/material/sort';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatButtonModule } from '@angular/material/button';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import {  RouterModule } from '@angular/router';
+import { EmployeeService } from '../../services/employee.service';
 
 @Component({
   selector: 'app-employee-form',
-  imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    RouterModule
-  ],
   templateUrl: './employee-form.component.html',
-  styleUrl: './employee-form.component.css'
+  styleUrls: ['./employee-form.component.css']
 })
-export class EmployeeFormComponent {
-  @Input() employeeId?: string;
+export class EmployeeFormComponent implements OnInit {
   employeeForm!: FormGroup;
-  uploadedFiles: { [key: string]: File[] } = {}; // To store uploaded files
+  employeeId: string | null = null;
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    @Inject(EmployeeService) private employeeService: EmployeeService
   ) {}
 
   ngOnInit() {
     this.employeeForm = this.fb.group({
-      name: ['', Validators.required],
-      dob: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      address: ['', Validators.required],
-
+      name: [''],
+      dob: [''],
+      email: [''],
+      phone: [''],
+      address: [''],
       education: this.fb.group({
-        tenth: ['', Validators.required],
-        twelfth: ['', Validators.required],
+        tenth: [''],
+        twelfth: [''],
         diploma: [''],
-        degree: ['', Validators.required]
+        degree: ['']
       }),
-
       officialDetails: this.fb.group({
-        employeeId: ['', Validators.required],
-        department: ['', Validators.required],
-        designation: ['', Validators.required],
-        joiningDate: ['', Validators.required]
-      }),
-
-      achievements: [''],
-      resume: ['']
+        employeeId: [''],
+        department: [''],
+        designation: [''],
+        joiningDate: ['']
+      })
     });
 
     this.route.paramMap.subscribe(params => {
-      this.employeeId = params.get('id') || undefined;
+      this.employeeId = params.get('id');
       if (this.employeeId) {
-        this.loadEmployeeData();
+        this.employeeService.getEmployeeById(this.employeeId).subscribe(data => {
+          this.employeeForm.patchValue(data);
+        });
       }
     });
   }
 
-  loadEmployeeData() {
-    const employeeData = {
-      name: 'John Doe',
-      dob: '1990-05-15',
-      email: 'john.doe@example.com',
-      phone: '1234567890',
-      address: '123 Main St, City, Country',
-      education: { tenth: 85, twelfth: 90, diploma: 'IT', degree: 'B.Tech' },
-      officialDetails: { employeeId: 'EMP123', department: 'IT', designation: 'Software Engineer', joiningDate: '2022-01-10' },
-      achievements: 'Best Employee of 2023',
-      resume: ''
-    };
-    this.employeeForm.patchValue(employeeData);
-  }
-
-  onFileSelect(event: any, key: string) {
-    this.uploadedFiles[key] = Array.from(event.target.files);
-  }
-
   addEmployee() {
-    console.log('Employee Added:', this.employeeForm.value, this.uploadedFiles);
-    this.router.navigate(['/employees']);
+    this.employeeService.addEmployee(this.employeeForm.value).subscribe(() => {
+      this.router.navigate(['/admin/employees']);
+    });
   }
 
   updateEmployee() {
-    console.log('Employee Updated:', this.employeeForm.value, this.uploadedFiles);
-    this.router.navigate(['/employees']);
+    if (this.employeeId) {
+      this.employeeService.updateEmployee(this.employeeId, this.employeeForm.value).subscribe(() => {
+        this.router.navigate(['/admin/employees']);
+      });
+    }
   }
 }

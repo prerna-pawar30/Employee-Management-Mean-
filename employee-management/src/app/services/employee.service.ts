@@ -1,32 +1,32 @@
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
+  private apiUrl = 'http://localhost:5000/api/employees';
 
-  constructor() { }
+  constructor(private http: HttpClient) {}
 
-  http=inject(HttpClient);
-
-  getAllProducts(){
-    return this.http.get<Employee[]>(environment.apiUrl+'/employee');
+  addEmployee(employeeData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/add`, employeeData);
   }
 
-  getProductbyId(id:string){
-    return this.http.get<Employee>(environment.apiUrl+'/employee/' + id);
+  getEmployees(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
   }
 
-  addProduct(model:Employee){
-    return this.http.post(environment.apiUrl +'/employee',model);
+  getEmployeeById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
-  updateProduct(id:string,model:Employee){
-    return this.http.put(environment.apiUrl +'/employee/'+id,model);
+  updateEmployee(id: string, employeeData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, employeeData);
   }
 
-  deleteProduct(id:string){
-    return this.http.delete(environment.apiUrl +'/employee/'+id);
+  deleteEmployee(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }

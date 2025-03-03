@@ -16,6 +16,10 @@ export const routes: Routes = [
         component:LoginComponent,
     },
     {
+        path:'employees',
+        component:EmployeesComponent,
+    },
+    {
         path:'admin-dashboard',
         component:AdminDashboardComponent,
     },
