@@ -13,47 +13,8 @@
 
        
       </div>
-  
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>Employee List</mat-card-title>
-        </mat-card-header>
-        
-        <mat-card-content>
-          <table mat-table [dataSource]="employees" class="mat-elevation-z8">
-            <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef> Name </th>
-              <td mat-cell *matCellDef="let employee"> {{employee.name}} </td>
-            </ng-container>
-  
-            <ng-container matColumnDef="email">
-              <th mat-header-cell *matHeaderCellDef> Email </th>
-              <td mat-cell *matCellDef="let employee"> {{employee.email}} </td>
-            </ng-container>
-  
-            <ng-container matColumnDef="mobileNumber">
-              <th mat-header-cell *matHeaderCellDef> Mobile Number </th>
-              <td mat-cell *matCellDef="let employee"> {{employee.mobileNumber}} </td>
-            </ng-container>
-  
-            <ng-container matColumnDef="project">
-              <th mat-header-cell *matHeaderCellDef> Project </th>
-              <td mat-cell *matCellDef="let employee"> {{employee.project}} </td>
-            </ng-container>
-  
-            <ng-container matColumnDef="actions">
-              <th mat-header-cell *matHeaderCellDef> Actions </th>
-              <td mat-cell *matCellDef="let employee">
-                <button mat-icon-button color="primary" (click)="viewEmployee(employee._id)">
-                  <mat-icon>visibility</mat-icon>
-                </button>
-              </td>
-            </ng-container>
-  
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-        </mat-card-content>
-      </mat-card>
+      <div>
+        <button routerLink="/employee-list">List Employees</button>
+      </div>
     </div>
   </div>

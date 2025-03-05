@@ -1,113 +1,21 @@
-<div class="container">
-    <h1>{{ employeeId ? 'Update Employee' : 'Add New Employee' }}</h1>
-  
-    <form class="form" [formGroup]="employeeForm">
-      <!-- PERSONAL DETAILS -->
-      <h2>Personal Details</h2>
-      <div class="form-group">
-        <mat-form-field class="full-width">
-          <mat-label>Name</mat-label>
-          <input matInput type="text" formControlName="name"/>
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-          <mat-label>Date of Birth</mat-label>
-          <input matInput type="date" formControlName="dob"/>
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-          <mat-label>Email</mat-label>
-          <input matInput type="email" formControlName="email"/>
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-          <mat-label>Phone</mat-label>
-          <input matInput type="tel" formControlName="phone"/>
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-          <mat-label>Address</mat-label>
-          <textarea matInput formControlName="address"></textarea>
-        </mat-form-field>
-      </div>
-  
-      <!-- EDUCATION DETAILS -->
-      <h2>Education Details</h2>
-      <div class="form-group" formGroupName="education">
-        <mat-form-field class="full-width">
-          <mat-label>10th Percentage</mat-label>
-          <input matInput type="number" formControlName="tenth"/>
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-          <mat-label>12th Percentage</mat-label>
-          <input matInput type="number" formControlName="twelfth"/>
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-          <mat-label>Diploma (if any)</mat-label>
-          <input matInput type="text" formControlName="diploma"/>
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-          <mat-label>Degree</mat-label>
-          <input matInput type="text" formControlName="degree"/>
-        </mat-form-field>
-  
-        <label>Upload Mark Sheets:</label>
-        <input type="file" multiple (change)="onFileSelect($event, 'educationDocs')"/>
-      </div>
-  
-      <!-- OFFICIAL DETAILS -->
-      <h2>Official Details</h2>
-      <div class="form-group" formGroupName="officialDetails">
-        <mat-form-field class="full-width">
-          <mat-label>Employee ID</mat-label>
-          <input matInput type="text" formControlName="employeeId"/>
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-          <mat-label>Department</mat-label>
-          <input matInput type="text" formControlName="department"/>
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-          <mat-label>Designation</mat-label>
-          <input matInput type="text" formControlName="designation"/>
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-          <mat-label>Joining Date</mat-label>
-          <input matInput type="date" formControlName="joiningDate"/>
-        </mat-form-field>
-      </div>
-  
-      <!-- ACHIEVEMENTS & CERTIFICATIONS -->
-      <h2>Achievements & Certifications</h2>
-      <div class="form-group">
-        <mat-form-field class="full-width">
-          <mat-label>Achievements</mat-label>
-          <textarea matInput formControlName="achievements"></textarea>
-        </mat-form-field>
-  
-        <label>Upload Certificates:</label>
-        <input type="file" multiple (change)="onFileSelect($event, 'certificates')"/>
-      </div>
-  
-      <!-- RESUME UPLOAD -->
-      <h2>Resume</h2>
-      <div class="form-group">
-        <label>Upload Resume:</label>
-        <input type="file" (change)="onFileSelect($event, 'resume')"/>
-      </div>
-  
-      <!-- SUBMIT BUTTON -->
-      <div class="form-group">
-        <button mat-raised-button color="primary" 
-                [disabled]="employeeForm.invalid"
-                (click)="employeeId ? updateEmployee() : addEmployee()">
-          {{ employeeId ? 'Update' : 'Add' }}
-        </button>
-      </div>
-    </form>
+<form class="form" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Name:</label>
+    <input type="text" formControlName="name" required>
   </div>
+  <div>
+    <label>Email:</label>
+    <input type="email" formControlName="email" required>
+  </div>
+  <div>
+    <label>DOB:</label>
+    <input type="date" formControlName="dob" required>
+  </div>
+  <div>
+    <label>Address:</label>
+    <input type="text" formControlName="address" required>
+  </div>
+  <button type="submit">
+    {{ editingEmployeeId ? 'Update Employee' : 'Add Employee' }}
+  </button>
+</form>

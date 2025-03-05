@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { subscribe } from 'diagnostics_channel';
 
 @Component({
   selector: 'app-employee-list',
@@ -17,6 +18,7 @@ export class EmployeeListComponent {
   email: string = '';
   address: string = '';
   dob: string = '';
+  editingEmployeeId: string|null=null;
 
   constructor(private http: HttpClient) {}
 
@@ -24,6 +26,13 @@ export class EmployeeListComponent {
     this.http.get<any[]>("http://localhost:3000/employee").subscribe((result) => {
       this.employeeList = result;
     });
+  }
+  onEdit(employee: any) {
+    this.editingEmployeeId = employee.id||employee._id;
+    this.name = employee.name;
+    this.email = employee.email;
+    this.address = employee.address;
+    this.dob = employee.dob;
   }
 
   onSubmit() {
@@ -33,6 +42,41 @@ export class EmployeeListComponent {
       address: this.address,
       dob: this.dob
     };
-    console.log("Submitted Data:", newSeller);
+
+
+    if (this.editingEmployeeId) {
+      // Update Employee
+      this.http.put(`http://localhost:3000/employee/${this.editingEmployeeId}`, newSeller)
+        .subscribe(() => {
+          this.getSeller(); // Refresh list
+          this.resetForm();
+        });
+    } else {
+      // Add New Employee
+      this.http.post("http://localhost:3000/employee", newSeller)
+        .subscribe(() => {
+          this.getSeller();
+          this.resetForm();
+        });
+    }
+  }
+
+  // Delete Employee
+  onDelete(employeeId: string) {
+    this.http.delete(`http://localhost:3000/employee/${employeeId}`)
+      .subscribe(() => {
+        this.getSeller();
+      });
+  }
+
+  // Reset form
+  resetForm() {
+    this.name = '';
+    this.email = '';
+    this.address = '';
+    this.dob = '';
+    this.editingEmployeeId = null;
   }
 }
+    // console.log("Submitted Data:", newSeller);
+  
