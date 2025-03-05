@@ -7,6 +7,9 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 // import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { EmployeeDashboardComponent } from './components/employee-dashboard/employee-dashboard.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+
 
 export const routes: Routes = [
     {

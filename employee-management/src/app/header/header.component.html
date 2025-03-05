@@ -1,0 +1,15 @@
+<mat-toolbar color="primary" class="header">
+    <span class="logo">Employee Management System</span>
+    <span class="spacer"></span>
+  
+    <nav class="nav-links">
+      <button mat-button routerLink="/" class="nav-item">Home</button>
+      <button mat-button routerLink="/employees" class="nav-item">Employees</button>
+      <button mat-button routerLink="/profile" class="nav-item">Profile</button>
+    </nav>
+  
+    <button mat-icon-button (click)="logout()" class="logout-btn">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+  </mat-toolbar>
+  

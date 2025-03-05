@@ -6,18 +6,22 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EmployeeService {
+  employeeData: any;
   getStatistics() {
     throw new Error('Method not implemented.');
   }
   private apiUrl = 'http://localhost:3000/employees';
 
   constructor(private http: HttpClient) {}
+  setEmployee(employee: any) {
+    this.employeeData.next(employee);
+  }
 
   addEmployee(employeeData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/add`, employeeData);
   }
 
-  getEmployees(): Observable<any[]> {
+  getEmployees(employee: any): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 
