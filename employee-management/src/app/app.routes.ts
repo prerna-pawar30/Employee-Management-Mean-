@@ -4,8 +4,9 @@ import { AppComponent } from './app.component';
 import { EmployeeFormComponent } from './components/employee-form/employee-form.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
-import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
+// import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
+import { EmployeeDashboardComponent } from './components/employee-dashboard/employee-dashboard.component';
 
 export const routes: Routes = [
     {
@@ -22,8 +23,8 @@ export const routes: Routes = [
         component:AdminDashboardComponent,
     },
     {
-        path:'user-dashboard',
-        component:UserDashboardComponent,
+        path:'employee-dashboard',
+        component:EmployeeDashboardComponent,
     },
 
     {
@@ -35,6 +36,8 @@ export const routes: Routes = [
         path: 'admin/employees/:id',
         component:EmployeeFormComponent,
     },
+
+
 
     {path:'employee-list', component:EmployeeListComponent}
     
