@@ -6,34 +6,23 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EmployeeService {
-  employeeData: any;
-  getStatistics() {
-    throw new Error('Method not implemented.');
-  }
-  private apiUrl = 'http://localhost:3000/employees';
+  private apiUrl = 'http://localhost:3000/employees'; // Change to your actual backend API URL
 
   constructor(private http: HttpClient) {}
-  setEmployee(employee: any) {
-    this.employeeData.next(employee);
-  }
 
-  addEmployee(employeeData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/add`, employeeData);
-  }
-
-  getEmployees(employee: any): Observable<any[]> {
+  getEmployees(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  getEmployeeById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  addEmployee(employee: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, employee);
   }
 
-  updateEmployee(id: string, employeeData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, employeeData);
+  updateEmployee(id: string, employee: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, employee);
   }
 
   deleteEmployee(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
 }
