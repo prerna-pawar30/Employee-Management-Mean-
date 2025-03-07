@@ -6,7 +6,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EmployeeService {
-  private apiUrl = 'http://localhost:3000/employees'; // Change to your actual backend API URL
+  private apiUrl = 'http://localhost:3000/employees'; 
+  private apiUrl1 = 'http://localhost:3000/employee'; 
+  
+  
+
+  // Change to your actual backend API URL
 
   constructor(private http: HttpClient) {}
 
@@ -15,7 +20,7 @@ export class EmployeeService {
   }
 
   addEmployee(employee: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, employee);
+    return this.http.post<any>(this.apiUrl1, employee);
   }
 
   updateEmployee(id: string, employee: any): Observable<any> {
