@@ -1,28 +1,27 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { EmployeeModel } from '../../../model/employee';
+
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
-  private apiUrl = 'http://localhost:3000/employees'; // Change to your actual backend API URL
-
-  constructor(private http: HttpClient) {}
-
-  getEmployees(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  saveAdmin(adminObj: EmployeeModel) {
+    throw new Error('Method not implemented.');
   }
 
-  addEmployee(employee: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, employee);
-  }
-
-  updateEmployee(id: string, employee: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, employee);
-  }
-
-  deleteEmployee(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
-  }
+   constructor(private http: HttpClient) { }
+  
+    private apiUrl = '  http://localhost:3000/employee'; 
+    
+  
+      saveAdmin1(obj : EmployeeModel):Observable<any>{
+       return this.http.post<any>(this.apiUrl,obj)
+      }
+  
+  
 }
