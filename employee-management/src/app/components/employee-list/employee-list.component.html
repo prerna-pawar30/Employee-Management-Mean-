@@ -15,7 +15,13 @@
           <th>Email</th>
           <th>DOB</th>
           <th>Address</th>
-          <th>Actions</th>
+          <th>Department</th>
+          <th>graduation</th>
+          <th>mobNo</th>
+          <th>designation</th>
+          <th>Salary</th>
+          <th>JoiningDate</th>
+          
         </tr>
       </thead>
       <tbody>
@@ -25,6 +31,14 @@
           <td>{{ item.email }}</td>
           <td>{{ item.dob }}</td>
           <td>{{ item.address }}</td>
+          <td>{{ item.deptName }}</td>
+          <td>{{ item.graduation }}</td>
+          <td>{{ item.mobNo }}</td>
+          <td>{{ item.designation }}</td>
+          <td>{{ item.salary }}</td>
+          <td>{{ item.joiningDate }}</td>
+          <td>{{ item.editingEmployeeId }}</td>
+
           <td>
             <button (click)="onEdit(item)">Edit</button>
             <button (click)="onDelete(item.id || item._id)">Delete</button>

@@ -1,17 +1,28 @@
 export class EmployeeModel {
-  id: string;
   name: string;
   email: string;
   mobNo: number;
   deptName: string;
-  password: string;
+  dob:String;
+  address:String;
+  graduation:String;
+  designation:String;
+  salary:String;
+  joiningDate:String;
 
   constructor() {
-    this.id = '';
+   
     this.name = '';
     this.email = '';
     this.mobNo = 0;
     this.deptName = '';
-    this.password = '';
+    this.deptName = '';
+    this.address='';
+    this.graduation='';
+    this.joiningDate='';
+    this.salary='';
+    this.dob='';
+    this.designation='';
+
   }
 }

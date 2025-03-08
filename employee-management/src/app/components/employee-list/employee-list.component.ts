@@ -6,33 +6,47 @@ import { subscribe } from 'diagnostics_channel';
 
 @Component({
   selector: 'app-employee-list',
-  standalone: true,  // ✅ Add this line!
+  standalone: true, // ✅ Add this line!
   imports: [FormsModule, CommonModule, HttpClientModule],
   templateUrl: './employee-list.component.html',
-  styleUrls: ['./employee-list.component.css']  // ✅ Use styleUrls (plural)
+  styleUrls: ['./employee-list.component.css'], // ✅ Use styleUrls (plural)
 })
 export class EmployeeListComponent {
-
   employeeList: any[] = [];
   name: string = '';
   email: string = '';
   address: string = '';
   dob: string = '';
-  editingEmployeeId: string|null=null;
+  deptName: string = '';
+  mobNo: String = '';
+  graduation: String = '';
+  designation: String = '';
+  salary: String = '';
+  joiningDate: String = '';
+  editingEmployeeId: string | null = null;
 
   constructor(private http: HttpClient) {}
 
   getSeller() {
-    this.http.get<any[]>("http://localhost:3000/employee").subscribe((result) => {
-      this.employeeList = result;
-    });
+    this.http
+      .get<any[]>('http://localhost:3000/employee')
+      .subscribe((result) => {
+        this.employeeList = result;
+      });
   }
   onEdit(employee: any) {
-    this.editingEmployeeId = employee.id||employee._id;
+    this.editingEmployeeId = employee.id || employee._id;
     this.name = employee.name;
     this.email = employee.email;
     this.address = employee.address;
     this.dob = employee.dob;
+    this.mobNo = employee.mobNo;
+    this.deptName = employee.deptName;
+
+    this.graduation = employee.graduation;
+    this.designation = employee.designation;
+    this.salary = employee.salary;
+    this.joiningDate = employee.joiningDate;
   }
 
   onSubmit() {
@@ -40,20 +54,31 @@ export class EmployeeListComponent {
       name: this.name,
       email: this.email,
       address: this.address,
-      dob: this.dob
-    };
+      dob: this.dob,
+      mobNo :this.mobNo,
+    deptName : this.deptName,
 
+    graduation : this.graduation,
+    designation : this.designation,
+    salary : this.salary,
+    joiningDate : this.joiningDate,
+    };
 
     if (this.editingEmployeeId) {
       // Update Employee
-      this.http.put(`http://localhost:3000/employee/${this.editingEmployeeId}`, newSeller)
+      this.http
+        .put(
+          `http://localhost:3000/employee/${this.editingEmployeeId}`,
+          newSeller
+        )
         .subscribe(() => {
           this.getSeller(); // Refresh list
           this.resetForm();
         });
     } else {
       // Add New Employee
-      this.http.post("http://localhost:3000/employee", newSeller)
+      this.http
+        .post('http://localhost:3000/employee', newSeller)
         .subscribe(() => {
           this.getSeller();
           this.resetForm();
@@ -63,7 +88,8 @@ export class EmployeeListComponent {
 
   // Delete Employee
   onDelete(employeeId: string) {
-    this.http.delete(`http://localhost:3000/employee/${employeeId}`)
+    this.http
+      .delete(`http://localhost:3000/employee/${employeeId}`)
       .subscribe(() => {
         this.getSeller();
       });
@@ -78,5 +104,4 @@ export class EmployeeListComponent {
     this.editingEmployeeId = null;
   }
 }
-    // console.log("Submitted Data:", newSeller);
-  
+// console.log("Submitted Data:", newSeller);

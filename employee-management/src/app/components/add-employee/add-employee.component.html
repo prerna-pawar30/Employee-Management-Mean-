@@ -17,24 +17,36 @@
                 <input type="text" id="email" [(ngModel)]="adminObj.email" class="form-control">
               </div>
               <div class="col-12">
-                <label for="id">Id</label>
-                <input type="number" id="id" [(ngModel)]="adminObj.id" class="form-control">
+                <label for="id">MobNo</label>
+                <input type="number" id="id" [(ngModel)]="adminObj.mobNo" class="form-control">
               </div>
               <div class="col-12">
-                <label for="mobNo">MobNo</label>
-                <input type="text" id="mobNo" [(ngModel)]="adminObj.mobNo" class="form-control">
+                <label for="mobNo">Department number</label>
+                <input type="text" id="mobNo" [(ngModel)]="adminObj.deptName" class="form-control">
               </div>
               <div class="col-12">
-                <label for="deptName">Dept Name</label>
-                <input type="text" id="deptName" [(ngModel)]="adminObj.deptName" class="form-control">
+                <label for="deptName">Address </label>
+                <input type="text" id="deptName" [(ngModel)]="adminObj.designation" class="form-control">
               </div>
               <div class="col-12">
-                <label for="password">Password</label>
-                <input type="text" id="password" [(ngModel)]="adminObj.password" class="form-control">
+                <label for="password">Dob</label>
+                <input type="text" id="password" [(ngModel)]="adminObj.dob" class="form-control">
+              </div>
+              <div class="col-12">
+                <label for="password">Graduation</label>
+                <input type="text" id="password" [(ngModel)]="adminObj.graduation" class="form-control">
+              </div>
+              <div class="col-12">
+                <label for="password">JoiningDate</label>
+                <input type="text" id="password" [(ngModel)]="adminObj.joiningDate" class="form-control">
+              </div>
+              <div class="col-12">
+                <label for="password">Salary</label>
+                <input type="text" id="password" [(ngModel)]="adminObj.salary" class="form-control">
               </div>
             </div>
             <div class="mt-3">
-              <button (click)="onSaveAdmin()" class="btn btn-primary">Save Employee</button>
+              <button (click)="onSaveAdmin()" class="btn btn-primary">Add Employee</button>
             </div>
           </div>
         </div>
