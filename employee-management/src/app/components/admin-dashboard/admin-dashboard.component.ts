@@ -58,6 +58,6 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   viewEmployee(id: string): void {
-    // Implementation pending
+    
   }
 }
