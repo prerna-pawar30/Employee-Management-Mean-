@@ -3,26 +3,27 @@ export class EmployeeModel {
   email: string;
   mobNo: number;
   deptName: string;
-  dob:String;
-  address:String;
-  graduation:String;
-  designation:String;
-  salary:String;
-  joiningDate:String;
+  dob: string;
+  address: string;
+  graduation: string;
+  designation: string;
+  salary: string;
+  joiningDate: string;
+  marksheet: File | null;
+  resume: File | null;
 
   constructor() {
-   
     this.name = '';
     this.email = '';
     this.mobNo = 0;
     this.deptName = '';
-    this.deptName = '';
-    this.address='';
-    this.graduation='';
-    this.joiningDate='';
-    this.salary='';
-    this.dob='';
-    this.designation='';
-
+    this.address = '';
+    this.graduation = '';
+    this.joiningDate = '';
+    this.salary = '';
+    this.dob = '';
+    this.designation = '';
+    this.marksheet = null;
+    this.resume = null;
   }
 }
