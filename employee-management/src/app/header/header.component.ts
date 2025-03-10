@@ -2,6 +2,7 @@ import { Component, inject, Inject } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -9,9 +10,15 @@ import { Router, RouterLink } from '@angular/router';
   imports:[MatToolbarModule,MatIconModule,RouterLink]
 })
 export class HeaderComponent {
+  authService = inject(AuthService);
   router =inject(Router);
-  logout() {
-    console.log('User logged out');
-    // Implement logout functionality
+  async logout(): Promise<void> {
+    try {
+      await this.authService.logout();
+      await this.router.navigate(['/login']);
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  
   }
 }

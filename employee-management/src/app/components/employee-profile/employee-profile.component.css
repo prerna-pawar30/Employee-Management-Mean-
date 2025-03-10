@@ -2,12 +2,12 @@
     display: flex;
 }
 
-.flex-col {
-    flex-direction: column;
+.justify-center {
+    justify-content: center;
 }
 
-.items-center {
-    align-items: center;
+.w-full {
+    width: 100%;
 }
 
 .mt-10 {
@@ -48,8 +48,4 @@
 
 .mb-4 {
     margin-bottom: 1rem;
-}
-
-.mr-2 {
-    margin-right: 0.5rem;
 }
