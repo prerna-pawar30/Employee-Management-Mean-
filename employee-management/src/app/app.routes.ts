@@ -6,6 +6,8 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { EmployeeDashboardComponent } from './components/employee-dashboard/employee-dashboard.component';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
+import { CheckInOutComponent } from './components/check-in-out/check-in-out.component';
+
 
 export const routes: Routes = [
     {
@@ -29,6 +31,10 @@ export const routes: Routes = [
 
     {path:'employee-list', component:EmployeeListComponent},
 
-    {path:'add-employee', component:AddEmployeeComponent}
+    {path:'add-employee', component:AddEmployeeComponent},
+
+    {path:'checkIn', component:CheckInOutComponent}
+
+   
     
 ];

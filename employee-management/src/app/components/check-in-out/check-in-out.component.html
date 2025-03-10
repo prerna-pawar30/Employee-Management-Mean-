@@ -1,0 +1,33 @@
+<div class="check-in-out">
+    <h2>Check-In/Check-Out</h2>
+  
+    <button (click)="checkIn()" [disabled]="isCheckedIn">Check In</button>
+    <button (click)="checkOut()" [disabled]="!isCheckedIn">Check Out</button>
+  
+    <p *ngIf="isCheckedIn">Timer: {{ elapsedTime }} seconds</p>
+  
+    <h3>History</h3>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Check-In Time</th>
+          <th>Check-Out Time</th>
+          <th>Duration (Minutes)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of history">
+          <td>{{ item.checkInTime | date: 'short' }}</td>
+          <td>{{ item.checkOutTime ? (item.checkOutTime | date: 'short') : 'N/A' }}</td>
+          <td *ngIf="item.duration !== null && item.duration !== undefined">
+            {{ (item.duration / 60000) | number: '1.2-2' }}
+          </td>
+          <td *ngIf="item.duration === null || item.duration === undefined">N/A</td>
+          
+        </tr>
+      </tbody>
+    </table>
+  
+    <button (click)="downloadHistory()">Download History</button>
+  </div>
+  
