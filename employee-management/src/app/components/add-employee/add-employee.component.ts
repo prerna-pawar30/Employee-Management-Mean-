@@ -4,6 +4,8 @@ import { EmployeeService } from '../../services/employee.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-add-employee',
@@ -30,11 +32,20 @@ export class AddEmployeeComponent {
   onSaveEmployee(): void {
     this.employeeService.saveEmployee(this.employee).subscribe(
       () => {
-        alert('Employee Details Saved Successfully');
+        Swal.fire({
+          title: 'Success!',
+          text: 'Employee saved successfully!',
+          icon: 'success',
+          timer: 2000, // Auto-close after 2 seconds
+          showConfirmButton: false
+        }).then(() => {
+          // Redirect to the admin dashboard after alert closes
+          this.router.navigate(['/admin-dashboard']);
+        });
       },
       (error) => {
         console.error('Error saving employee', error);
-        alert('Failed to save employee');
+        Swal.fire('Error!', 'Failed to save employee.', 'error');
       }
     );
   }

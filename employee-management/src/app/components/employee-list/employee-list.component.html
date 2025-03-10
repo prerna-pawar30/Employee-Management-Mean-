@@ -1,11 +1,11 @@
-<div>
-  <button (click)="getSeller()">List Employees</button>
-</div>
+<div class="container mt-4">
+  <div class="text-center mb-3">
+    <button class="btn btn-success" (click)="getSeller()">List Employees</button>
+  </div>
 
-<div class="row">
-  <div class="col-12">
-    <table class="table table-bordered">
-      <thead>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover text-center">
+      <thead class="table-dark">
         <tr>
           <th>#</th>
           <th>Name</th>
@@ -18,7 +18,6 @@
           <th>Designation</th>
           <th>Salary</th>
           <th>Joining Date</th>
-          <th>Documents</th>
           <th>View Documents</th>
           <th>Actions</th>
         </tr>
@@ -37,24 +36,22 @@
           <td>{{ item.salary }}</td>
           <td>{{ item.joiningDate }}</td>
 
-          <!-- <td>
-            <p *ngIf="item.marksheet">Marksheet: {{ item.marksheet }}</p>
-            <p *ngIf="item.resume">Resume: {{ item.resume }}</p>
-          </td> -->
-<!-- 
           <td>
-            <a *ngIf="item.marksheet" [href]="'http://localhost:3000/uploads/' + item.marksheet" download>Download Marksheet</a>
-            <a *ngIf="item.resume" [href]="'http://localhost:3000/uploads/' + item.resume" download>Download Resume</a>
-          </td>
-           -->
-          <td>
-            <button *ngIf="item.marksheet" (click)="viewDocument(item.marksheet)">View Marksheet</button>
-            <button *ngIf="item.resume" (click)="viewDocument(item.resume)">View Resume</button>
+            <button *ngIf="item.marksheetUrl" class="btn btn-info btn-sm" (click)="viewDocument(item.marksheetUrl)">
+              <i class="bi bi-eye"></i> Marksheet
+            </button>
+            <button *ngIf="item.resumeUrl" class="btn btn-warning btn-sm" (click)="viewDocument(item.resumeUrl)">
+              <i class="bi bi-eye"></i> Resume
+            </button>
           </td>
 
           <td>
-            <button (click)="onEdit(item)">Edit</button>
-            <button (click)="onDelete(item._id)">Delete</button>
+            <button class="btn btn-primary btn-sm me-1" (click)="onEdit(item)">
+              <i class="bi bi-pencil"></i> Edit
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="onDelete(item._id)">
+              <i class="bi bi-trash"></i> Delete
+            </button>
           </td>
         </tr>
       </tbody>

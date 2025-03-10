@@ -1,0 +1,18 @@
+<div>
+    <h3>Employee Check-In</h3>
+    <input type="text" [(ngModel)]="employeeId" placeholder="Enter Employee ID" />
+    <button (click)="checkIn()">Check In</button>
+  
+    <div *ngIf="qrCode">
+      <h4>Your QR Code for Check-In</h4>
+      <img [src]="qrCode" alt="Check-in QR Code" />
+    </div>
+  </div>
+
+  
+  <div>
+    <h3>Employee Check-Out</h3>
+    <input type="text" placeholder="Enter Record ID" />
+    <button (click)="checkOut()">Check Out</button>
+  </div>
+  
