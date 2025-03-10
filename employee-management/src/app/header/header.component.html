@@ -1,10 +1,32 @@
 <mat-toolbar color="primary" class="header">
+  @if (authService.isAdmin) {
+    <span class="logo">Admin Information</span>
+    <span class="spacer"></span>
+  }@else {
     <span class="logo">Employee Management System</span>
     <span class="spacer"></span>
+  }
+    
   
     <nav class="nav-links">
-      <button  routerLink="/admin-dashboard" class="nav-item">Admin-dashboard</button>
+
+      <div class="profile">
+
+        @if (authService.isAdmin) {
+          <a routerLink="/admin">{{authService.userName}}</a>
+        }@else {
+          <a routerLink="/employee-profile">{{authService.userName}}</a>
+        }
+        
+      @if (authService.isLoggedIn) {
+        <a routerLink="/leave-employee" class="cursor-pointer ml-2">Leave</a>
+        <a (click)="logout()" class="cursor-pointer ml-2">Logout</a>
+      }@else {
+        <a routerLink="/login" class="cursor-pointer ml-2">Log In</a>
       
+        <a routerLink="/register" class="cursor-pointer ml-2">Register</a>}
+
+    </div>
     </nav>
   </mat-toolbar>
   

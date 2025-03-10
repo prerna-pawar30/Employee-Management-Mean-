@@ -24,37 +24,20 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  private fb = inject(FormBuilder);
-  private authService = inject(AuthService);
-  private router = inject(Router);
+  formbuilder = inject(FormBuilder);
 
-  registerForm: FormGroup = this.fb.group({
+  registerForm = this.formbuilder.group({
+    name: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]]
   });
-
-  errorMessage: string = '';
-
-  async onSubmit(): Promise<void> {
-    if (this.registerForm.invalid) return;
-
-    try {
-      const response = await this.authService.createUser(
-        this.registerForm.value.email,
-        this.registerForm.value.password,
-        'user' // Default role
-      );
-
-      console.log('Registration response:', response);
-
-      if (response.data) {
-        await this.router.navigate(['/login']);
-      } else {
-        this.errorMessage = 'Registration failed. Please try again.';
-      }
-    } catch (error: any) {
-      console.error('Registration error:', error);
-      this.errorMessage = error.response?.data?.error || 'Registration failed';
-    }
-  }
+ authService= inject(AuthService);
+ router = inject(Router);
+  register(){
+  let value = this.registerForm.value;
+  this.authService.register(value.name!, value.email!, value.password!).subscribe(result => {
+    alert("User registered successfully");
+    this.router.navigateByUrl('/login');
+  });
+}
 }

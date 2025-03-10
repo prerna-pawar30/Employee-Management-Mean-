@@ -36,28 +36,10 @@ export class AdminDashboardComponent implements OnInit {
   employees: Employee[] = [];
   displayedColumns: string[] = ['name', 'email', 'mobileNumber', 'project', 'actions'];
 
-  private authService = inject(AuthService); // ✅ Replaced constructor with inject()
-  private router = inject(Router); // ✅ Using inject() for DI
+ authService = inject(AuthService); // ✅ Replaced constructor with inject()
+  router = inject(Router); // ✅ Using inject() for DI
 
   ngOnInit(): void {
     // Employee fetching logic will be added later
-  }
-
-  async logout(): Promise<void> {
-    try {
-      await this.authService.logout();
-      await this.router.navigate(['/login']);
-    } catch (error) {
-      console.error('Logout failed:', error);
-    }
-  }
-
-  addNewEmployee(): void {
-    
-    this.router.navigate(['admin/employees/add']);
-  }
-
-  viewEmployee(id: string): void {
-    
   }
 }

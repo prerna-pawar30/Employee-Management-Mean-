@@ -1,54 +1,70 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import axios, { AxiosResponse } from 'axios';
-import { jwtDecode } from 'jwt-decode'; // ✅ Updated import
+import { HttpClient } from '@angular/common/http';
+import { inject,Injectable } from '@angular/core';
+import { environment } from '../../environments/environment.prod';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:3000/api/auth';
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor() {}
+http = inject(HttpClient);
 
-  async login(email: string, password: string): Promise<AxiosResponse<any>> {  // ✅ Updated type
-    return axios.post(`${this.baseUrl}/login`, { email, password });
+  register(name:string,email:string,password:string){
+    return this.http.post(environment.apiUrl+"/auth/register",{
+      name,
+      email,
+      password,
+    });
   }
 
-  async createUser(email: string, password: string, role: string): Promise<AxiosResponse<any>> {  // ✅ Updated type
-    if (isPlatformBrowser(this.platformId)) {
-      const token = localStorage.getItem('token');
-      return axios.post(
-        `${this.baseUrl}/create-user`, 
-        { email, password, role },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      );
-    }
-    throw new Error('localStorage is not available in SSR mode');
+  login(email:string,password:string){
+    return this.http.post(environment.apiUrl+"/auth/login",{
+      email,
+      password,
+    });
   }
 
-  isAdmin(): boolean {
-    if (isPlatformBrowser(this.platformId)) {
-      const token = localStorage.getItem('token');
-      if (token) {
-        try {
-          const decoded = jwtDecode<{ role: string }>(token); // ✅ Improved typing
-          return decoded.role === 'admin';
-        } catch (error) {
-          return false;
-        }
+  get isLoggedIn(): boolean {
+    return typeof window !== "undefined" && localStorage.getItem("token") !== null;
+  }
+  
+  get isAdmin(): boolean {
+    if (typeof window !== "undefined") {
+      let userData = localStorage.getItem("user");
+      if (userData) {
+        return JSON.parse(userData).isAdmin;
       }
     }
     return false;
   }
-
-  async logout(): Promise<void> {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem('token');
+  
+  get userName(): string | null {
+    if (typeof window !== "undefined") {
+      let userData = localStorage.getItem("user");
+      if (userData) {
+        return JSON.parse(userData).name;
+      }
+    }
+    return null;
+  }
+  
+  get userEmail(): string | null {
+    if (typeof window !== "undefined") {
+      let userData = localStorage.getItem("user");
+      if (userData) {
+        return JSON.parse(userData).email;
+      }
+    }
+    return null;
+  }
+  
+  logout() {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
     }
   }
 }
+  

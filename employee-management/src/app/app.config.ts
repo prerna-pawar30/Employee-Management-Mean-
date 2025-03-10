@@ -4,8 +4,14 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { tokenHttpInterceptor } from './core/token-http-interceptor';
 
 export const appConfig: ApplicationConfig = {
-  providers: [importProvidersFrom(HttpClientModule),provideHttpClient(withFetch()),provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(withEventReplay())]
+  providers: [
+    importProvidersFrom(HttpClientModule),
+    provideHttpClient(withFetch(),withInterceptors([tokenHttpInterceptor])),
+    provideZoneChangeDetection({ eventCoalescing: true }), 
+    provideRouter(routes), 
+    provideClientHydration(withEventReplay())]
 };
