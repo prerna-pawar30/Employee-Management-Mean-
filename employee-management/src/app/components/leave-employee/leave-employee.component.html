@@ -1,0 +1,29 @@
+<h2>Leave Management</h2>
+
+<form (submit)="applyleave()">
+    <input type="text" [(ngModel)]="newleave.employeeId" placeholder="Employee ID" required>
+    <input type="text" [(ngModel)]="newleave.reason" placeholder="Reason" required>
+    <input type="date" [(ngModel)]="newleave.date" required>
+    <button type="submit">Apply Leave</button>
+</form>
+
+<h3>Leave Requests</h3>
+<table>
+    <tr>
+        <th>Employee ID</th>
+        <th>Reason</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    <tr *ngFor="let leave of leaves">
+        <td>{{ leave.employeeId }}</td>
+        <td>{{ leave.reason }}</td>
+        <td>{{ leave.date | date }}</td>
+        <td>{{ leave.status }}</td>
+        <td>
+            <button (click)="updateleave(leave._id, 'Approved')">Approve</button>
+            <button (click)="updateleave(leave._id, 'Rejected')">Reject</button>
+        </td>
+    </tr>
+</table>

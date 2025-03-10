@@ -6,6 +6,7 @@ import { EmployeeModel } from '../../../model/employee';
 @Injectable({
   providedIn: 'root',
 })
+
 export class EmployeeService {
   saveAdmin(adminObj: EmployeeModel) {
     throw new Error('Method not implemented.');
