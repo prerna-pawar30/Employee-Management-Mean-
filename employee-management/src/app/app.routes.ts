@@ -1,12 +1,10 @@
 import { Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 // import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { EmployeeDashboardComponent } from './components/employee-dashboard/employee-dashboard.component';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
-import {LeaveEmployeeComponent } from './components/leave-employee/leave-employee.component';
 
 export const routes: Routes = [
     {
@@ -17,21 +15,35 @@ export const routes: Routes = [
         path:'login',
         component:LoginComponent,
     },
+
+    {
+        path:'register',
+        component:RegisterComponent,
+    },
     
     {
         path:'admin-dashboard',
         component:AdminDashboardComponent,
+        canActivate:[adminGaurd]
     },
     {
         path:'employee-dashboard',
         component:EmployeeDashboardComponent,
+        canActivate:[authGaurd]
     },
 
+    {
+        path:'employee-profile',
+        component:EmployeeProfileComponent,
+        canActivate:[authGaurd]
+    },
 
-    {path:'employee-list', component:EmployeeListComponent},
+    {
+        path:'employee-list', 
+        component:EmployeeListComponent,
+        canActivate:[adminGaurd]
+    },
 
-    {path:'add-employee', component:AddEmployeeComponent},
-
-    {path:'leave-employee',component:LeaveEmployeeComponent},
+    {path:'add-employee', component:AddEmployeeComponent}
     
 ];
