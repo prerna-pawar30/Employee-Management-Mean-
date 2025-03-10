@@ -5,6 +5,10 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { EmployeeDashboardComponent } from './components/employee-dashboard/employee-dashboard.component';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
+import { RegisterComponent } from './components/register/register.component';
+import { adminGaurd } from './core/admin-guard';
+import { authGaurd } from './core/auth-guard';
+import { EmployeeProfileComponent } from './components/employee-profile/employee-profile.component';
 
 export const routes: Routes = [
     {

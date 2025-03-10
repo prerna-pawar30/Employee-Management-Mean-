@@ -9,9 +9,12 @@ export class LeaveService {
   private apiUrl = 'http://localhost:3000/api/leave'; 
   constructor(private http:HttpClient) { }
 
-  applyleave(leave :any){
-    return this.http.post(`${this.apiUrl}/applyleave`,leave);
+  applyleave(leave: any) {
+    console.log("📡 API Request to Backend:", leave); // Debugging
+  
+    return this.http.post(`${this.apiUrl}/applyleave`, leave);
   }
+  
   getAllleave():Observable<any[]>{
     return this.http.get<any[]>(`${this.apiUrl}/all`);
   }

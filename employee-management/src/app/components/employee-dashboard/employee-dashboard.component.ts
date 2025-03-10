@@ -1,10 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-employee-dashboard',
-  imports: [DatePipe],
+  imports: [DatePipe,CommonModule],
   templateUrl: './employee-dashboard.component.html',
   styleUrl: './employee-dashboard.component.css'
 })
