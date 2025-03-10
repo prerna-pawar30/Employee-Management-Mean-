@@ -1,56 +1,21 @@
-
 <div class="container">
-    <div class="row">
+  <h5>Employee Register</h5>
+  <input type="text" [(ngModel)]="employee.name" placeholder="Name" class="form-control">
+  <input type="email" [(ngModel)]="employee.email" placeholder="Email" class="form-control">
+  <input type="number" [(ngModel)]="employee.mobNo" placeholder="Mobile No" class="form-control">
+  <input type="text" [(ngModel)]="employee.deptName" placeholder="Department Name" class="form-control">
+  <input type="text" [(ngModel)]="employee.address" placeholder="Address" class="form-control">
+  <input type="date" [(ngModel)]="employee.dob" placeholder="DOB" class="form-control">
+  <input type="text" [(ngModel)]="employee.graduation" placeholder="Graduation" class="form-control">
+  <input type="text" [(ngModel)]="employee.designation" placeholder="Designation" class="form-control">
+  <input type="text" [(ngModel)]="employee.salary" placeholder="Salary" class="form-control">
+  <input type="date" [(ngModel)]="employee.joiningDate" placeholder="Joining Date" class="form-control">
+
+  <label>SSC Marksheet</label>
+  <input type="file" (change)="onFileSelected($event, 'marksheet')" class="form-control">
   
-      <div class="col-md-8">
-        <!-- Right side: Add Admin Form -->
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Employee Register</h5>
-            <div class="row">
-              <div class="col-12">
-                <label for="name">Name</label>
-                <input type="text" id="name" [(ngModel)]="adminObj.name" class="form-control">
-              </div>
-              <div class="col-12">
-                <label for="email">Email</label>
-                <input type="text" id="email" [(ngModel)]="adminObj.email" class="form-control">
-              </div>
-              <div class="col-12">
-                <label for="id">MobNo</label>
-                <input type="number" id="id" [(ngModel)]="adminObj.mobNo" class="form-control">
-              </div>
-              <div class="col-12">
-                <label for="mobNo">Department number</label>
-                <input type="text" id="mobNo" [(ngModel)]="adminObj.deptName" class="form-control">
-              </div>
-              <div class="col-12">
-                <label for="deptName">Address </label>
-                <input type="text" id="deptName" [(ngModel)]="adminObj.designation" class="form-control">
-              </div>
-              <div class="col-12">
-                <label for="password">Dob</label>
-                <input type="text" id="password" [(ngModel)]="adminObj.dob" class="form-control">
-              </div>
-              <div class="col-12">
-                <label for="password">Graduation</label>
-                <input type="text" id="password" [(ngModel)]="adminObj.graduation" class="form-control">
-              </div>
-              <div class="col-12">
-                <label for="password">JoiningDate</label>
-                <input type="text" id="password" [(ngModel)]="adminObj.joiningDate" class="form-control">
-              </div>
-              <div class="col-12">
-                <label for="password">Salary</label>
-                <input type="text" id="password" [(ngModel)]="adminObj.salary" class="form-control">
-              </div>
-            </div>
-            <div class="mt-3">
-              <button (click)="onSaveAdmin()" class="btn btn-primary">Add Employee</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+  <label>Resume</label>
+  <input type="file" (change)="onFileSelected($event, 'resume')" class="form-control">
+
+  <button (click)="onSaveEmployee()" class="btn btn-primary">Add Employee</button>
+</div>

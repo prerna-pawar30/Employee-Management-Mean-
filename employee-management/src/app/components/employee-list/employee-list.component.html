@@ -2,9 +2,6 @@
   <button (click)="getSeller()">List Employees</button>
 </div>
 
-<!-- Employee Form -->
-
-<!-- Employee Table -->
 <div class="row">
   <div class="col-12">
     <table class="table table-bordered">
@@ -16,12 +13,14 @@
           <th>DOB</th>
           <th>Address</th>
           <th>Department</th>
-          <th>graduation</th>
-          <th>mobNo</th>
-          <th>designation</th>
+          <th>Graduation</th>
+          <th>Mob No</th>
+          <th>Designation</th>
           <th>Salary</th>
-          <th>JoiningDate</th>
-          
+          <th>Joining Date</th>
+          <th>Documents</th>
+          <th>View Documents</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -37,11 +36,25 @@
           <td>{{ item.designation }}</td>
           <td>{{ item.salary }}</td>
           <td>{{ item.joiningDate }}</td>
-          <td>{{ item.editingEmployeeId }}</td>
+
+          <!-- <td>
+            <p *ngIf="item.marksheet">Marksheet: {{ item.marksheet }}</p>
+            <p *ngIf="item.resume">Resume: {{ item.resume }}</p>
+          </td> -->
+<!-- 
+          <td>
+            <a *ngIf="item.marksheet" [href]="'http://localhost:3000/uploads/' + item.marksheet" download>Download Marksheet</a>
+            <a *ngIf="item.resume" [href]="'http://localhost:3000/uploads/' + item.resume" download>Download Resume</a>
+          </td>
+           -->
+          <td>
+            <button *ngIf="item.marksheet" (click)="viewDocument(item.marksheet)">View Marksheet</button>
+            <button *ngIf="item.resume" (click)="viewDocument(item.resume)">View Resume</button>
+          </td>
 
           <td>
             <button (click)="onEdit(item)">Edit</button>
-            <button (click)="onDelete(item.id || item._id)">Delete</button>
+            <button (click)="onDelete(item._id)">Delete</button>
           </td>
         </tr>
       </tbody>
