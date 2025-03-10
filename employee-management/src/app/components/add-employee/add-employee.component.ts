@@ -3,10 +3,11 @@ import { EmployeeModel } from '../../../../model/employee';
 import { EmployeeService } from '../../services/employee.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-employee',
-  imports:[FormsModule],
+  imports:[FormsModule,   CommonModule],
   templateUrl: './add-employee.component.html',
   styleUrls: ['./add-employee.component.css']
 })

@@ -13,24 +13,11 @@ export class EmployeeService {
   saveEmployee(employee: any): Observable<any> {
     const formData = new FormData();
     
-    formData.append("name", employee.name);
-    formData.append("email", employee.email);
-    formData.append("mobNo", employee.mobNo.toString());
-    formData.append("deptName", employee.deptName);
-    formData.append("dob", employee.dob);
-    formData.append("address", employee.address);
-    formData.append("graduation", employee.graduation);
-    formData.append("designation", employee.designation);
-    formData.append("salary", employee.salary);
-    formData.append("joiningDate", employee.joiningDate);
-    
-    if (employee.marksheet) {
-      formData.append("marksheet", employee.marksheet);
-    }
-    
-    if (employee.resume) {
-      formData.append("resume", employee.resume);
-    }
+    Object.keys(employee).forEach(key => {
+      if (employee[key] !== null) {
+        formData.append(key, employee[key]);
+      }
+    });
 
     return this.http.post<any>(this.apiUrl, formData);
   }

@@ -2,14 +2,13 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { subscribe } from 'diagnostics_channel';
 
 @Component({
   selector: 'app-employee-list',
-  standalone: true, // ✅ Add this line!
+  standalone: true,
   imports: [FormsModule, CommonModule, HttpClientModule],
   templateUrl: './employee-list.component.html',
-  styleUrls: ['./employee-list.component.css'], // ✅ Use styleUrls (plural)
+  styleUrls: ['./employee-list.component.css'],
 })
 export class EmployeeListComponent {
   employeeList: any[] = [];
@@ -18,31 +17,33 @@ export class EmployeeListComponent {
   address: string = '';
   dob: string = '';
   deptName: string = '';
-  mobNo: String = '';
-  graduation: String = '';
-  designation: String = '';
-  salary: String = '';
-  joiningDate: String = '';
+  mobNo: string = '';
+  graduation: string = '';
+  designation: string = '';
+  salary: string = '';
+  joiningDate: string = '';
   editingEmployeeId: string | null = null;
 
   constructor(private http: HttpClient) {}
 
   getSeller() {
-    this.http
-      .get<any[]>('http://localhost:3000/employee')
-      .subscribe((result) => {
-        this.employeeList = result;
-      });
+    this.http.get<any[]>('http://localhost:3000/employee').subscribe((result) => {
+      this.employeeList = result.map(employee => ({
+        ...employee,
+        marksheetUrl: `http://localhost:3000/uploads/${employee.marksheet}`,
+        resumeUrl: `http://localhost:3000/uploads/${employee.resume}`
+      }));
+    });
   }
+
   onEdit(employee: any) {
-    this.editingEmployeeId = employee.id || employee._id;
+    this.editingEmployeeId = employee._id;
     this.name = employee.name;
     this.email = employee.email;
     this.address = employee.address;
     this.dob = employee.dob;
     this.mobNo = employee.mobNo;
     this.deptName = employee.deptName;
-
     this.graduation = employee.graduation;
     this.designation = employee.designation;
     this.salary = employee.salary;
@@ -55,30 +56,22 @@ export class EmployeeListComponent {
       email: this.email,
       address: this.address,
       dob: this.dob,
-      mobNo :this.mobNo,
-    deptName : this.deptName,
-
-    graduation : this.graduation,
-    designation : this.designation,
-    salary : this.salary,
-    joiningDate : this.joiningDate,
+      mobNo: this.mobNo,
+      deptName: this.deptName,
+      graduation: this.graduation,
+      designation: this.designation,
+      salary: this.salary,
+      joiningDate: this.joiningDate,
     };
 
     if (this.editingEmployeeId) {
-      // Update Employee
-      this.http
-        .put(
-          `http://localhost:3000/employee/${this.editingEmployeeId}`,
-          newSeller
-        )
+      this.http.put(`http://localhost:3000/employee/${this.editingEmployeeId}`, newSeller)
         .subscribe(() => {
-          this.getSeller(); // Refresh list
+          this.getSeller();
           this.resetForm();
         });
     } else {
-      // Add New Employee
-      this.http
-        .post('http://localhost:3000/employee', newSeller)
+      this.http.post('http://localhost:3000/employee', newSeller)
         .subscribe(() => {
           this.getSeller();
           this.resetForm();
@@ -86,16 +79,13 @@ export class EmployeeListComponent {
     }
   }
 
-  // Delete Employee
   onDelete(employeeId: string) {
-    this.http
-      .delete(`http://localhost:3000/employee/${employeeId}`)
+    this.http.delete(`http://localhost:3000/employee/${employeeId}`)
       .subscribe(() => {
         this.getSeller();
       });
   }
 
-  // Reset form
   resetForm() {
     this.name = '';
     this.email = '';
@@ -103,5 +93,14 @@ export class EmployeeListComponent {
     this.dob = '';
     this.editingEmployeeId = null;
   }
+
+  // ✅ Correctly added inside the class
+  viewDocument(fileName: string) {
+    if (!fileName) {
+      console.error("No file provided.");
+      return;
+    }
+    window.open(`http://localhost:3000/uploads/${fileName}`, "_blank");
+  }
+  
 }
-// console.log("Submitted Data:", newSeller);
