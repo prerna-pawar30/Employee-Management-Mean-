@@ -5,10 +5,14 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { EmployeeDashboardComponent } from './components/employee-dashboard/employee-dashboard.component';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
+
+import { CheckInOutComponent } from './components/check-in-out/check-in-out.component';
+
 import { RegisterComponent } from './components/register/register.component';
 import { adminGaurd } from './core/admin-guard';
 import { authGaurd } from './core/auth-guard';
 import { EmployeeProfileComponent } from './components/employee-profile/employee-profile.component';
+
 
 export const routes: Routes = [
     {
@@ -48,6 +52,10 @@ export const routes: Routes = [
         canActivate:[adminGaurd]
     },
 
-    {path:'add-employee', component:AddEmployeeComponent}
+    {
+        path:'add-employee', 
+        component:AddEmployeeComponent,
+        canActivate:[adminGaurd]
+    }
     
 ];
