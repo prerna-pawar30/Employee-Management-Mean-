@@ -10,7 +10,7 @@ export class LeaveService {
   constructor(private http:HttpClient) { }
 
   applyleave(leave: any) {
-    console.log("📡 API Request to Backend:", leave); // Debugging
+  
   
     return this.http.post(`${this.apiUrl}/applyleave`, leave);
   }

@@ -1,9 +1,9 @@
 <h2>Leave Management</h2>
 
-<form (submit)="applyleave()">
-    <input type="text" [(ngModel)]="newleave.employeeId" placeholder="Employee ID" required>
-    <input type="text" [(ngModel)]="newleave.reason" placeholder="Reason" required>
-    <input type="date" [(ngModel)]="newleave.date" required>
+<form #leaveForm="ngForm" (ngSubmit)="applyleave()">
+    <input type="text" [(ngModel)]="newleave.employeeId" name="employeeId" placeholder="Employee ID" required>
+    <input type="text" [(ngModel)]="newleave.reason" name="reason" placeholder="Reason" required>
+    <input type="date" [(ngModel)]="newleave.date" name="date" required>
     <button type="submit">Apply Leave</button>
 </form>
 

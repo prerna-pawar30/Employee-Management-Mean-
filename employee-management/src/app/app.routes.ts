@@ -1,3 +1,4 @@
+
 import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
@@ -9,9 +10,11 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
 import { CheckInOutComponent } from './components/check-in-out/check-in-out.component';
 
 import { RegisterComponent } from './components/register/register.component';
-import { adminGaurd } from './core/admin-guard';
 import { authGaurd } from './core/auth-guard';
+import { adminGaurd } from './core/admin-guard';
 import { EmployeeProfileComponent } from './components/employee-profile/employee-profile.component';
+import { LeaveEmployeeComponent } from './components/leave-employee/leave-employee.component';
+
 
 
 export const routes: Routes = [
@@ -52,10 +55,22 @@ export const routes: Routes = [
         canActivate:[adminGaurd]
     },
 
-    {
+
+    {path:'add-employee', component:AddEmployeeComponent},
+
+    {path:'checkIn', component:CheckInOutComponent},
+
+      {
         path:'add-employee', 
         component:AddEmployeeComponent,
         canActivate:[adminGaurd]
-    }
+    },
+    
+{
+    path:'leave-employee',
+    component:LeaveEmployeeComponent,
+    canActivate:[authGaurd]
+}
+
     
 ];

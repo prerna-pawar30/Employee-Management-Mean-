@@ -67,4 +67,3 @@ http = inject(HttpClient);
     }
   }
 }
-  

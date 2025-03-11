@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { log } from 'node:console';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -28,14 +29,21 @@ export class EmployeeListComponent {
   constructor(private http: HttpClient) {}
 
   getSeller() {
-    this.http.get<any[]>('http://localhost:3000/employee').subscribe((result) => {
-      this.employeeList = result.map(employee => ({
-        ...employee,
-        marksheetUrl: employee.marksheet ? `http://localhost:3000/uploads/${employee.marksheet}` : null,
-        resumeUrl: employee.resume ? `http://localhost:3000/uploads/${employee.resume}` : null
-      }));
-    });
+    console.log
+    this.http.get<any[]>('http://localhost:3000/employee').subscribe(
+      (result) => {
+        this.employeeList = result.map(employee => ({
+          ...employee,
+          marksheetUrl: employee.marksheet ? `http://localhost:3000/uploads/${employee.marksheet}` : null,
+          resumeUrl: employee.resume ? `http://localhost:3000/uploads/${employee.resume}` : null
+        }));
+      },
+      (error) => {
+        console.error("❌ Error fetching employee list:", error);
+      }
+    );
   }
+  
 
   onEdit(employee: any) {
     console.log(employee);

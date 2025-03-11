@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-
 export class EmployeeService {
   private apiUrl = 'http://localhost:3000/employee';
 
