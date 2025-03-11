@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-employee-list',
   standalone: true,
-  imports: [FormsModule, CommonModule, HttpClientModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.css'],
 })
@@ -28,14 +28,28 @@ export class EmployeeListComponent {
   constructor(private http: HttpClient) {}
 
   getSeller() {
-    this.http.get<any[]>('http://localhost:3000/employee').subscribe((result) => {
-      this.employeeList = result.map(employee => ({
-        ...employee,
-        marksheetUrl: employee.marksheet ? `http://localhost:3000/uploads/${employee.marksheet}` : null,
-        resumeUrl: employee.resume ? `http://localhost:3000/uploads/${employee.resume}` : null
-      }));
+    console.log("req arrived");
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token')}` // Ensure token is set
     });
+  
+    this.http.get<any[]>('http://localhost:3000/employee', { headers }).subscribe(
+      (result) => {
+        console.log("inside get employee", result);
+  
+        this.employeeList = result.map(employee => ({
+          ...employee, 
+          marksheetUrl: employee.marksheet ? `http://localhost:3000/uploads/${employee.marksheet}` : null,
+          resumeUrl: employee.resume ? `http://localhost:3000/uploads/${employee.resume}` : null
+        }));
+      },
+      (error) => {
+        console.error("Error fetching employees:", error);
+      }
+    );
   }
+  
 
   onEdit(employee: any) {
     console.log(employee);
