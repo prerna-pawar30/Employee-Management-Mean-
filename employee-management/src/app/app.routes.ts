@@ -56,9 +56,17 @@ export const routes: Routes = [
     },
 
 
-    {path:'add-employee', component:AddEmployeeComponent},
+    {
+        path:'add-employee',
+        component:AddEmployeeComponent,
+        canActivate:[adminGaurd]
+    },
 
-    {path:'checkIn', component:CheckInOutComponent},
+    {
+        path:'checkIn', 
+        component:CheckInOutComponent,
+        
+    },
 
       {
         path:'add-employee', 
