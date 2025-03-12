@@ -1,31 +1,34 @@
+
 <h2>Leave Management</h2>
 
 <!-- Employee Leave Application Form -->
 <form #leaveForm="ngForm" (ngSubmit)="applyLeave()">
-    <input type="text" [(ngModel)]="newLeave.employeeId" name="employeeId" placeholder="Employee ID" required>
-    <input type="text" [(ngModel)]="newLeave.reason" name="reason" placeholder="Reason" required>
-    <input type="date" [(ngModel)]="newLeave.date" name="date" required>
-    <button type="submit">Apply Leave</button>
+  <input type="text" [(ngModel)]="newLeave.employeeId" name="employeeId" placeholder="Employee ID" required>
+  <input type="text" [(ngModel)]="newLeave.reason" name="reason" placeholder="Reason" required>
+  <input type="date" [(ngModel)]="newLeave.date" name="date" required>
+  <button type="submit">Apply Leave</button>
 </form>
 
-<!-- Admin Section for Leave Requests -->
-<h3>Admin Panel - Leave Requests</h3>
-<table>
+<!-- Admin Section for Leave Requests (Only Visible to Admin) -->
+<div *ngIf="isAdmin">
+  <h3>Admin Panel - Leave Requests</h3>
+  <table>
     <tr>
-        <th>Employee ID</th>
-        <th>Reason</th>
-        <th>Date</th>
-        <th>Status</th>
-        <th>Actions</th>
+      <th>Employee ID</th>
+      <th>Reason</th>
+      <th>Date</th>
+      <th>Status</th>
+      <th>Actions</th>
     </tr>
     <tr *ngFor="let leave of adminLeaves">
-        <td>{{ leave.employeeId }}</td>
-        <td>{{ leave.reason }}</td>
-        <td>{{ leave.date | date }}</td>
-        <td>{{ leave.status }}</td>
-        <td>
-            <button (click)="confirmAction(leave._id, 'Approved')">Approve</button>
-            <button (click)="confirmAction(leave._id, 'Rejected')">Reject</button>
-        </td>
+      <td>{{ leave.employeeId }}</td>
+      <td>{{ leave.reason }}</td>
+      <td>{{ leave.date | date }}</td>
+      <td>{{ leave.status }}</td>
+      <td>
+        <button (click)="confirmAction(leave._id, 'Approved')" [disabled]="leave.status !== 'Pending'">Approve</button>
+        <button (click)="confirmAction(leave._id, 'Rejected')" [disabled]="leave.status !== 'Pending'">Reject</button>
+      </td>
     </tr>
-</table>
+  </table>
+</div>

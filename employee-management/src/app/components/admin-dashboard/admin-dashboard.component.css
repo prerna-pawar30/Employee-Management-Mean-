@@ -1,34 +1,33 @@
+/* 🌟 General Dashboard Styling */
 .dashboard-container {
-  height: 100vh;
+  min-height: 100vh; /* Ensures the full height of the screen */
   display: flex;
   flex-direction: column;
   background-color: #f4f6f8;
   font-family: 'Arial', sans-serif;
 }
 
-/* Responsive Toolbar */
+/* ✅ Admin Toolbar */
 mat-toolbar {
   display: flex;
   align-items: center;
   padding: 10px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #1976d2;
+  color: white;
 }
 
 .spacer {
   flex-grow: 1;
 }
 
-mat-icon {
-  font-size: 24px;
-}
-
-/* Content Styling */
+/* ✅ Content Styling */
 .content {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* Prevents pushing content off-screen */
   text-align: center;
   padding: 30px;
 }
@@ -40,7 +39,7 @@ h2 {
   margin-bottom: 20px;
 }
 
-/* Button Actions */
+/* ✅ Button Actions */
 .actions {
   display: flex;
   justify-content: center;
@@ -52,9 +51,67 @@ button {
   font-size: 16px;
   font-weight: 500;
   padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
 }
 
-/* Responsive Design */
+button:hover {
+  opacity: 0.8;
+}
+
+/* ✅ Leave Management Table */
+table {
+  width: 90%;
+  max-width: 900px;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #1976d2;
+  color: white;
+  font-weight: bold;
+}
+
+td {
+  color: #333;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* ✅ Approve/Reject Buttons */
+.approve-btn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.reject-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.approve-btn, .reject-btn {
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* ✅ Responsive Design */
 @media (max-width: 768px) {
   .actions {
     flex-direction: column;
@@ -64,5 +121,14 @@ button {
 
   button {
     width: 80%;
+  }
+
+  table {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  th, td {
+    padding: 10px;
   }
 }

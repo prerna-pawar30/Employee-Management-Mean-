@@ -1,23 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
-import { CommonModule, DatePipe } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-leave',
   templateUrl: './leave-employee.component.html',
   styleUrls: ['./leave-employee.component.css'],
-  imports:[CommonModule,FormsModule]
+  standalone: true,
+  imports: [CommonModule, FormsModule]
 })
 export class LeaveEmployeeComponent implements OnInit {
   newLeave = { employeeId: '', reason: '', date: '' };
   adminLeaves: any[] = [];
+  isAdmin = false;
 
-  constructor(private http: HttpClient) {}
+  authService = inject(AuthService);
+  http = inject(HttpClient);
 
   ngOnInit() {
-    this.getAllLeaves();
+    this.checkAdminStatus();
+    if (this.isAdmin) {
+      this.getAllLeaves(); // Fetch leave requests only if the user is an admin
+    }
+  }
+
+  // Check if user is an admin
+  checkAdminStatus() {
+    this.isAdmin = this.authService.isAdmin;
   }
 
   // ✅ Get all leave requests for admin
@@ -34,10 +46,16 @@ export class LeaveEmployeeComponent implements OnInit {
 
   // ✅ Apply for leave (Employee)
   applyLeave() {
+    if (!this.newLeave.employeeId || !this.newLeave.reason || !this.newLeave.date) {
+      Swal.fire('Error', 'All fields are required!', 'error');
+      return;
+    }
+
     this.http.post('http://localhost:3000/api/leave/applyleave', this.newLeave).subscribe(
       (response: any) => {
         Swal.fire('Success!', 'Leave request submitted!', 'success');
-        this.getAllLeaves(); // Refresh leave list
+        this.newLeave = { employeeId: '', reason: '', date: '' }; // Reset form
+        if (this.isAdmin) this.getAllLeaves(); // Refresh leave list for admin
       },
       (error) => {
         Swal.fire('Error', 'Failed to submit leave request', 'error');
