@@ -12,9 +12,15 @@ import { CheckInOutComponent } from './components/check-in-out/check-in-out.comp
 import { RegisterComponent } from './components/register/register.component';
 import { authGaurd } from './core/auth-guard';
 import { adminGaurd } from './core/admin-guard';
+<<<<<<< HEAD
 import { LeaveEmployeeComponent } from './components/leave-employee/leave-employee.component';
 // import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
+=======
+import { EmployeeProfileComponent } from './components/employee-profile/employee-profile.component';
+import { LeaveComponent } from './components/leave-employee/leave-employee.component';
+
+>>>>>>> b1870b77c9ec24e4bf111b6bfb96b2fff2475701
 
 
 
@@ -60,8 +66,15 @@ export const routes: Routes = [
     },
 
 
+<<<<<<< HEAD
     {
         path:'add-employee',
+=======
+    {path:'checkIn', component:CheckInOutComponent},
+
+      {
+        path:'add-employee', 
+>>>>>>> b1870b77c9ec24e4bf111b6bfb96b2fff2475701
         component:AddEmployeeComponent,
     
     },
@@ -72,11 +85,20 @@ export const routes: Routes = [
         
     },
     
+<<<<<<< HEAD
     {
         path:'leave-employee',
         component:LeaveEmployeeComponent,
         canActivate:[authGaurd]
     },
+=======
+{
+    path:'leave-employee',
+    component:LeaveComponent,
+    canActivate:[authGaurd]
+},
+
+>>>>>>> b1870b77c9ec24e4bf111b6bfb96b2fff2475701
 
     
 ];

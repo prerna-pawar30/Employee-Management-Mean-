@@ -7,6 +7,9 @@ import { environment } from '../../environments/environment.prod';
   providedIn: 'root'
 })
 export class AuthService {
+  getUserId() {
+    throw new Error('Method not implemented.');
+  }
 
   constructor() {}
 http = inject(HttpClient);
