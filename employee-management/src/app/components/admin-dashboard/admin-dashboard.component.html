@@ -1,68 +1,14 @@
-<!-- <div class="dashboard-container">
- 
-  <mat-toolbar color="primary">
-    <span>Admin Dashboard</span>
-    <span class="spacer"></span>
-    
-  </mat-toolbar>
-
+<div class="dashboard-container">
   <div class="content">
     <h2>Welcome, Admin</h2>
 
-        <div class="actions">
-          <button mat-raised-button color="primary" routerLink="/add-employee">
-            <mat-icon>add</mat-icon> Add New Employee
-          </button>
-          <button mat-raised-button color="accent" routerLink="/employee-list">
-            <mat-icon>list</mat-icon> View Employees
-          </button>
-        </div>
-      </div>
-   <div> -->
-
-
-
-
-    <div class="dashboard-container">
-      <!-- Main Content -->
-      <mat-toolbar color="primary">
-        <span>Admin Dashboard</span>
-        <span class="spacer"></span>
-      </mat-toolbar>
-    
-      <div class="content">
-        <h2>Welcome, Admin</h2>
-    
-        <div class="actions">
-          <button mat-raised-button color="primary" routerLink="/add-employee">
-            <mat-icon>add</mat-icon> Add New Employee
-          </button>
-          <button mat-raised-button color="accent" routerLink="/employee-list">
-            <mat-icon>list</mat-icon> View Employees
-          </button>
-        </div>
-    
-        <!-- Leave Management Section (Visible to Admin Only) -->
-        <h3>Leave Requests</h3>
-        <table>
-          <tr>
-            <th>Employee ID</th>
-            <th>Reason</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-          <tr *ngFor="let leave of adminLeaves">
-            <td>{{ leave.employeeId }}</td>
-            <td>{{ leave.reason }}</td>
-            <td>{{ leave.date | date }}</td>
-            <td>{{ leave.status }}</td>
-            <td>
-              <button (click)="confirmAction(leave._id, 'Approved')">Approve</button>
-              <button (click)="confirmAction(leave._id, 'Rejected')">Reject</button>
-            </td>
-          </tr>
-        </table>
-      </div>
+    <!-- Action Buttons -->
+    <div class="actions">
+      <a mat-raised-button color="primary" [routerLink]="['/add-employee']">
+        <mat-icon>add</mat-icon> Add New Employee
+      </a>
+      <button mat-raised-button color="accent" [routerLink]="['/employee-list']">
+        <mat-icon>list</mat-icon> View Employees
+      </button>
     </div>
-    
+ 

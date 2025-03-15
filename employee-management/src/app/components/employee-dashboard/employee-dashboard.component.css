@@ -1,55 +1,94 @@
-.flex {
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h2, h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  /* Dashboard Container */
+  .dashboard-container {
+    max-width: 600px;
+    background: white;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Buttons */
+  button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  
+  button:not(:disabled) {
+    background: #007bff;
+    color: white;
+  }
+  
+  button:not(:disabled):hover {
+    background: #0056b3;
+  }
+  
+  /* Form Styles */
+  form {
     display: flex;
-}
-
-.flex-col {
     flex-direction: column;
-}
-
-.items-center {
-    align-items: center;
-}
-
-.mt-10 {
-    margin-top: 2.5rem;
-}
-
-.bg-white {
-    background-color: #ffffff;
-}
-
-.p-8 {
-    padding: 2rem;
-}
-
-.rounded {
-    border-radius: 0.5rem;
-}
-
-.shadow-md {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.w-6\/12 {
-    width: 50%;
-}
-
-.sm\:w-96 {
-    width: 24rem;
-}
-
-.text-2xl {
-    font-size: 1.5rem;
-}
-
-.font-bold {
-    font-weight: 700;
-}
-
-.mb-4 {
-    margin-bottom: 1rem;
-}
-
-.mr-2 {
-    margin-right: 0.5rem;
-}
+    gap: 12px;
+    padding: 15px;
+    background: #fff;
+    border-radius: 5px;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  /* Error Message */
+  .error {
+    color: red;
+    font-size: 12px;
+    margin-top: -10px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .dashboard-container {
+      width: 90%;
+      padding: 15px;
+    }
+  }
+  

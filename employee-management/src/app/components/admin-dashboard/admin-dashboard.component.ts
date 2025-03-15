@@ -1,95 +1,61 @@
-
-import { Component, OnInit, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { MatIcon } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatTableModule } from '@angular/material/table';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSidenavModule } from '@angular/material/sidenav';
-
-interface Employee {
-  _id: string;
-  name: string;
-  email: string;
-  mobileNumber: string;
-  project: string;
-}
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSidenavModule
-  ],
   templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.css']
+  styleUrls: ['./admin-dashboard.component.css'],
+  imports:[MatIcon,CommonModule,RouterModule]
 })
 export class AdminDashboardComponent implements OnInit {
-  employees: Employee[] = [];
-  displayedColumns: string[] = ['name', 'email', 'mobileNumber', 'project', 'actions'];
-  adminLeaves: any[] = [];
+  allLeaveRequests: any[] = [];
 
-  authService = inject(AuthService);
-  router = inject(Router);
-  http = inject(HttpClient);
+  constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
-    if (!this.authService.isAdmin) {
-      this.router.navigateByUrl('/'); // Redirect non-admin users
-    } else {
-      this.getAllLeaves(); // Load leave requests if admin
-    }
+  ngOnInit() {
+    this.fetchLeaveRequests();
   }
 
-  // Fetch all leave requests for admin
-  getAllLeaves() {
-    this.http.get<any[]>('http://localhost:3000/api/leave/all').subscribe(
-      (data) => {
-        this.adminLeaves = data;
+  fetchLeaveRequests() {
+    this.http.get<any[]>('http://localhost:3000/api/leave/all').subscribe({
+      next: (data) => {
+        console.log('Fetched leave requests:', data); // Debugging
+        this.allLeaveRequests = data;
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching leave requests:', error);
-      }
-    );
-  }
-
-  // Confirm before approving/rejecting leave
-  confirmAction(leaveId: string, status: string) {
-    Swal.fire({
-      title: `Are you sure?`,
-      text: `Do you want to mark this leave as ${status}?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: `Yes, ${status}`,
-      cancelButtonText: 'Cancel'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.updateLeaveStatus(leaveId, status);
+        Swal.fire('Error', 'Failed to fetch leave requests.', 'error');
       }
     });
   }
-
-  // Update leave status
+  
+  // Update leave request status (Approve/Reject)
   updateLeaveStatus(leaveId: string, status: string) {
-    this.http.put(`http://localhost:3000/api/leave/update/${leaveId}`, { status }).subscribe(
-      () => {
-        Swal.fire('Updated!', `Leave marked as ${status}`, 'success');
-        this.getAllLeaves(); // Refresh leave list
-      },
-      (error) => {
-        Swal.fire('Error', 'Failed to update leave status', 'error');
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `Do you want to ${status.toLowerCase()} this leave request?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: `Yes, ${status.toLowerCase()} it!`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.http.put(`/api/leave/update/${leaveId}`, { status }).subscribe(
+          () => {
+            Swal.fire('Updated!', `Leave request has been ${status.toLowerCase()}.`, 'success');
+            this.fetchLeaveRequests(); // Refresh the leave list after update
+          },
+          (error) => {
+            console.error('Error updating leave status', error);
+            Swal.fire('Error', 'Failed to update leave request.', 'error');
+          }
+        );
       }
-    );
+    });
   }
 }

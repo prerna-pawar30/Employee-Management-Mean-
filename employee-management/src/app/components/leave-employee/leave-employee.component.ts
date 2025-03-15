@@ -1,92 +1,86 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import Swal from 'sweetalert2';
 import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+
+interface LeaveRequest {
+  _id: string;
+  employeeId: { _id: string; name: string; email: string };
+  reason: string;
+  date: string;
+  status: string;
+}
 
 @Component({
   selector: 'app-leave',
   templateUrl: './leave-employee.component.html',
   styleUrls: ['./leave-employee.component.css'],
-  standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [MatTableModule, MatPaginatorModule, MatSortModule, CommonModule]
 })
-export class LeaveEmployeeComponent implements OnInit {
-  newLeave = { employeeId: '', reason: '', date: '' };
-  adminLeaves: any[] = [];
-  isAdmin = false;
+export class LeaveComponent implements OnInit {
+  leaveRequests: LeaveRequest[] = [];
+  displayedColumns: string[] = ['employee', 'email', 'reason', 'date', 'status', 'actions'];
+  isAdmin: boolean = false;
+  loading: boolean = false;
 
   authService = inject(AuthService);
   http = inject(HttpClient);
+  snackBar = inject(MatSnackBar);
 
-  ngOnInit() {
-    this.checkAdminStatus();
-    if (this.isAdmin) {
-      this.getAllLeaves(); // Fetch leave requests only if the user is an admin
-    }
+  async ngOnInit(): Promise<void> {
+    this.isAdmin = await this.authService.isAdmin;
+    this.getLeaveRequests();
   }
 
-  // Check if user is an admin
-  checkAdminStatus() {
-    this.isAdmin = this.authService.isAdmin;
-  }
+  getLeaveRequests() {
+    this.loading = true;
+    const apiUrl = this.isAdmin
+      ? 'http://localhost:3000/api/leave/all'
+      : `http://localhost:3000/api/leave/${this.authService.getUserId()}`;
 
-  // ✅ Get all leave requests for admin
-  getAllLeaves() {
-    this.http.get<any[]>('http://localhost:3000/api/leave/all').subscribe(
+    this.http.get<LeaveRequest[]>(apiUrl).subscribe(
       (data) => {
-        this.adminLeaves = data;
+        this.leaveRequests = data;
+        this.loading = false;
       },
       (error) => {
         console.error('Error fetching leave requests:', error);
+        this.snackBar.open('Failed to fetch leave requests.', 'Close', { duration: 3000 });
+        this.loading = false;
       }
     );
   }
 
-  // ✅ Apply for leave (Employee)
-  applyLeave() {
-    if (!this.newLeave.employeeId || !this.newLeave.reason || !this.newLeave.date) {
-      Swal.fire('Error', 'All fields are required!', 'error');
-      return;
-    }
-
-    this.http.post('http://localhost:3000/api/leave/applyleave', this.newLeave).subscribe(
-      (response: any) => {
-        Swal.fire('Success!', 'Leave request submitted!', 'success');
-        this.newLeave = { employeeId: '', reason: '', date: '' }; // Reset form
-        if (this.isAdmin) this.getAllLeaves(); // Refresh leave list for admin
-      },
-      (error) => {
-        Swal.fire('Error', 'Failed to submit leave request', 'error');
-      }
-    );
-  }
-
-  // ✅ Confirm before approving/rejecting
   confirmAction(leaveId: string, status: string) {
+    const formattedStatus = status.toLowerCase();
+
     Swal.fire({
       title: `Are you sure?`,
-      text: `Do you want to mark this leave as ${status}?`,
+      text: `Do you want to mark this leave as ${formattedStatus}?`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: `Yes, ${status}`,
+      confirmButtonText: `Yes, ${formattedStatus}`,
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.updateLeaveStatus(leaveId, status);
+        this.updateLeaveStatus(leaveId, formattedStatus);
       }
     });
   }
 
-  // ✅ Update leave status
   updateLeaveStatus(leaveId: string, status: string) {
     this.http.put(`http://localhost:3000/api/leave/update/${leaveId}`, { status }).subscribe(
       () => {
-        Swal.fire('Updated!', `Leave marked as ${status}`, 'success');
-        this.getAllLeaves(); // Refresh leave list
+        this.snackBar.open(`Leave marked as ${status}`, 'Close', { duration: 3000 });
+        this.getLeaveRequests();
       },
       (error) => {
+        console.error("Error updating leave:", error);
         Swal.fire('Error', 'Failed to update leave status', 'error');
       }
     );

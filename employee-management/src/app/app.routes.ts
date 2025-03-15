@@ -13,7 +13,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { authGaurd } from './core/auth-guard';
 import { adminGaurd } from './core/admin-guard';
 import { EmployeeProfileComponent } from './components/employee-profile/employee-profile.component';
-import { LeaveEmployeeComponent } from './components/leave-employee/leave-employee.component';
+import { LeaveComponent } from './components/leave-employee/leave-employee.component';
+
 
 
 
@@ -56,8 +57,6 @@ export const routes: Routes = [
     },
 
 
-    {path:'add-employee', component:AddEmployeeComponent},
-
     {path:'checkIn', component:CheckInOutComponent},
 
       {
@@ -68,9 +67,10 @@ export const routes: Routes = [
     
 {
     path:'leave-employee',
-    component:LeaveEmployeeComponent,
+    component:LeaveComponent,
     canActivate:[authGaurd]
-}
+},
+
 
     
 ];
