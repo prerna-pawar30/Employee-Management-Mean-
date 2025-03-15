@@ -14,7 +14,7 @@
       <div class="profile">
 
         @if (authService.isAdmin) {
-          <a routerLink="/admin">{{authService.userName}}</a>
+          <a routerLink="/admin-profile">{{authService.userName}}</a>
         }@else {
           <a routerLink="/employee-profile">{{authService.userName}}</a>
         }

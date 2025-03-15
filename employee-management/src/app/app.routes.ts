@@ -14,6 +14,8 @@ import { authGaurd } from './core/auth-guard';
 import { adminGaurd } from './core/admin-guard';
 import { EmployeeProfileComponent } from './components/employee-profile/employee-profile.component';
 import { LeaveEmployeeComponent } from './components/leave-employee/leave-employee.component';
+// import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
 
 
 
@@ -37,6 +39,7 @@ export const routes: Routes = [
         component:AdminDashboardComponent,
         canActivate:[adminGaurd]
     },
+
     {
         path:'employee-dashboard',
         component:EmployeeDashboardComponent,
@@ -50,6 +53,12 @@ export const routes: Routes = [
     },
 
     {
+        path:'admin-profile',
+        component:AdminProfileComponent,
+        canActivate:[adminGaurd]
+    },
+
+    {
         path:'employee-list', 
         component:EmployeeListComponent,
         canActivate:[adminGaurd]
@@ -59,7 +68,7 @@ export const routes: Routes = [
     {
         path:'add-employee',
         component:AddEmployeeComponent,
-        canActivate:[adminGaurd]
+    
     },
 
     {
@@ -67,18 +76,12 @@ export const routes: Routes = [
         component:CheckInOutComponent,
         
     },
-
-      {
-        path:'add-employee', 
-        component:AddEmployeeComponent,
-        canActivate:[adminGaurd]
-    },
     
-{
-    path:'leave-employee',
-    component:LeaveEmployeeComponent,
-    canActivate:[authGaurd]
-}
+    {
+        path:'leave-employee',
+        component:LeaveEmployeeComponent,
+        canActivate:[authGaurd]
+    },
 
     
 ];
