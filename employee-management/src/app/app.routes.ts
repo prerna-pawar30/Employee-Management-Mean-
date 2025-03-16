@@ -1,4 +1,5 @@
 
+
 import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
@@ -18,6 +19,9 @@ import { adminGaurd } from './core/admin-guard';
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
 
 import { LeaveComponent } from './components/leave-employee/leave-employee.component';
+import { EmployeeleaveComponent } from './employee-leave/employee-leave.component';
+import path from 'node:path';
+import { Component } from '@angular/core';
 
 
 export const routes: Routes = [
@@ -79,6 +83,10 @@ export const routes: Routes = [
        component:LeaveComponent,
        canActivate: [authGaurd]
     },
-
+    {
+        path:'employee-leave',
+    component:EmployeeleaveComponent
+    }
     
 ];
+

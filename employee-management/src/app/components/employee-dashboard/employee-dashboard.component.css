@@ -1,94 +1,54 @@
-/* General Styles */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-  }
-  
-  h2, h3 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 15px;
-  }
-  
-  /* Dashboard Container */
-  .dashboard-container {
-    max-width: 600px;
-    background: white;
-    margin: 40px auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Buttons */
-  button {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-    transition: background 0.3s ease-in-out;
-  }
-  
-  button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-  }
-  
-  button:not(:disabled) {
-    background: #007bff;
-    color: white;
-  }
-  
-  button:not(:disabled):hover {
-    background: #0056b3;
-  }
-  
-  /* Form Styles */
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 15px;
-    background: #fff;
-    border-radius: 5px;
-  }
-  
-  label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #333;
-  }
-  
-  input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    width: 100%;
-  }
-  
-  input:focus {
-    border-color: #007bff;
-    outline: none;
-  }
-  
-  /* Error Message */
-  .error {
-    color: red;
-    font-size: 12px;
-    margin-top: -10px;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .dashboard-container {
-      width: 90%;
-      padding: 15px;
-    }
-  }
-  
+.card {
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 25px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3 {
+  font-weight: bold;
+}
+
+.btn-lg {
+  padding: 12px 20px;
+  font-size: 18px;
+  border-radius: 8px;
+}
+
+.btn-success {
+  background: #28a745;
+  border: none;
+  transition: background 0.3s ease-in-out;
+}
+
+.btn-success:hover {
+  background: #218838;
+}
+
+.btn-danger {
+  background: #dc3545;
+  border: none;
+  transition: background 0.3s ease-in-out;
+}
+
+.btn-danger:hover {
+  background: #c82333;
+}
+
+.table {
+  margin-top: 20px;
+}
+
+.table thead {
+  background: #343a40;
+  color: white;
+}
+
+.table-hover tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.text-success {
+  font-size: 20px;
+  font-weight: bold;
+}

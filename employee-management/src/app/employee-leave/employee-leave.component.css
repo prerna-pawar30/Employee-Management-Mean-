@@ -1,0 +1,40 @@
+.card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #ffffff;
+  }
+  
+  h3 {
+    color: #333;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-control {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .btn-success {
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .btn-success:hover {
+    background: #218838;
+  }
+  
+  .text-danger {
+    font-size: 14px;
+  }
+  
+  .shadow-sm {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  

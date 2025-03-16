@@ -1,48 +1,71 @@
-<h2>Employee Dashboard</h2>
+<div class="container mt-5">
+  <div class="card bg-white p-4 rounded shadow-sm w-75 mx-auto">
+      <h2 class="text-center mb-4 text-primary">Employee Dashboard</h2>
 
-<!-- Check-in/Check-out Buttons -->
-<button (click)="checkIn()" [disabled]="isCheckedIn">Check In</button>
-<button (click)="checkOut()" [disabled]="!isCheckedIn">Check Out</button>
+      <!-- Employee Info -->
+      <div class="mb-4 text-center">
+          <p><strong>Name:</strong> {{ authService.userName }}</p>
+          <p><strong>Employee ID:</strong> {{ employeeId }}</p>
+      </div>
 
+      <!-- Check-In & Check-Out Buttons -->
+      <div class="mb-4 d-flex justify-content-center">
+          <button class="btn btn-success btn-lg mr-3"
+              (click)="checkIn()" [disabled]="isCheckedIn">
+              Start Work
+          </button>
 
-<h3>Request Leave</h3>
-<form #leaveForm="ngForm" (ngSubmit)="submitLeaveRequest()">
-  <label for="employeeId">Employee ID</label>
-  <input 
-    type="text"
-    id="employeeId" 
-    name="employeeId" 
-    [(ngModel)]="newLeaveRequest.employeeId" 
-    placeholder="Employee ID " 
-   
-  />
+          <button class="btn btn-danger btn-lg" 
+              (click)="checkOut()" [disabled]="!isCheckedIn">
+              Stop Work
+          </button>
+      </div>
 
-  <label for="reason">Leave Reason</label>
-  <input 
-    type="text" 
-    id="reason" 
-    name="reason" 
-    [(ngModel)]="newLeaveRequest.reason" 
-    placeholder="Enter Leave Reason" 
-    required 
-    #reason="ngModel"
-  />
-  <div *ngIf="reason.invalid && reason.touched" class="error">
-    Leave reason is required.
+      <!-- Work Duration & Last Check-In/Out -->
+      <div class="text-center">
+          <p *ngIf="lastCheckIn" class="font-weight-bold">
+              <i class="fas fa-clock text-warning"></i> Last Check-In: {{ lastCheckIn | date: 'short' }}
+          </p>
+          <p *ngIf="lastCheckOut" class="font-weight-bold">
+              <i class="fas fa-clock text-secondary"></i> Last Check-Out: {{ lastCheckOut | date: 'short' }}
+          </p>
+          <p class="text-lg font-weight-bold mt-3 text-success">
+              Work Duration: {{ formatTime(elapsedTime) }}
+          </p>
+      </div>
+
+      <hr class="my-4">
+
+      <!-- Work History Table -->
+      <h3 class="text-center mb-4 text-info">Work History</h3>
+      <div class="table-responsive">
+          <table class="table table-bordered table-hover">
+              <thead class="thead-dark">
+                  <tr>
+                      <th scope="col">Date</th>
+                      <th scope="col">Check-In</th>
+                      <th scope="col">Check-Out</th>
+                      <th scope="col">Total Hours</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let record of workRecords">
+                      <td>{{ record.date | date:'shortDate' }}</td>
+                      <td>{{ record.checkInTime | date:'shortTime' }}</td>
+                      <td>{{ record.checkOutTime ? (record.checkOutTime | date:'shortTime') : 'Pending' }}</td>
+                      <td>{{ record.checkOutTime ? formatTime(record.duration) : 'In Progress' }}</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+
+      <hr class="my-4">
+
+      <!-- Leave Form Button -->
+      <div class="text-center">
+          <a routerLink="/employee-leave" class="btn btn-primary btn-lg">
+              <i class="fas fa-calendar-alt"></i> Request Leave
+          </a>
+      </div>
   </div>
-
-  <label for="date">Leave Date</label>
-  <input 
-    type="date" 
-    id="date" 
-    name="date" 
-    [(ngModel)]="newLeaveRequest.date" 
-    required 
-    #date="ngModel"
-  />
-  <div *ngIf="date.invalid && date.touched" class="error">
-    Leave date is required.
-  </div>
-
-  <button type="submit" [disabled]="leaveForm.invalid">Submit Leave Request</button>
-</form> 
+</div>
