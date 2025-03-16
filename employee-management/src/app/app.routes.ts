@@ -84,8 +84,8 @@ export const routes: Routes = [
        canActivate: [authGaurd]
     },
     {
-        path:'employee-leave',
-    component:EmployeeleaveComponent
+        path:'employee-leave-form',
+        component:EmployeeleaveComponent,
     }
     
 ];
