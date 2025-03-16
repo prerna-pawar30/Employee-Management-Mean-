@@ -62,6 +62,17 @@ http = inject(HttpClient);
     }
     return null;
   }
+  //i am giving manali type it
+  getCurrentUser(): { _id: string; name: string; email: string } | null {
+    if (typeof window !== "undefined") {
+      const userData = localStorage.getItem("user");
+      if (userData) {
+        return JSON.parse(userData);
+      }
+    }
+    return null;
+  }
+
   
   logout() {
     if (typeof window !== "undefined") {

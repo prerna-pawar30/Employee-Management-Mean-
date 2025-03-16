@@ -30,3 +30,4 @@ export class LeaveService {
     return this.http.put(`${this.apiUrl}/update/${leaveId}`, { status });
   }
 }
+
