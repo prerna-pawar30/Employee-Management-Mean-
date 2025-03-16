@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { LeaveService } from '../services/leave.service';
+import { LeaveService } from '../../services/leave.service';
 
 @Component({
   selector: 'app-employee-dashboard',
@@ -16,7 +16,7 @@ export class EmployeeleaveComponent implements OnInit {
   isCheckedIn: boolean = false;
   newLeaveRequest = { employeeId: '', reason: '', date: '' };
 
-  constructor(private http: HttpClient, private leaveService : LeaveService) {}
+  constructor(private http: HttpClient, @Inject(LeaveService) private leaveService : LeaveService) {}
 
   ngOnInit() {
    

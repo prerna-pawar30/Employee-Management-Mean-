@@ -14,8 +14,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { authGaurd } from './core/auth-guard';
 import { adminGaurd } from './core/admin-guard';
 import { EmployeeProfileComponent } from './components/employee-profile/employee-profile.component';
-import { LeaveComponent } from './components/leave-employee/leave-employee.component';
-import { EmployeeleaveComponent } from './employee-leave/employee-leave.component';
+import { LeaveComponent } from './components/leave-employee-admin/leave-employee.component';
+import { EmployeeleaveComponent } from './components/employee-leave/employee-leave.component';
 
 
 

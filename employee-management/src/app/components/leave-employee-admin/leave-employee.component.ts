@@ -7,10 +7,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 interface LeaveRequest {
   _id: string;
-  employeeId: { _id: string; name: string; email: string };
+  employeeId?: { _id: string; name: string; email: string };  // Allow optional to prevent errors
   reason: string;
   date: string;
   status: string;
@@ -19,8 +20,8 @@ interface LeaveRequest {
 @Component({
   selector: 'app-leave',
   templateUrl: './leave-employee.component.html',
-  styleUrls: ['./leave-employee.component.css'],
-  imports: [MatTableModule, MatPaginatorModule, MatSortModule, CommonModule]
+  imports: [MatTableModule, MatPaginatorModule, MatSortModule, CommonModule, MatProgressSpinnerModule]
+
 })
 export class LeaveComponent implements OnInit {
   leaveRequests: LeaveRequest[] = [];
@@ -57,18 +58,16 @@ export class LeaveComponent implements OnInit {
   }
 
   confirmAction(leaveId: string, status: string) {
-    const formattedStatus = status.toLowerCase();
-
     Swal.fire({
       title: `Are you sure?`,
-      text: `Do you want to mark this leave as ${formattedStatus}?`,
+      text: `Do you want to mark this leave as ${status.toLowerCase()}?`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: `Yes, ${formattedStatus}`,
+      confirmButtonText: `Yes, ${status.toLowerCase()}`,
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.updateLeaveStatus(leaveId, formattedStatus);
+        this.updateLeaveStatus(leaveId, status.toLowerCase());
       }
     });
   }
@@ -86,4 +85,3 @@ export class LeaveComponent implements OnInit {
     );
   }
 }
-

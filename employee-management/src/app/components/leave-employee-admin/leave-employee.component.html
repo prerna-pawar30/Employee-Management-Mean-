@@ -1,18 +1,22 @@
 <div class="leave-container">
   <h2>Leave Requests</h2>
 
+  <div *ngIf="loading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
   <mat-table *ngIf="leaveRequests.length; else noRequests" [dataSource]="leaveRequests" class="mat-elevation-z8">
     
     <!-- Employee Name -->
     <ng-container matColumnDef="employee">
       <mat-header-cell *matHeaderCellDef> Employee </mat-header-cell>
-      <mat-cell *matCellDef="let leave"> {{ leave.employeeId.name }} </mat-cell>
+      <mat-cell *matCellDef="let leave"> {{ leave.employeeId?.name }} </mat-cell>
     </ng-container>
 
     <!-- Employee Email -->
     <ng-container matColumnDef="email">
       <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-      <mat-cell *matCellDef="let leave"> {{ leave.employeeId.email }} </mat-cell>
+      <mat-cell *matCellDef="let leave"> {{ leave.employeeId?.email}} </mat-cell>
     </ng-container>
 
     <!-- Leave Reason -->
@@ -54,4 +58,3 @@
     <p>No leave requests found.</p>
   </ng-template>
 </div>
-
