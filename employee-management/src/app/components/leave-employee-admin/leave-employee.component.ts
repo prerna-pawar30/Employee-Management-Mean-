@@ -38,6 +38,7 @@ export class LeaveComponent implements OnInit {
   dataSource = new MatTableDataSource<LeaveRequest>([]);
   isAdmin: boolean = false;
   loading: boolean = false;
+  newLeaveRequest: Partial<LeaveRequest> = {};
 
   authService = inject(AuthService);
   http = inject(HttpClient);
@@ -50,7 +51,16 @@ export class LeaveComponent implements OnInit {
     this.isAdmin = await this.authService.isAdmin; // Assuming this returns a boolean
     this.getLeaveRequests();
   }
+  loadEmployeeId() {
+          const user = JSON.parse(localStorage.getItem('user')!); // Get logged-in user
+          if (user && user._id) {
+            this.newLeaveRequest.employeeId = user._id; // Set employee ID
+          } else {
+            Swal.fire('Error', 'User not found. Please log in again.', 'error');
+          }
+        }
 
+  
   getLeaveRequests(): void {
     this.loading = true;
     const apiUrl = this.isAdmin
