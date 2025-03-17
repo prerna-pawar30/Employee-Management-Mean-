@@ -13,9 +13,10 @@ import { CheckInOutComponent } from './components/check-in-out/check-in-out.comp
 import { RegisterComponent } from './components/register/register.component';
 import { authGaurd } from './core/auth-guard';
 import { adminGaurd } from './core/admin-guard';
-import { EmployeeProfileComponent } from './components/employee-profile/employee-profile.component';
+
+import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
+import { EmployeeleaveComponent } from './components/employee-leave-form/employee-leave.component';
 import { LeaveComponent } from './components/leave-employee-admin/leave-employee.component';
-import { EmployeeleaveComponent } from './components/employee-leave/employee-leave.component';
 
 
 
@@ -40,16 +41,19 @@ export const routes: Routes = [
         component:AdminDashboardComponent,
         canActivate:[adminGaurd]
     },
+
     {
         path:'employee-dashboard',
         component:EmployeeDashboardComponent,
         canActivate:[authGaurd]
     },
 
+
+
     {
-        path:'employee-profile',
-        component:EmployeeProfileComponent,
-        canActivate:[authGaurd]
+        path:'admin-profile',
+        component:AdminProfileComponent,
+        // canActivate:[adminGaurd]
     },
 
     {
@@ -59,25 +63,27 @@ export const routes: Routes = [
     },
 
 
-    {path:'checkIn', component:CheckInOutComponent},
-
-      {
-        path:'add-employee', 
+    {
+        path:'add-employee',
         component:AddEmployeeComponent,
-        canActivate:[adminGaurd]
+    
+    },
+
+    {
+        path:'checkIn', 
+        component:CheckInOutComponent,
+        
     },
     
-{
-    path:'leave-employee',
-    component:LeaveComponent,
-    canActivate:[authGaurd]
-},
-{
-    path:'employee-leave',
-    component:EmployeeleaveComponent,
-    
-}
-
+    {
+       path:'leave-employee',
+       component:LeaveComponent,
+       canActivate: [authGaurd]
+    },
+    {
+        path:'employee-leave-form',
+        component:EmployeeleaveComponent,
+    }
     
 ];
 

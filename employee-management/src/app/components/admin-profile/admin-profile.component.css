@@ -1,0 +1,9 @@
+.sidenav-container {
+  height: 100vh; /* Ensures full height */
+}
+
+.profile-sidenav {
+  width: 300px !important; /* Ensures visibility */
+  background-color: white;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}

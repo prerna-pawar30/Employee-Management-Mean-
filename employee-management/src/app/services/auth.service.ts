@@ -73,11 +73,21 @@ http = inject(HttpClient);
     return null;
   }
 
-  
   logout() {
     if (typeof window !== "undefined") {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
     }
   }
+
+  get userId(): string | null {
+    if (typeof window !== "undefined") {
+      let userData = localStorage.getItem("user");
+      if (userData) {
+        return JSON.parse(userData)._id; // Make sure the user object contains `_id`
+      }
+    }
+    return null;
+  }
+  
 }

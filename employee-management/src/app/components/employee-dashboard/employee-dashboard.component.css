@@ -1,54 +1,110 @@
+/* General Styles */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: 50px auto;
+}
+
+/* Card Styling */
 .card {
-  border-radius: 12px;
   background: #ffffff;
-  padding: 25px;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease-in-out;
 }
 
-h2, h3 {
-  font-weight: bold;
+.card:hover {
+  transform: translateY(-3px);
 }
 
-.btn-lg {
-  padding: 12px 20px;
-  font-size: 18px;
+/* Buttons */
+.btn {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 20px;
   border-radius: 8px;
+  transition: 0.3s ease-in-out;
 }
 
-.btn-success {
-  background: #28a745;
+.btn-primary {
+  background: #007bff;
   border: none;
-  transition: background 0.3s ease-in-out;
 }
 
-.btn-success:hover {
-  background: #218838;
+.btn-primary:hover {
+  background: #0056b3;
 }
 
 .btn-danger {
   background: #dc3545;
   border: none;
-  transition: background 0.3s ease-in-out;
 }
 
 .btn-danger:hover {
-  background: #c82333;
+  background: #b52b3b;
 }
 
-.table {
-  margin-top: 20px;
-}
-
-.table thead {
-  background: #343a40;
-  color: white;
-}
-
-.table-hover tbody tr:hover {
-  background: #f8f9fa;
-}
-
-.text-success {
-  font-size: 20px;
+/* Work Duration */
+.text-lg {
+  font-size: 18px;
   font-weight: bold;
+  color: #333;
+}
+
+/* Table Styles */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  background: #007bff;
+  color: white;
+  padding: 12px;
+  text-align: center;
+}
+
+.table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+/* Leave Request Button */
+.text-center a.btn-lg {
+  margin-top: 20px;
+  background: #28a745;
+  border: none;
+  padding: 12px 25px;
+}
+
+.text-center a.btn-lg:hover {
+  background: #218838;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .card {
+      padding: 20px;
+  }
+
+  .btn {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+
+  .table-responsive {
+      overflow-x: auto;
+  }
 }

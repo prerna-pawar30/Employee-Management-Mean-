@@ -1,33 +1,50 @@
-<div class="check-in-out">
-    <h2>Check-In/Check-Out</h2>
-  
-    <button (click)="checkIn()" [disabled]="isCheckedIn">Check In</button>
-    <button (click)="checkOut()" [disabled]="!isCheckedIn">Check Out</button>
-  
-    <p *ngIf="isCheckedIn">Timer: {{ elapsedTime }} seconds</p>
-  
-    <h3>History</h3>
-    <table border="1">
-      <thead>
-        <tr>
-          <th>Check-In Time</th>
-          <th>Check-Out Time</th>
-          <th>Duration (Minutes)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of history">
-          <td>{{ item.checkInTime | date: 'short' }}</td>
-          <td>{{ item.checkOutTime ? (item.checkOutTime | date: 'short') : 'N/A' }}</td>
-          <td *ngIf="item.duration !== null && item.duration !== undefined">
-            {{ (item.duration / 60000) | number: '1.2-2' }}
-          </td>
-          <td *ngIf="item.duration === null || item.duration === undefined">N/A</td>
-          
-        </tr>
-      </tbody>
-    </table>
-  
-    <button (click)="downloadHistory()">Download History</button>
+<div class="flex flex-col items-center mt-10">
+  <div class="bg-white p-8 rounded shadow-md w-6/12 sm:w-96 text-center">
+      <h2 class="text-2xl font-bold mb-4">Employee Dashboard</h2>
+
+      <div class="mb-4">
+          <p><strong>Name:</strong> {{ authService.userName }}</p>
+      </div>
+
+      <div class="mb-4">
+          <button mat-raised-button color="primary" class="mr-2"
+              (click)="startStopwatch()" [disabled]="isCheckedIn">
+              Start Work
+          </button>
+
+          <button mat-raised-button color="warn" 
+              (click)="stopStopwatch()" [disabled]="!isCheckedIn">
+              Stop Work
+          </button>
+      </div>
+
+      <p *ngIf="lastCheckIn"><strong>Last Check-In:</strong> {{ lastCheckIn | date: 'short' }}</p>
+      <p *ngIf="lastCheckOut"><strong>Last Check-Out:</strong> {{ lastCheckOut | date: 'short' }}</p>
+
+      <p class="text-lg font-semibold mt-4">
+          Work Duration: {{ formatTime(elapsedTime) }}
+      </p>
+
+      <hr class="my-6">
+
+      <h3 class="text-xl font-bold mt-4">Work History</h3>
+      <table class="min-w-full bg-white border border-gray-300">
+          <thead>
+              <tr class="bg-gray-200">
+                  <th class="border px-4 py-2">Date</th>
+                  <th class="border px-4 py-2">Check-In</th>
+                  <th class="border px-4 py-2">Check-Out</th>
+                  <th class="border px-4 py-2">Total Hours</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let record of workRecords">
+                  <td class="border px-4 py-2">{{ record.date | date:'shortDate' }}</td>
+                  <td class="border px-4 py-2">{{ record.checkInTime | date:'shortTime' }}</td>
+                  <td class="border px-4 py-2">{{ record.checkOutTime ? (record.checkOutTime | date:'shortTime') : 'Pending' }}</td>
+                  <td class="border px-4 py-2">{{ record.checkOutTime ? formatTime(record.duration) : 'In Progress' }}</td>
+              </tr>
+          </tbody>
+      </table>
   </div>
-  
+</div>
