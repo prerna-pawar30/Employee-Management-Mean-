@@ -73,7 +73,6 @@ http = inject(HttpClient);
     return null;
   }
 
-  
   logout() {
     if (typeof window !== "undefined") {
       localStorage.removeItem("token");

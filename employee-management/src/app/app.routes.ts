@@ -14,14 +14,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { authGaurd } from './core/auth-guard';
 import { adminGaurd } from './core/admin-guard';
 
-// import { LeaveEmployeeComponent } from './components/leave-employee/leave-employee.component';
-// import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
+import { EmployeeleaveComponent } from './components/employee-leave-form/employee-leave.component';
+import { LeaveComponent } from './components/leave-employee-admin/leave-employee.component';
 
-import { LeaveComponent } from './components/leave-employee/leave-employee.component';
-import { EmployeeleaveComponent } from './employee-leave/employee-leave.component';
-import path from 'node:path';
-import { Component } from '@angular/core';
+
 
 
 export const routes: Routes = [
