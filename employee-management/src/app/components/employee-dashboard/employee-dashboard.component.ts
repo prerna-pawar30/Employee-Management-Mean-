@@ -8,6 +8,9 @@ import { CommonModule } from '@angular/common';
 import { environment } from '../../../environments/environment.prod';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CheckInOutComponent } from "../check-in-out/check-in-out.component";
+import { EmployeeleaveComponent } from "../employee-leave-form/employee-leave.component";
+import { AddEmployeeComponent } from "../add-employee/add-employee.component";
 
 
 interface WorkRecord {
@@ -19,7 +22,7 @@ interface WorkRecord {
 
 @Component({
   selector: 'app-employee-dashboard',
-  imports: [CommonModule, RouterLink,FormsModule],
+  imports: [CommonModule, RouterLink, FormsModule, CheckInOutComponent, EmployeeleaveComponent, AddEmployeeComponent],
   templateUrl: './employee-dashboard.component.html',
   styleUrls: ['./employee-dashboard.component.css']
 })
@@ -36,6 +39,7 @@ export class EmployeeDashboardComponent {
   selectedMonth: string = '';
   months: string[] = [];
   filteredWorkRecords: WorkRecord[] = [];
+employeeName: any;
 
   constructor(
     @Inject(AuthService) public authService: AuthService,
@@ -179,22 +183,24 @@ export class EmployeeDashboardComponent {
       return;
     }
   
-    const csvRows = [];
-    csvRows.push(['Date', 'Check-In Time', 'Check-Out Time', 'Duration (HH:MM:SS)']);
+    const csvRows: string[][] = [];
+    csvRows.push(['Date', 'Check-In Time', 'Check-Out Time', 'Duration (HH:MM:SS)']); // Header row
   
     this.filteredWorkRecords.forEach(record => {
-      const formattedDate = record.date;
-      const formattedCheckInTime = new Date(record.checkInTime).toLocaleTimeString();
-      const formattedCheckOutTime = record.checkOutTime ? new Date(record.checkOutTime).toLocaleTimeString() : 'Pending';
+      const formattedDate = new Date(record.checkInTime).toISOString().split('T')[0]; // Ensure proper date formatting
+      const formattedCheckInTime = record.checkInTime ? new Date(record.checkInTime).toLocaleString() : 'N/A';
+      const formattedCheckOutTime = record.checkOutTime ? new Date(record.checkOutTime).toLocaleString() : 'Pending';
       const formattedDuration = record.checkOutTime ? this.formatTime(record.duration) : 'In Progress';
+  
       csvRows.push([formattedDate, formattedCheckInTime, formattedCheckOutTime, formattedDuration]);
     });
   
-    const csvString = csvRows.map(row => row.join(',')).join('\n');
-    const blob = new Blob([csvString], { type: 'text/csv' });
-    const fileName = `work_record_${this.selectedMonth.replace(' ', '_')}.csv`;
+    const csvContent = csvRows.map(row => row.join(',')).join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const fileName = `work_record_${this.selectedMonth.replace(/ /g, '_')}.csv`;
   
     saveAs(blob, fileName);
   }
+  
   
 }

@@ -1,87 +1,25 @@
-<div class="container mt-5">
-    <div class="card bg-white p-4 rounded shadow-sm w-75 mx-auto">
-      <h2 class="text-center mb-4">Employee Dashboard</h2>
-  
-      <div class="mb-4">
-        <p><strong>Name:</strong> {{ authService.userName }}</p>
-      </div>
-  
-      <div class="mb-4 d-flex justify-content-center">
-        <button class="btn btn-primary mr-2"
-                (click)="startStopwatch()" [disabled]="isCheckedIn">
-          Start Work
-        </button>
-  
-        <button class="btn btn-danger"
-                (click)="stopStopwatch()" [disabled]="!isCheckedIn">
-          Stop Work
-        </button>
-      </div>
-  
-      <p *ngIf="lastCheckIn"><strong>Last Check-In:</strong> {{ lastCheckIn | date: 'short' }}</p>
-      <p *ngIf="lastCheckOut"><strong>Last Check-Out:</strong> {{ lastCheckOut | date: 'short' }}</p>
-  
-      <p class="text-lg font-weight-bold mt-4">
-        Current Work Duration: {{ formatTime(elapsedTime) }}
-      </p>
-  
-      <hr class="my-4">
-  
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <div>
-          <h3 class="mb-0">Work History</h3>
-          <div class="form-group">
-            <label for="monthSelect">Select Month:</label>
-            <select class="form-control form-control-sm" id="monthSelect" [(ngModel)]="selectedMonth" (change)="onMonthChange(selectedMonth)">
-              <option *ngFor="let month of months" [value]="month">{{ month }}</option>
-            </select>
-          </div>
-        </div>
-        <div>
-          <button class="btn btn-info btn-sm mr-2" (click)="viewTotalHours()">View Monthly Total Hours</button>
-          <button class="btn btn-success btn-sm" (click)="downloadMonthlyRecord()">Download Monthly Record</button>
-        </div>
-      </div>
-  
-      <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-          <thead class="bg-gray-200">
-            <tr>
-              <th scope="col">Date</th>
-              <th scope="col">Check-In</th>
-              <th scope="col">Check-Out</th>
-              <th scope="col">Duration</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let record of filteredWorkRecords">
-              <td>{{ record.date | date:'shortDate' }}</td>
-              <td>{{ record.checkInTime | date:'shortTime' }}</td>
-              <td>{{ record.checkOutTime ? (record.checkOutTime | date:'shortTime') : 'Pending' }}</td>
-              <td>{{ record.checkOutTime ? formatTime(record.duration) : 'In Progress' }}</td>
-            </tr>
-            <tr *ngIf="filteredWorkRecords.length === 0">
-              <td colspan="4" class="text-center">No records found for the selected month.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  
-    <div *ngIf="showTotalHoursView" class="card bg-white p-4 rounded shadow-sm w-75 mx-auto mt-4">
-      <h3 class="text-center mb-4">Total Working Hours for {{ selectedMonth }}</h3>
-      <p class="text-center text-lg font-weight-bold">
-        {{ formatTime(totalWorkingHours) }}
-      </p>
-      <div class="text-center">
-        <button class="btn btn-secondary" (click)="hideTotalHours()">Close</button>
-      </div>
-    </div>
+<!-- employee-dashboard.component.html -->
+
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h2>Welcome, {{ employeeName }}</h2>
+    <p>Employee ID: {{ employeeId }}</p>
   </div>
   
-  
-  <div class="text-center mt-4">
-    <a routerLink="/employee-leave-form" class="btn btn-primary btn-lg">
-      <i class="fas fa-calendar-alt"></i> Request Leave
-    </a>
+  <div class="dashboard-content">
+    <div class="dashboard-section">
+      <h3>Check-in/Check-out</h3>
+      <app-check-in-out></app-check-in-out>
+    </div>
+
+    <div class="dashboard-section">
+      <h3>Leave Request</h3>
+      <app-leave-employee></app-leave-employee>
+    </div>
+
+    <div class="dashboard-section">
+      <h3>Add Employee</h3>
+      <app-add-employee></app-add-employee>
+    </div>
   </div>
+</div>
