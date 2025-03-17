@@ -2,12 +2,14 @@ import { Component, Inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { CheckInOutService } from '../../services/check-in-out.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
+
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../environments/environment.prod';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-employee-dashboard',
-  imports:[CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './employee-dashboard.component.html',
   styleUrls: ['./employee-dashboard.component.css']
 })
@@ -19,6 +21,8 @@ export class EmployeeDashboardComponent {
   timer: any;
   employeeId: string | null = null;
   workRecords: any[] = [];
+  showTotalHoursView: boolean = false;
+  totalWorkingHours: number = 0;
 
   constructor(
     @Inject(AuthService) public authService: AuthService,
@@ -33,6 +37,7 @@ export class EmployeeDashboardComponent {
       return;
     }
     this.fetchWorkRecords();
+    this.calculateTotalWorkingHours();
   }
 
   startStopwatch() {
@@ -53,12 +58,13 @@ export class EmployeeDashboardComponent {
 
   checkIn() {
     if (!this.employeeId) return;
-    
+
     this.checkInOutService.checkIn(this.employeeId).subscribe(
       (res: any) => {
         this.isCheckedIn = true;
         this.lastCheckIn = new Date();
         this.elapsedTime = 0;
+        this.fetchWorkRecords(); // Refresh work records after check-in
       },
       (error) => console.error(error)
     );
@@ -71,6 +77,7 @@ export class EmployeeDashboardComponent {
       (res: any) => {
         this.isCheckedIn = false;
         this.lastCheckOut = new Date();
+        this.fetchWorkRecords(); // Refresh work records after check-out
       },
       (error) => console.error(error)
     );
@@ -79,7 +86,7 @@ export class EmployeeDashboardComponent {
   fetchWorkRecords() {
     if (!this.employeeId) return;
 
-    this.http.get(`${environment.API_URL}/api/check-in-out/history/${this.employeeId}`).subscribe(
+    this.http.get(`${environment.apiUrl}/api/check-in-out/history/${this.employeeId}`).subscribe(
       (res: any) => {
         console.log("History API Response:", res); // Debugging
         if (res.history) {
@@ -91,8 +98,10 @@ export class EmployeeDashboardComponent {
               ? new Date(record.checkOutTime).getTime() - new Date(record.checkInTime).getTime()
               : 0
           }));
+          this.calculateTotalWorkingHours();
         } else {
           this.workRecords = [];
+          this.totalWorkingHours = 0;
         }
       },
       (error) => console.error("Error fetching history:", error)
@@ -109,5 +118,19 @@ export class EmployeeDashboardComponent {
 
   private pad(num: number): string {
     return num < 10 ? '0' + num : num.toString();
+  }
+
+  viewTotalHours() {
+    this.showTotalHoursView = true;
+  }
+
+  hideTotalHours() {
+    this.showTotalHoursView = false;
+  }
+
+  calculateTotalWorkingHours() {
+    this.totalWorkingHours = this.workRecords.reduce((total, record) => {
+      return total + record.duration;
+    }, 0);
   }
 }

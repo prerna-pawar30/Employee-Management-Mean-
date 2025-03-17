@@ -13,11 +13,15 @@ import { CheckInOutComponent } from './components/check-in-out/check-in-out.comp
 import { RegisterComponent } from './components/register/register.component';
 import { authGaurd } from './core/auth-guard';
 import { adminGaurd } from './core/admin-guard';
-import { EmployeeProfileComponent } from './components/employee-profile/employee-profile.component';
+
+// import { LeaveEmployeeComponent } from './components/leave-employee/leave-employee.component';
+// import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
+
 import { LeaveComponent } from './components/leave-employee/leave-employee.component';
 import { EmployeeleaveComponent } from './employee-leave/employee-leave.component';
-
-
+import path from 'node:path';
+import { Component } from '@angular/core';
 
 
 export const routes: Routes = [
@@ -40,16 +44,19 @@ export const routes: Routes = [
         component:AdminDashboardComponent,
         canActivate:[adminGaurd]
     },
+
     {
         path:'employee-dashboard',
         component:EmployeeDashboardComponent,
         canActivate:[authGaurd]
     },
 
+
+
     {
-        path:'employee-profile',
-        component:EmployeeProfileComponent,
-        canActivate:[authGaurd]
+        path:'admin-profile',
+        component:AdminProfileComponent,
+        // canActivate:[adminGaurd]
     },
 
     {
@@ -59,25 +66,27 @@ export const routes: Routes = [
     },
 
 
-    {path:'checkIn', component:CheckInOutComponent},
-
-      {
-        path:'add-employee', 
+    {
+        path:'add-employee',
         component:AddEmployeeComponent,
-        canActivate:[adminGaurd]
+    
+    },
+
+    {
+        path:'checkIn', 
+        component:CheckInOutComponent,
+        
     },
     
-{
-    path:'leave-employee',
-    component:LeaveComponent,
-    canActivate:[authGaurd]
-},
-{
-    path:'employee-leave',
-    component:EmployeeleaveComponent,
-    
-}
-
+    {
+       path:'leave-employee',
+       component:LeaveComponent,
+       canActivate: [authGaurd]
+    },
+    {
+        path:'employee-leave-form',
+        component:EmployeeleaveComponent,
+    }
     
 ];
 

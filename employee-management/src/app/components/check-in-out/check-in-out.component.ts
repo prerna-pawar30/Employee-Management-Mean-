@@ -4,8 +4,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { CheckInOutService } from '../../services/check-in-out.service';
-import { environment } from '../../../environments/environment';
+
 import { AuthService } from '../../services/auth.service';
+import { environment } from '../../../environments/environment.prod';
 
 
 @Component({

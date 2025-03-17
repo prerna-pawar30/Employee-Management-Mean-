@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
 export class HeaderComponent {
   authService = inject(AuthService);
   router =inject(Router);
+sidenav: any;
   async logout(): Promise<void> {
     try {
       await this.authService.logout();
