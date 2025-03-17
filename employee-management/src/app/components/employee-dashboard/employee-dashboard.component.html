@@ -22,14 +22,25 @@
       <p *ngIf="lastCheckOut"><strong>Last Check-Out:</strong> {{ lastCheckOut | date: 'short' }}</p>
   
       <p class="text-lg font-weight-bold mt-4">
-        Work Duration: {{ formatTime(elapsedTime) }}
+        Current Work Duration: {{ formatTime(elapsedTime) }}
       </p>
   
       <hr class="my-4">
   
       <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="mb-0">Work History</h3>
-        <button class="btn btn-info btn-sm" (click)="viewTotalHours()">View Total Hours</button>
+        <div>
+          <h3 class="mb-0">Work History</h3>
+          <div class="form-group">
+            <label for="monthSelect">Select Month:</label>
+            <select class="form-control form-control-sm" id="monthSelect" [(ngModel)]="selectedMonth" (change)="onMonthChange(selectedMonth)">
+              <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <button class="btn btn-info btn-sm mr-2" (click)="viewTotalHours()">View Monthly Total Hours</button>
+          <button class="btn btn-success btn-sm" (click)="downloadMonthlyRecord()">Download Monthly Record</button>
+        </div>
       </div>
   
       <div class="table-responsive">
@@ -43,11 +54,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let record of workRecords">
+            <tr *ngFor="let record of filteredWorkRecords">
               <td>{{ record.date | date:'shortDate' }}</td>
               <td>{{ record.checkInTime | date:'shortTime' }}</td>
               <td>{{ record.checkOutTime ? (record.checkOutTime | date:'shortTime') : 'Pending' }}</td>
               <td>{{ record.checkOutTime ? formatTime(record.duration) : 'In Progress' }}</td>
+            </tr>
+            <tr *ngIf="filteredWorkRecords.length === 0">
+              <td colspan="4" class="text-center">No records found for the selected month.</td>
             </tr>
           </tbody>
         </table>
@@ -55,7 +69,7 @@
     </div>
   
     <div *ngIf="showTotalHoursView" class="card bg-white p-4 rounded shadow-sm w-75 mx-auto mt-4">
-      <h3 class="text-center mb-4">Total Working Hours</h3>
+      <h3 class="text-center mb-4">Total Working Hours for {{ selectedMonth }}</h3>
       <p class="text-center text-lg font-weight-bold">
         {{ formatTime(totalWorkingHours) }}
       </p>
