@@ -5,14 +5,10 @@ import { HttpClient } from '@angular/common/http';
 import { saveAs } from 'file-saver';
 
 import { CommonModule } from '@angular/common';
-import { environment } from '../../../environments/environment.prod';
+
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { CheckInOutComponent } from "../check-in-out/check-in-out.component";
-import { EmployeeleaveComponent } from "../employee-leave-form/employee-leave.component";
-import { AddEmployeeComponent } from "../add-employee/add-employee.component";
 import { SideBarComponent } from "../side-bar/side-bar.component";
-
 
 interface WorkRecord {
   date: string;

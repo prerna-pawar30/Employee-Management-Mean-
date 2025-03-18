@@ -20,7 +20,7 @@ interface WorkRecord {
 
 @Component({
   selector: 'app-check-in-out',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SideBarComponent],
   templateUrl: './check-in-out.component.html',
   styleUrls: ['./check-in-out.component.css']
 })

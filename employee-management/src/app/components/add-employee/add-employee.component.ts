@@ -5,11 +5,12 @@ import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
+import { SideBarComponent } from "../side-bar/side-bar.component";
 
 
 @Component({
   selector: 'app-add-employee',
-  imports:[FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, SideBarComponent],
   templateUrl: './add-employee.component.html',
   styleUrls: ['./add-employee.component.css']
 })

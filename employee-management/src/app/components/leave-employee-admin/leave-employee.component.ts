@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { SideBarComponent } from "../side-bar/side-bar.component";
+import { MatCardModule } from '@angular/material/card';
 
 interface LeaveRequest {
   _id: string;
@@ -31,7 +33,8 @@ interface LeaveRequest {
     MatProgressSpinnerModule,
     MatFormFieldModule,
     MatInputModule,
-  ],
+    MatCardModule
+],
 })
 export class LeaveComponent implements OnInit {
   displayedColumns: string[] = ['employee', 'email', 'reason', 'date', 'status', 'actions'];

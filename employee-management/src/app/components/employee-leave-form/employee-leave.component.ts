@@ -76,13 +76,14 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SideBarComponent } from "../side-bar/side-bar.component";
 
 @Component({
   selector: 'app-leave-employee',
   templateUrl: './employee-leave.component.html',
   styleUrls: ['./employee-leave.component.css'],
   standalone: true,
-  imports: [FormsModule, CommonModule], // ✅ Import FormsModule Here
+  imports: [FormsModule, CommonModule, SideBarComponent], // ✅ Import FormsModule Here
 })
 export class EmployeeleaveComponent  implements OnInit {
   newLeaveRequest = {

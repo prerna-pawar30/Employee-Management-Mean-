@@ -1,27 +1,99 @@
 .leave-container {
-  max-width: 900px;
-  margin: auto;
+  display: flex;
+  height: 100vh;
+  background: #f4f6f8;
 }
 
-mat-table {
+/* Sidebar Styling */
+.sidebar {
+  width: 250px;
+  min-width: 250px;
+  background: #2c3e50;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 20px;
+}
+
+/* Main Content */
+.content {
+  flex-grow: 1;
+  margin-left: 260px;
+  padding: 20px;
+}
+
+/* Leave Card */
+.leave-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Page Title */
+.page-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* Loader */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+/* Filter Input */
+.filter-input {
   width: 100%;
-  margin-top: 20px;
+  margin-bottom: 15px;
 }
 
-mat-header-cell, mat-cell {
-  padding: 12px;
+/* Status Styles */
+.status-chip {
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+  display: inline-block;
+  text-transform: uppercase;
 }
 
 .approved {
-  color: green;
-  font-weight: bold;
+  background: #4caf50;
+  color: white;
+}
+
+.pending {
+  background: #ff9800;
+  color: white;
 }
 
 .rejected {
-  color: red;
-  font-weight: bold;
+  background: #f44336;
+  color: white;
 }
 
+/* Table Styling */
+.mat-table {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+}
+
+th {
+  font-weight: bold;
+  background: #1976d2;
+  color: white;
+}
+
+td {
+  padding: 10px;
+}
+
+/* Buttons */
 button {
   margin-right: 5px;
 }
