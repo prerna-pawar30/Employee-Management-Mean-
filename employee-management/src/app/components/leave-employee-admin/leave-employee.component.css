@@ -1,99 +1,129 @@
+/* 🌟 Main Container (Smaller Size) */
 .leave-container {
   display: flex;
-  height: 100vh;
-  background: #f4f6f8;
+  height: 90vh; /* Reduce height */
+  background-color: #f4f6f9;
+  padding: 10px; /* Reduce padding */
+  gap: 10px;
 }
 
-/* Sidebar Styling */
+/* 🌟 Sidebar Styling */
 .sidebar {
-  width: 250px;
-  min-width: 250px;
+  width: 200px; /* Make sidebar smaller */
   background: #2c3e50;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding-top: 20px;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
 }
 
-/* Main Content */
+/* 🌟 Content Area */
 .content {
   flex-grow: 1;
-  margin-left: 260px;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
 }
 
-/* Leave Card */
+/* 🌟 Card Styling */
 .leave-card {
+  width: 100%;
+  max-width: 800px; /* Reduce width */
   background: white;
-  padding: 20px;
+  padding: 15px; /* Reduce padding */
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Page Title */
+/* 🌟 Page Title */
 .page-title {
-  font-size: 22px;
+  font-size: 18px; /* Reduce font size */
   font-weight: bold;
+  color: #2c3e50;
+  text-align: center;
   margin-bottom: 15px;
 }
 
-/* Loader */
+/* 🌟 Search Filter */
+.filter-input {
+  width: 100%;
+  max-width: 300px; /* Reduce width */
+  margin-bottom: 10px;
+}
+
+/* 🌟 Loading Spinner */
 .loading-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50vh;
+  height: 80px; /* Reduce height */
 }
 
-/* Filter Input */
-.filter-input {
+/* 🌟 Table Styling (Smaller Size) */
+table {
   width: 100%;
-  margin-bottom: 15px;
-}
-
-/* Status Styles */
-.status-chip {
-  padding: 5px 10px;
-  border-radius: 12px;
-  font-weight: bold;
-  display: inline-block;
-  text-transform: uppercase;
-}
-
-.approved {
-  background: #4caf50;
-  color: white;
-}
-
-.pending {
-  background: #ff9800;
-  color: white;
-}
-
-.rejected {
-  background: #f44336;
-  color: white;
-}
-
-/* Table Styling */
-.mat-table {
-  width: 100%;
+  border-collapse: collapse;
   background: white;
   border-radius: 8px;
 }
 
 th {
-  font-weight: bold;
-  background: #1976d2;
+  background: #2980b9;
   color: white;
+  padding: 8px; /* Reduce padding */
+  text-align: left;
+  font-size: 12px; /* Reduce font size */
 }
 
 td {
-  padding: 10px;
+  padding: 6px; /* Reduce padding */
+  border-bottom: 1px solid #ddd;
+  font-size: 12px; /* Reduce font size */
+  color: #555;
 }
 
-/* Buttons */
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* 🌟 Hover Effect */
+tr:hover {
+  background: #eaf2ff;
+  transition: 0.3s;
+}
+
+/* 🌟 Status Chips (Smaller) */
+.status-chip {
+  padding: 4px 8px; /* Reduce size */
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 10px; /* Reduce font size */
+  display: inline-block;
+  width: 70px; /* Reduce width */
+  text-align: center;
+}
+
+/* 🌟 Button Styling (Smaller) */
 button {
-  margin-right: 5px;
+  cursor: pointer;
+  padding: 6px 10px; /* Reduce padding */
+  border: none;
+  border-radius: 4px;
+  font-size: 12px; /* Reduce font size */
+  transition: all 0.3s ease;
+}
+
+button[color="primary"] {
+  background: #27ae60;
+  color: white;
+}
+
+button[color="warn"] {
+  background: #e74c3c;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.8;
 }

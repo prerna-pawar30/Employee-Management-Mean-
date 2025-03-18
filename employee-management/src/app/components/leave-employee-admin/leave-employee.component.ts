@@ -24,6 +24,7 @@ interface LeaveRequest {
 @Component({
   selector: 'app-leave',
   templateUrl: './leave-employee.component.html',
+  styleUrl:'./leave-employee.component.css',
   standalone: true,
   imports: [
     CommonModule,
@@ -33,7 +34,8 @@ interface LeaveRequest {
     MatProgressSpinnerModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    SideBarComponent
 ],
 })
 export class LeaveComponent implements OnInit {
