@@ -1,213 +1,81 @@
-<!-- <div class="container mt-5">
-  <div class="card bg-light p-4 rounded shadow-sm w-50 mx-auto">
+<div class="container mt-5">
+  <div class="leave-container">
     
-    <h3 class="text-center mb-3">Request Leave</h3>
-
-    <form #leaveForm="ngForm" (ngSubmit)="submitLeaveRequest()" class="needs-validation" novalidate>
-      
-      
-      <div class="form-group">
-        <label for="employeeId" class="font-weight-bold">Employee ID</label>
-        <input 
-          type="text"
-          id="employeeId" 
-          name="employeeId" 
-          [(ngModel)]="newLeaveRequest.employeeId" 
-          class="form-control" 
-          readonly
-        />
-      </div>
-
-    
-      <div class="form-group">
-        <label for="reason" class="font-weight-bold">Leave Reason</label>
-        <input 
-          type="text" 
-          id="reason" 
-          name="reason" 
-          [(ngModel)]="newLeaveRequest.reason" 
-          class="form-control" 
-          placeholder="Enter Leave Reason" 
-          required 
-          #reason="ngModel"
-        />
-        <div *ngIf="reason.invalid && reason.touched" class="text-danger small">
-          Leave reason is required.
+    <!-- Leave Request Form -->
+    <div class="leave-form shadow-lg">
+      <h3 class="text-center mb-4">Request Leave</h3>
+      <form #leaveForm="ngForm" (ngSubmit)="submitLeaveRequest()" class="needs-validation" novalidate>
+        
+        <!-- Employee ID -->
+        <div class="form-group">
+          <label>Employee ID</label>
+          <input type="text" [(ngModel)]="newLeaveRequest.employeeId" name="employeeId" class="form-control" readonly />
         </div>
-      </div>
 
-    
-      <div class="form-group">
-        <label for="date" class="font-weight-bold">Leave Date</label>
-        <input 
-          type="date" 
-          id="date" 
-          name="date" 
-          [(ngModel)]="newLeaveRequest.date" 
-          class="form-control" 
-          required 
-          #date="ngModel"
-        />
-        <div *ngIf="date.invalid && date.touched" class="text-danger small">
-          Leave date is required.
+        <!-- Leave Type -->
+        <div class="form-group">
+          <label>Leave Type</label>
+          <select [(ngModel)]="newLeaveRequest.type" name="leaveType" class="form-control" required #leaveType="ngModel">
+            <option value="" disabled selected>Select Leave Type</option>
+            <option *ngFor="let leave of leaveTypes" [value]="leave.type">
+              {{ leave.type }} (Available: {{ leave.available - leave.booked }})
+            </option>
+          </select>
+          <div *ngIf="leaveType.invalid && leaveType.touched" class="error-msg">Please select a leave type.</div>
         </div>
-      </div>
 
-     
-      <div class="form-group">
-        <label class="font-weight-bold">Current Status</label>
-        <div 
-          class="p-2 text-center font-weight-bold rounded" 
-          [ngClass]="{
-            'bg-success text-white': newLeaveRequest.status === 'approved',
-            'bg-warning text-dark': newLeaveRequest.status === 'pending',
-            'bg-danger text-white': newLeaveRequest.status === 'rejected'
-          }"
-        >
-          {{ newLeaveRequest.status | titlecase }}
+        <!-- Leave Reason -->
+        <div class="form-group">
+          <label>Leave Reason</label>
+          <textarea [(ngModel)]="newLeaveRequest.reason" name="reason" class="form-control" rows="3" placeholder="Enter Leave Reason" required #reason="ngModel"></textarea>
+          <div *ngIf="reason.invalid && reason.touched" class="error-msg">Leave reason is required.</div>
         </div>
-      </div>
 
-      <div class="text-center">
-        <button type="submit" class="btn btn-success w-100 mt-3" [disabled]="leaveForm.invalid">
+        <!-- Leave Date -->
+        <div class="form-group">
+          <label>Leave Date</label>
+          <input type="date" [(ngModel)]="newLeaveRequest.date" name="date" class="form-control" required #date="ngModel" />
+          <div *ngIf="date.invalid && date.touched" class="error-msg">Leave date is required.</div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100 mt-3" [disabled]="leaveForm.invalid">
           Submit Leave Request
         </button>
-      </div>
+      </form>
+    </div>
 
-    </form>
-  </div>
-</div> 
+    <!-- Leave History -->
+    <div class="leave-history shadow-lg">
+      <h4 class="text-center mb-3">Leave History</h4>
+      <p *ngIf="leaveRequests.length === 0" class="text-center text-danger">No leave history found.</p>
+      <table *ngIf="leaveRequests.length > 0" class="table table-hover">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Reason</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let leave of leaveRequests">
+            <td>{{ leave.type || 'N/A' }}</td>
+            <td>{{ leave.reason || 'N/A' }}</td>
+            <td>{{ leave.date || 'N/A' }}</td>
+            <td>
+              <span class="badge" [ngClass]="{
+                'badge-success': leave.status === 'approved',
+                'badge-warning': leave.status === 'pending',
+                'badge-danger': leave.status === 'rejected'
+              }">
+                {{ leave.status | titlecase }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-
-
- -->
-
-
-
- <div class="container mt-5">
-  <div class="card bg-light p-4 rounded shadow-sm w-50 mx-auto">
-    <h3 class="text-center mb-3">Request Leave</h3>
-
-    <form #leaveForm="ngForm" (ngSubmit)="submitLeaveRequest()" class="needs-validation" novalidate>
-      <!-- Employee ID (Auto-Filled) -->
-      <div class="form-group">
-        <label for="employeeId" class="font-weight-bold">Employee ID</label>
-        <input
-          type="text"
-          id="employeeId"
-          name="employeeId"
-          [(ngModel)]="newLeaveRequest.employeeId"
-          class="form-control"
-          readonly
-        />
-      </div>
-
-      <!-- Leave Type Selection -->
-      <div class="form-group">
-        <label for="leaveType" class="font-weight-bold">Leave Type</label>
-        <select
-          id="leaveType"
-          name="leaveType"
-          [(ngModel)]="newLeaveRequest.type"
-          class="form-control"
-          required
-          #leaveType="ngModel"
-        >
-          <option value="" disabled selected>Select Leave Type</option>
-          <option *ngFor="let leave of leaveTypes" [value]="leave.type">
-            {{ leave.type }} (Available: {{ leave.available - leave.booked }})
-          </option>
-        </select>
-        <div *ngIf="leaveType.invalid && leaveType.touched" class="text-danger small">
-          Please select a leave type.
-        </div>
-      </div>
-
-      <!-- Leave Reason -->
-      <div class="form-group">
-        <label for="reason" class="font-weight-bold">Leave Reason</label>
-        <input
-          type="text"
-          id="reason"
-          name="reason"
-          [(ngModel)]="newLeaveRequest.reason"
-          class="form-control"
-          placeholder="Enter Leave Reason"
-          required
-          #reason="ngModel"
-        />
-        <div *ngIf="reason.invalid && reason.touched" class="text-danger small">
-          Leave reason is required.
-        </div>
-      </div>
-
-      <!-- Leave Date -->
-      <div class="form-group">
-        <label for="date" class="font-weight-bold">Leave Date</label>
-        <input
-          type="date"
-          id="date"
-          name="date"
-          [(ngModel)]="newLeaveRequest.date"
-          class="form-control"
-          required
-          #date="ngModel"
-        />
-        <div *ngIf="date.invalid && date.touched" class="text-danger small">
-          Leave date is required.
-        </div>
-      </div>
-
-      <!-- Leave Status (Read-Only) -->
-      <div class="form-group">
-        <label class="font-weight-bold">Current Status</label>
-        <div
-          class="p-2 text-center font-weight-bold rounded"
-          [ngClass]="{
-            'bg-success text-white': newLeaveRequest.status === 'approved',
-            'bg-warning text-dark': newLeaveRequest.status === 'pending',
-            'bg-danger text-white': newLeaveRequest.status === 'rejected'
-          }"
-        >
-          {{ newLeaveRequest.status | titlecase }}
-        </div>
-      </div>
-
-      <!-- Submit Button -->
-      <div class="text-center">
-        <button type="submit" class="btn btn-success w-100 mt-3" [disabled]="leaveForm.invalid">
-          Submit Leave Request
-        </button>
-      </div>
-    </form>
-  </div>
-
-  <!-- Employee Leave History -->
-  <div class="card mt-4 p-4 rounded shadow-sm">
-    <h4 class="text-center mb-3">Leave History</h4>
-    <table class="table table-bordered text-center">
-      <thead class="thead-dark">
-        <tr>
-          <th>Type</th>
-          <th>Reason</th>
-          <th>Date</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let leave of leaveRequests">
-          <td>{{ leave.type }}</td>
-          <td>{{ leave.reason }}</td>
-          <td>{{ leave.date }}</td>
-          <td [ngClass]="{
-            'text-success': leave.status === 'approved',
-            'text-warning': leave.status === 'pending',
-            'text-danger': leave.status === 'rejected'
-          }">
-            {{ leave.status | titlecase }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>
