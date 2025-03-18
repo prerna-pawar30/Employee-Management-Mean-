@@ -4,12 +4,13 @@ import Swal from 'sweetalert2';
 import { MatIcon } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { SideBarComponent } from "../side-bar/side-bar.component";
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.css'],
-  imports:[MatIcon,CommonModule,RouterModule]
+  imports: [MatIcon, CommonModule, RouterModule, SideBarComponent]
 })
 export class AdminDashboardComponent implements OnInit {
   allLeaveRequests: any[] = [];

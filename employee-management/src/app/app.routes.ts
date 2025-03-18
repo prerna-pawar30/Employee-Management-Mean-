@@ -17,6 +17,7 @@ import { adminGaurd } from './core/admin-guard';
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
 import { EmployeeleaveComponent } from './components/employee-leave-form/employee-leave.component';
 import { LeaveComponent } from './components/leave-employee-admin/leave-employee.component';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
 
 
 
@@ -83,7 +84,9 @@ export const routes: Routes = [
     {
         path:'employee-leave-form',
         component:EmployeeleaveComponent,
-    }
+    },
+
+    {path:'side-bar', component:SideBarComponent}
     
 ];
 

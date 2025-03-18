@@ -1,38 +1,32 @@
 <div class="dashboard-container">
-  <!-- Sidebar Navigation -->
-  <aside class="sidebar">
-    <div class="logo">
-      <!-- <img src="assets/logo.png" alt="Company Logo" class="logo-img"> -->
-    </div>
-    <ul class="nav-links">
-      <li><a routerLink="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-      <li><a routerLink="/checkIn"><i class="fas fa-clock"></i> Check-in/Check-out</a></li>
-      <li><a routerLink="/employee-leave-form"><i class="fas fa-calendar-alt"></i> Leave Requests</a></li>
-      <li><a routerLink="/add-employee"><i class="fas fa-user-plus"></i> Add Employee</a></li>
-      <li><a routerLink="/settings"><i class="fas fa-cog"></i> Settings</a></li>
-    </ul>
-  </aside>
+ 
+    
+    <app-side-bar></app-side-bar>
+    
 
-  <!-- Main Dashboard Content -->
+ <!-- Main Dashboard Content --> 
   <div class="dashboard-main">
     <div class="dashboard-header">
       <h2>Welcome, {{ authService.userName }}</h2>
-      <p>Employee ID: {{ authService.userEmail}}</p>
+      <p>Employee ID: {{ authService.userEmail }}</p>
     </div>
 
     <!-- Dashboard Buttons -->
     <div class="dashboard-content">
-      <button class="dashboard-btn" routerLink="/checkIn">
-        <i class="fas fa-clock"></i> Check-in/Check-out
-      </button>
+      <div class="card" routerLink="/checkIn">
+        <i class="fas fa-clock"></i>
+        <h3>Check-in/Check-out</h3>
+      </div>
 
-      <button class="dashboard-btn" routerLink="/employee-leave-form">
-        <i class="fas fa-calendar-alt"></i> Leave Request
-      </button>
+      <div class="card" routerLink="/employee-leave-form">
+        <i class="fas fa-calendar-alt"></i>
+        <h3>Leave Request</h3>
+      </div>
 
-      <button class="dashboard-btn" routerLink="/add-employee">
-        <i class="fas fa-user-plus"></i> Add Employee
-      </button>
+      <div class="card" routerLink="/add-employee">
+        <i class="fas fa-user-plus"></i>
+        <h3>Add Employee</h3>
+      </div>
     </div>
   </div>
 </div>
