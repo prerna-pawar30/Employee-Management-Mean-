@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" class="header">
-  <!-- <a class="cursor-pointer ml-2">Back</a> -->
+  
   @if (authService.isAdmin) {
     <span class="logo">Admin Information</span>
     <span class="spacer"></span>
@@ -20,8 +20,8 @@
         }
         
       @if (authService.isLoggedIn) {
-        <a routerLink="/leave-employee" class="cursor-pointer ml-2">Leave</a>
-        <a routerLink="/checkIn" class="cursor-pointer ml-2">Check-In</a>
+        <!-- <a routerLink="/leave-employee" class="cursor-pointer ml-2">Leave</a> -->
+        <!-- <a routerLink="/checkIn" class="cursor-pointer ml-2">Check-In</a> -->
         <a (click)="logout()" class="cursor-pointer ml-2">Logout</a>
 
       }@else {
