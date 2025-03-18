@@ -1,192 +1,132 @@
-/* ============================== */
-/*         GENERAL LAYOUT         */
-/* ============================== */
-
+/* General Layout */
 .dashboard-container {
   display: flex;
-  height: 100vh;
-  background-color: #f4f7fc;
-  font-family: 'Arial', sans-serif;
+  min-height: 100vh;  /* Ensures minimum 80% height */
+  height: auto;       /* Allows it to grow if needed */
+  overflow: hidden;
 }
 
-/* ============================== */
-/*           SIDEBAR              */
-/* ============================== */
 
+/* Sidebar */
 .sidebar {
   width: 250px;
-  height: 100vh;
-  background: #1e1e2f; /* Professional Dark Theme */
-  padding: 20px;
+  background: #2C3E50;
   color: white;
   display: flex;
   flex-direction: column;
-  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  left: 0;
-  top: 0;
+  padding: 20px;
+  transition: 0.3s;
+  
 }
 
-/* Sidebar Logo */
 .logo {
   text-align: center;
-  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 30px;
 }
 
-.logo-img {
-  width: 140px;
-  height: auto;
-}
-
-/* Navigation Links */
 .nav-links {
   list-style: none;
   padding: 0;
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
 
 .nav-links li {
-  width: 100%;
+  margin: 20px 0;
 }
 
 .nav-links a {
   color: white;
   text-decoration: none;
-  font-size: 16px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px;
+  font-size: 18px;
+  padding: 12px 20px;
   border-radius: 5px;
-  transition: background 0.3s, transform 0.2s;
+  transition: 0.3s;
 }
 
-.nav-links i {
-  font-size: 18px;
-  width: 25px;
-  text-align: center;
+.nav-links a i {
+  margin-right: 10px;
 }
 
 .nav-links a:hover {
-  background: #1abc9c;
-  transform: translateX(5px);
+  background: #34495E;
 }
 
-/* ============================== */
-/*       MAIN DASHBOARD AREA      */
-/* ============================== */
-
+/* Main Dashboard Content */
 .dashboard-main {
   flex: 1;
-  margin-left: 250px; /* Offset for fixed sidebar */
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  background: #F4F7FC;
+  padding: 30px;
+  overflow-y: auto;
 }
 
-/* ============================== */
-/*        DASHBOARD HEADER        */
-/* ============================== */
-
+/* Dashboard Header */
 .dashboard-header {
   background: white;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
-.dashboard-header h2 {
-  color: #3b4057;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.dashboard-header p {
-  color: #666;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-/* ============================== */
-/*      DASHBOARD BUTTONS         */
-/* ============================== */
-
+/* Dashboard Content */
 .dashboard-content {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
 }
 
-/* Professional Dashboard Buttons */
-.dashboard-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 260px;
-  height: 100px;
-  background: #ffffff;
-  border: none;
+/* Cards */
+.card {
+  background: white;
+  padding: 30px;
+  text-align: center;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card i {
+  font-size: 40px;
+  margin-bottom: 10px;
+  color: #007BFF;
+}
+
+.card h3 {
   font-size: 18px;
   font-weight: bold;
-  color: #2a2e43;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  text-align: center;
-  gap: 10px;
-  font-family: 'Arial', sans-serif;
 }
 
-.dashboard-btn i {
-  font-size: 22px;
-}
-
-/* Button Hover Effects */
-.dashboard-btn:hover {
-  background: #1abc9c;
-  color: white;
-  transform: translateY(-3px);
-}
-
-/* ============================== */
-/*      RESPONSIVE DESIGN         */
-/* ============================== */
-
-@media screen and (max-width: 992px) {
+/* Responsive */
+@media (max-width: 768px) {
   .dashboard-container {
     flex-direction: column;
-    height: auto;
   }
 
   .sidebar {
     width: 100%;
     height: auto;
-    position: relative;
-    padding: 15px;
+    text-align: center;
+  }
+
+  .nav-links li {
+    display: inline-block;
+    margin: 10px;
+  }
+
+  .nav-links a {
+    display: inline-block;
+    padding: 10px 15px;
   }
 
   .dashboard-main {
-    margin-left: 0;
-    padding: 15px;
-  }
-
-  .dashboard-content {
-    flex-direction: column;
-  }
-
-  .dashboard-btn {
-    width: 100%;
+    padding: 20px;
   }
 }
