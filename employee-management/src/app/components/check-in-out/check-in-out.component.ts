@@ -8,6 +8,7 @@ import { CheckInOutService } from '../../services/check-in-out.service';
 
 import { AuthService } from '../../services/auth.service';
 import { environment } from '../../../environments/environment.prod';
+import { RouterLink } from '@angular/router';
 
 interface WorkRecord {
   date: string;
@@ -18,7 +19,7 @@ interface WorkRecord {
 
 @Component({
   selector: 'app-check-in-out',
-  imports:[CommonModule, FormsModule],
+  imports:[CommonModule, FormsModule, RouterLink],
   templateUrl: './check-in-out.component.html',
   styleUrls: ['./check-in-out.component.css']
 })
