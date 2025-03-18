@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -42,11 +43,20 @@ login(){
     console.log(result);
     localStorage.setItem("token",result.token);
     localStorage.setItem("user",JSON.stringify(result.user));
+      // Show Success Popup
+      Swal.fire({
+        icon: 'success',
+        title: 'Login Successful',
+        text: 'You have successfully logged in!',
+        timer: 2000, // Auto close after 2 seconds
+        showConfirmButton: false
+      });
     if(result.user.isAdmin){
       this.router.navigateByUrl("/admin-dashboard");
     }else{
       this.router.navigateByUrl("/employee-dashboard");
     }
+    
  });   
 }
 }
