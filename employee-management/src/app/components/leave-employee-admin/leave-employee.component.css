@@ -69,7 +69,7 @@ table {
 
 th {
   background: #2980b9;
-  color: white;
+  color: rgb(25, 14, 14);
   padding: 8px; /* Reduce padding */
   text-align: left;
   font-size: 12px; /* Reduce font size */

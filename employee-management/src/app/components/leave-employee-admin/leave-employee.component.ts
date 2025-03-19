@@ -15,7 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 
 interface LeaveRequest {
   _id: string;
-  employeeId: { _id: string; name: string; email: string };
+  employeeId: string;
   reason: string;
   date: string;
   status: string;
