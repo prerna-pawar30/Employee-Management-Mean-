@@ -13,7 +13,7 @@ body {
 /* Sidebar */
 .sidebar {
   width: 260px;
-  background-color: #2c3e50;
+  background-color: #000000;
   color: white;
   position: fixed;
   left: 0;
@@ -105,7 +105,7 @@ body {
 
 .card:hover {
   transform: translateY(-5px);
-  background: #000000;
+  background: #9763f0;
   color: white;
 }
 

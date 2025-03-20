@@ -3,15 +3,15 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-side-bar',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.css',
   
 })
 export class SideBarComponent {
-  isSidebarOpen = false;
+   isSidebarOpen = false;
 
-  toggleSidebar() {
+   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
-}
+   }
 }
