@@ -9,5 +9,9 @@ import { RouterLink } from '@angular/router';
   
 })
 export class SideBarComponent {
+  isSidebarOpen = false;
 
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+}
 }
