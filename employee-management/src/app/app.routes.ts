@@ -12,6 +12,7 @@ import { AdminProfileComponent } from './components/admin-profile/admin-profile.
 import { EmployeeleaveComponent } from './components/employee-leave-form/employee-leave.component';
 import { LeaveComponent } from './components/leave-employee-admin/leave-employee.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { PayrollComponent } from './components/payroll/payroll.component';
 
 export const routes: Routes = [
     {
@@ -78,7 +79,8 @@ export const routes: Routes = [
     {
         path:'side-bar', 
         component:SideBarComponent
-    }
+    },
+    { path: 'payroll', component: PayrollComponent },
     
 ];
 
