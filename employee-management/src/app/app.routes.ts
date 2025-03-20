@@ -1,26 +1,17 @@
-
-
 import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
-// import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { EmployeeDashboardComponent } from './components/employee-dashboard/employee-dashboard.component';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
-
 import { CheckInOutComponent } from './components/check-in-out/check-in-out.component';
-
 import { RegisterComponent } from './components/register/register.component';
 import { authGaurd } from './core/auth-guard';
 import { adminGaurd } from './core/admin-guard';
-
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
 import { EmployeeleaveComponent } from './components/employee-leave-form/employee-leave.component';
 import { LeaveComponent } from './components/leave-employee-admin/leave-employee.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
-
-
-
 
 export const routes: Routes = [
     {
@@ -48,8 +39,6 @@ export const routes: Routes = [
         component:EmployeeDashboardComponent,
         canActivate:[authGaurd]
     },
-
-
 
     {
         path:'admin-profile',
@@ -86,7 +75,10 @@ export const routes: Routes = [
         component:EmployeeleaveComponent,
     },
 
-    {path:'side-bar', component:SideBarComponent}
+    {
+        path:'side-bar', 
+        component:SideBarComponent
+    }
     
 ];
 
