@@ -19,7 +19,7 @@ interface WorkRecord {
 
 @Component({
   selector: 'app-employee-dashboard',
-  imports: [CommonModule, RouterLink, FormsModule, SideBarComponent],
+  imports: [CommonModule, FormsModule, RouterLink, SideBarComponent],
   templateUrl: './employee-dashboard.component.html',
   styleUrls: ['./employee-dashboard.component.css']
 })

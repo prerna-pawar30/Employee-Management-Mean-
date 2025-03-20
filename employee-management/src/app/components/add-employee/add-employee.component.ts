@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+
 import { EmployeeModel } from '../../../../model/employee';
 import { EmployeeService } from '../../services/employee.service';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
-import { SideBarComponent } from "../side-bar/side-bar.component";
+import { Component } from '@angular/core';
+import { SideBarComponent } from '../side-bar/side-bar.component';
 
 
 @Component({

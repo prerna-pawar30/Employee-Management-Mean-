@@ -1,35 +1,33 @@
 <mat-toolbar color="primary" class="header">
   
-  @if (authService.isAdmin) {
-    <span class="logo">Admin Information</span>
-    <span class="spacer"></span>
-  }@else {
+  @if (!authService.isLoggedIn) {
     <span class="logo">Employee Management System</span>
+  } @else {
+    @if (authService.isAdmin) {
+      <span class="logo">Admin Dashboard</span>
+    } @else {
+      <span class="logo">Employee Dashboard</span>
+    }
     <span class="spacer"></span>
   }
-    
-  
-    <nav class="nav-links">
 
-      <div class="profile">
+  <nav class="nav-links">
+    <div class="profile">
+      <!-- Profile Button with Dropdown -->
+      <button mat-icon-button [matMenuTriggerFor]="profileMenu">
+        <i class="fa-solid fa-user"></i>
+      </button>
 
-        @if (authService.isAdmin) {
-          <a routerLink="/admin-profile">{{authService.userName}}</a>
-        }@else {
-          <a routerLink="/employee-profile">{{authService.userName}}</a>
-        }
-        
-      @if (authService.isLoggedIn) {
-        <!-- <a routerLink="/leave-employee" class="cursor-pointer ml-2">Leave</a> -->
-        <!-- <a routerLink="/checkIn" class="cursor-pointer ml-2">Check-In</a> -->
-        <a (click)="logout()" class="cursor-pointer ml-2">Logout</a>
-
-      }@else {
-        <a routerLink="/login" class="cursor-pointer ml-2">Log In</a>
-      
-        <a routerLink="/register" class="cursor-pointer ml-2">Register</a>}
+      <!-- Dropdown Menu -->
+      <mat-menu #profileMenu="matMenu">
+        <button *ngIf="authService.isLoggedIn" mat-menu-item (click)="logout()">Logout</button>
+        <ng-container *ngIf="!authService.isLoggedIn">
+          <button mat-menu-item routerLink="/login">Login</button>
+          <button mat-menu-item routerLink="/register">Register</button>
+        </ng-container>
+      </mat-menu>
 
     </div>
-    </nav>
-  </mat-toolbar>
-  
+  </nav>
+
+</mat-toolbar>

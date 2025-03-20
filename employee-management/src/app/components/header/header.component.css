@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
-  background-color: #6b7aed; /* Dark professional look */
+  background-color: #000000; /* Professional dark look */
   color: white;
   font-family: 'Arial', sans-serif;
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
@@ -17,21 +17,16 @@
   z-index: 1000;
 }
 
-/* Logo & Title */
+/* Logo Styling */
 .logo {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: bold;
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.logo i {
-  font-size: 1.8rem;
-  color: #1abc9c; /* Accent color */
-}
-
-/* Spacer to push profile section to the right */
+/* Spacer to push elements to the right */
 .spacer {
   flex-grow: 1;
 }
@@ -47,33 +42,41 @@
 .profile {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
+}
+
+/* Profile Icon Button */
+.profile button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 1.5rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.profile button:hover {
+  transform: scale(1.1);
+}
+
+/* Material Menu Styling */
+mat-menu {
+  min-width: 150px;
+}
+
+/* Menu Items */
+mat-menu-item {
   font-size: 1rem;
-}
-
-/* Profile Links */
-.profile a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s, transform 0.2s;
-  padding: 8px 15px;
-  border-radius: 5px;
-}
-
-/* Hover Effects */
-.profile a:hover {
-  background-color: #1abc9c;
-  color: white;
-  transform: translateY(-2px);
 }
 
 /* Logout Button */
 .logout-btn {
   background: #e74c3c;
+  color: white;
   padding: 8px 15px;
   border-radius: 5px;
   font-weight: bold;
+  font-size: 1rem;
   transition: all 0.3s ease-in-out;
 }
 
@@ -81,20 +84,57 @@
   background: #c0392b;
 }
 
-/* Responsive Design */
+/* ========================== */
+/*       RESPONSIVE NAV       */
+/* ========================== */
+
 @media screen and (max-width: 768px) {
   .header {
     flex-direction: column;
-    padding: 10px;
+    text-align: center;
   }
 
   .nav-links {
     flex-direction: column;
     gap: 10px;
+    padding-top: 10px;
   }
 
   .profile {
     flex-direction: column;
-    gap: 10px;
+  }
+}
+
+/* ========================== */
+/*       MOBILE MENU          */
+/* ========================== */
+
+.menu-icon {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: white;
+}
+
+/* Show Menu Icon for Small Screens */
+@media screen and (max-width: 600px) {
+  .menu-icon {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #6b7aed;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .nav-links.show {
+    display: flex;
   }
 }

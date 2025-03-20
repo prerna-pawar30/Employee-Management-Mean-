@@ -2,18 +2,20 @@ import { Component, inject, Inject } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink } from '@angular/router';
+import { MatMenuModule } from '@angular/material/menu';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
-  imports:[MatToolbarModule,MatIconModule,RouterLink,CommonModule]
+  styleUrl:'./header.component.css',
+  imports: [MatToolbarModule, MatIconModule, RouterLink, CommonModule, MatMenuModule]
+
 })
 export class HeaderComponent {
+  router = inject(Router);
   authService = inject(AuthService);
-  router =inject(Router);
-sidenav: any;
+  sidenav: any;
   async logout(): Promise<void> {
     try {
       await this.authService.logout();
@@ -23,4 +25,5 @@ sidenav: any;
     }
   
   }
+
 }
