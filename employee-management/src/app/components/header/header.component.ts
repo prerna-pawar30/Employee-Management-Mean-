@@ -3,7 +3,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
-import { Location } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 @Component({
@@ -15,7 +14,6 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponent {
   router = inject(Router);
-  location = inject(Location);
   authService = inject(AuthService);
   sidenav: any;
   async logout(): Promise<void> {
@@ -28,7 +26,4 @@ export class HeaderComponent {
   
   }
 
-  goBack(): void {
-    this.location.back();
-  }
 }

@@ -6,32 +6,27 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 10px;
-  background-color: #6b7aed; /* Dark professional look */
+  padding: 12px 20px;
+  background-color: #000000; /* Professional dark look */
   color: white;
   font-family: 'Arial', sans-serif;
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   width: 100%;
-  z-index: 500;
+  z-index: 1000;
 }
 
-/* Logo & Title */
+/* Logo Styling */
 .logo {
-  font-size: 1.2rem; /* Reduce size */
+  font-size: 1.4rem;
   font-weight: bold;
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.logo i {
-  font-size: 1.5rem; /* Reduce size */
-  color: #1abc9c; /* Accent color */
-}
-
-/* Spacer to push profile section to the right */
+/* Spacer to push elements to the right */
 .spacer {
   flex-grow: 1;
 }
@@ -40,7 +35,7 @@
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 20px;
 }
 
 /* Profile Section */
@@ -48,34 +43,40 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.9rem; /* Reduce font size */
 }
 
-/* Profile Links */
-.profile a {
+/* Profile Icon Button */
+.profile button {
+  background: none;
+  border: none;
+  cursor: pointer;
   color: white;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s, transform 0.2s;
-  padding: 6px 12px; /* Reduce padding */
-  border-radius: 5px;
-  font-size: 0.9rem; /* Reduce font size */
+  font-size: 1.5rem;
+  transition: transform 0.3s ease-in-out;
 }
 
-/* Hover Effects */
-.profile a:hover {
-  background-color: #93b3ac;
-  color: white;
-  transform: translateY(-2px);
+.profile button:hover {
+  transform: scale(1.1);
+}
+
+/* Material Menu Styling */
+mat-menu {
+  min-width: 150px;
+}
+
+/* Menu Items */
+mat-menu-item {
+  font-size: 1rem;
 }
 
 /* Logout Button */
 .logout-btn {
   background: #e74c3c;
-  padding: 6px 12px; /* Reduce padding */
+  color: white;
+  padding: 8px 15px;
   border-radius: 5px;
   font-weight: bold;
-  font-size: 0.9rem; /* Reduce font size */
+  font-size: 1rem;
   transition: all 0.3s ease-in-out;
 }
 
@@ -90,18 +91,17 @@
 @media screen and (max-width: 768px) {
   .header {
     flex-direction: column;
-    padding: 8px;
+    text-align: center;
   }
 
   .nav-links {
     flex-direction: column;
-    gap: 5px;
-    font-size: 0.9rem; /* Reduce font size */
+    gap: 10px;
+    padding-top: 10px;
   }
 
   .profile {
     flex-direction: column;
-    gap: 8px;
   }
 }
 
@@ -111,8 +111,9 @@
 
 .menu-icon {
   display: none;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   cursor: pointer;
+  color: white;
 }
 
 /* Show Menu Icon for Small Screens */
@@ -125,7 +126,7 @@
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 50px;
+    top: 60px;
     right: 0;
     background: #6b7aed;
     width: 100%;

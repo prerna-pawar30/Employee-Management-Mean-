@@ -131,3 +131,57 @@
     width: 100%;
   }
 }
+
+/* Active and Hover States */
+.nav-links a.active {
+  background-color: #6b46c1;
+  color: white;
+}
+
+.nav-links a:hover {
+  background-color: #edf2f7;
+  color: #1a202c;
+}
+
+/* Logout Button */
+.logout {
+  margin-top: auto;
+}
+
+.logout a {
+  display: block;
+  padding: 12px;
+  text-align: center;
+  color: #e53e3e;
+  border-radius: 8px;
+}
+
+.logout a:hover {
+  background-color: #fde8e8;
+}
+
+/* Responsive Sidebar for Small Screens */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 220px;
+  }
+
+  .content {
+    margin-left: 230px;
+  }
+}
+
+@media (max-width: 576px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .content {
+    margin-left: 0;
+    width: 100%;
+  }
+}
