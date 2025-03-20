@@ -1,30 +1,30 @@
 <mat-toolbar color="primary" class="header">
-  
-  @if (authService.isLoggedIn) {
+  <div class="left-section">
+    <div *ngIf="authService.isLoggedIn" class="toggle-btn" (click)="toggleSidebar()">☰</div>
+    <span class="logo" *ngIf="isSidebarOpen">
+     
+     
+    </span>
     
-  } @else {
-    <span class="logo">Welcome</span>
-  }
+  </div>
 
-  @if (!authService.isLoggedIn) {
-    <span class="logo">Employee Management System</span>
-  } @else {
-    @if (authService.isAdmin) {
-      <span class="logo">Admin Dashboard</span>
+  <div class="Left-bar">
+    @if (!authService.isLoggedIn) {
+      Employee Management System
     } @else {
-      <span class="logo">Employee Dashboard</span>
+      @if (authService.isAdmin) {
+        Admin Dashboard
+      } @else {
+        Employee Dashboard
+      }
     }
-    <span class="spacer"></span>
-  }
-
+   </div>
+  <span class="spacer"></span>
   <nav class="nav-links">
     <div class="profile">
-      <!-- Profile Button with Dropdown -->
       <button mat-icon-button [matMenuTriggerFor]="profileMenu">
         <i class="fa-solid fa-user"></i>
       </button>
-
-      <!-- Dropdown Menu -->
       <mat-menu #profileMenu="matMenu">
         <button *ngIf="authService.isLoggedIn" mat-menu-item (click)="logout()">Logout</button>
         <ng-container *ngIf="!authService.isLoggedIn">
@@ -32,8 +32,18 @@
           <button mat-menu-item routerLink="/register">Register</button>
         </ng-container>
       </mat-menu>
-
     </div>
   </nav>
-
 </mat-toolbar>
+
+<aside *ngIf="authService.isLoggedIn" class="sidebar" [class.open]="isSidebarOpen">
+  <div class="logo">
+    <h2 *ngIf="isSidebarOpen">Profile</h2>
+  </div>
+  <ul class="nav-links">
+    <li><a routerLink="/employee-dashboard"><i class="fas fa-tachometer-alt"></i> <span *ngIf="isSidebarOpen">Dashboard</span></a></li>
+    <li><a routerLink="/checkIn"><i class="fas fa-clock"></i> <span *ngIf="isSidebarOpen">Check-in/Check-out</span></a></li>
+    <li><a routerLink="/employee-leave-form"><i class="fas fa-calendar-alt"></i> <span *ngIf="isSidebarOpen">Leave Requests</span></a></li>
+    <li><a routerLink="/add-employee"><i class="fas fa-user-plus"></i> <span *ngIf="isSidebarOpen">Add Employee</span></a></li>
+  </ul>
+</aside>
