@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 20px;
+  padding: 10px 10px;
   background-color: #6b7aed; /* Dark professional look */
   color: white;
   font-family: 'Arial', sans-serif;
@@ -14,12 +14,12 @@
   position: sticky;
   top: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 500;
 }
 
 /* Logo & Title */
 .logo {
-  font-size: 1.5rem;
+  font-size: 1.2rem; /* Reduce size */
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -27,7 +27,7 @@
 }
 
 .logo i {
-  font-size: 1.8rem;
+  font-size: 1.5rem; /* Reduce size */
   color: #1abc9c; /* Accent color */
 }
 
@@ -40,15 +40,15 @@
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 }
 
 /* Profile Section */
 .profile {
   display: flex;
   align-items: center;
-  gap: 15px;
-  font-size: 1rem;
+  gap: 10px;
+  font-size: 0.9rem; /* Reduce font size */
 }
 
 /* Profile Links */
@@ -57,13 +57,14 @@
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s, transform 0.2s;
-  padding: 8px 15px;
+  padding: 6px 12px; /* Reduce padding */
   border-radius: 5px;
+  font-size: 0.9rem; /* Reduce font size */
 }
 
 /* Hover Effects */
 .profile a:hover {
-  background-color: #1abc9c;
+  background-color: #93b3ac;
   color: white;
   transform: translateY(-2px);
 }
@@ -71,9 +72,10 @@
 /* Logout Button */
 .logout-btn {
   background: #e74c3c;
-  padding: 8px 15px;
+  padding: 6px 12px; /* Reduce padding */
   border-radius: 5px;
   font-weight: bold;
+  font-size: 0.9rem; /* Reduce font size */
   transition: all 0.3s ease-in-out;
 }
 
@@ -81,20 +83,57 @@
   background: #c0392b;
 }
 
-/* Responsive Design */
+/* ========================== */
+/*       RESPONSIVE NAV       */
+/* ========================== */
+
 @media screen and (max-width: 768px) {
   .header {
     flex-direction: column;
-    padding: 10px;
+    padding: 8px;
   }
 
   .nav-links {
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
+    font-size: 0.9rem; /* Reduce font size */
   }
 
   .profile {
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
+  }
+}
+
+/* ========================== */
+/*       MOBILE MENU          */
+/* ========================== */
+
+.menu-icon {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Show Menu Icon for Small Screens */
+@media screen and (max-width: 600px) {
+  .menu-icon {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: #6b7aed;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .nav-links.show {
+    display: flex;
   }
 }
