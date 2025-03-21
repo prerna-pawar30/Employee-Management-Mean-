@@ -11,8 +11,12 @@ import { adminGaurd } from './core/admin-guard';
 import { EmployeeleaveComponent } from './components/employee-leave-form/employee-leave.component';
 import { LeaveComponent } from './components/leave-employee-admin/leave-employee.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
+<<<<<<< HEAD
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
 import { EmpProfileComponent } from './components/emp-profile/emp-profile.component';
+=======
+import { PayrollComponent } from './components/payroll/payroll.component';
+>>>>>>> 53457ad54c2bc749d51d00a20466a58e451bbb6f
 
 export const routes: Routes = [
     {
@@ -88,7 +92,8 @@ export const routes: Routes = [
     {
         path:'side-bar', 
         component:SideBarComponent
-    }
+    },
+    { path: 'payroll', component: PayrollComponent },
     
 ];
 

@@ -1,0 +1,30 @@
+<h2>Payroll Management</h2>
+
+<!-- Add Payroll -->
+<div>
+  <input [(ngModel)]="newPayroll.employeeId" placeholder="Employee ID">
+  <input [(ngModel)]="newPayroll.basicSalary" type="number" placeholder="Basic Salary">
+  <input [(ngModel)]="newPayroll.deductions" type="number" placeholder="Deductions">
+  <input [(ngModel)]="newPayroll.bonuses" type="number" placeholder="Bonuses">
+  <button (click)="addPayroll()">Add Payroll</button>
+</div>
+
+<!-- Payroll Table -->
+<table>
+  <tr>
+    <th>Employee ID</th>
+    <th>Basic Salary</th>
+    <th>Deductions</th>
+    <th>Bonuses</th>
+    <th>Total Salary</th>
+    <th>Actions</th>
+  </tr>
+  <tr *ngFor="let payroll of payrolls">
+    <td>{{ payroll.employeeId }}</td>
+    <td>{{ payroll.basicSalary }}</td>
+    <td>{{ payroll.deductions }}</td>
+    <td>{{ payroll.bonuses }}</td>
+    <td>{{ payroll.totalSalary }}</td>
+    <td><button (click)="deletePayroll(payroll._id)">Delete</button></td>
+  </tr>
+</table>
