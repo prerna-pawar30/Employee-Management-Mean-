@@ -2,11 +2,11 @@ import { Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-admin-profile',
+  selector: 'app-emp-profile',
   imports: [],
-  templateUrl: './admin-profile.component.html',
-  styleUrl: './admin-profile.component.css'
+  templateUrl: './emp-profile.component.html',
+  styleUrl: './emp-profile.component.css'
 })
-export class AdminProfileComponent {
+export class EmpProfileComponent {
   authService = inject(AuthService);
 }

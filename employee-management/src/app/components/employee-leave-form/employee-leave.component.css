@@ -1,91 +1,78 @@
-.leave-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
+/* Global Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa;
 }
 
-.leave-form, .leave-history {
-  width: 80%;
-  max-width: 600px;
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
+.container {
+  max-width: 1200px;
 }
 
-.error-msg {
-  color: red;
-  font-size: 0.85rem;
+.card {
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-.badge-success { background-color: #28a745; color: white; }
-.badge-warning { background-color: #ffc107; color: black; }
-.badge-danger { background-color: #dc3545; color: white; }
+.card:hover {
+  transform: scale(1.02);
+}
 
+/* Form Styles */
+.form-control {
+  border-radius: 8px;
+  padding: 10px;
+}
 
-/* Buttons */
 .btn-primary {
-  background: #007bff;
+  background-color: #007bff;
   border: none;
   padding: 12px;
-  font-size: 16px;
-  font-weight: 600;
+  font-weight: bold;
   border-radius: 8px;
-  transition: 0.3s;
 }
 
 .btn-primary:hover {
-  background: #0056b3;
+  background-color: #0056b3;
 }
 
-/* Leave History Table */
+/* Table Styling */
 .table {
-  width: 100%;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
 }
 
 .table thead {
-  background: #007bff;
+  background-color: #343a40;
   color: white;
 }
 
-.table th, .table td {
-  padding: 14px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 123, 255, 0.1);
 }
 
-.table tbody tr:hover {
-  background: #f8f9fa;
-}
-
-/* Status Badges */
+/* Badge Styling */
 .badge {
-  padding: 6px 14px;
-  border-radius: 15px;
   font-size: 14px;
-  font-weight: bold;
-}
-
-.badge-success {
-  background: #28a745;
-  color: white;
-}
-
-.badge-warning {
-  background: #ffc107;
-  color: black;
-}
-
-.badge-danger {
-  background: #dc3545;
-  color: white;
+  padding: 6px 10px;
+  border-radius: 12px;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .leave-form, .leave-history {
-    width: 90%;
+  .row {
+    flex-direction: column;
+  }
+
+  .col-md-5, .col-md-7 {
+    width: 100%;
+  }
+
+  .btn-primary {
+    font-size: 16px;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
   }
 }
