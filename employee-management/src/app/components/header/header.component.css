@@ -57,7 +57,7 @@
 .sidebar {
   width: 70px;
   height: 100vh;
-  background-color: #9763f0;
+  background-color: #9a61fe;
   color: white;
   position: fixed;
   left: 0;
@@ -129,7 +129,7 @@
 
 /* Sidebar Hover Effects */
 .sidebar .nav-links li:hover {
-  background-color: #7b56d9;
+  background-color: #774de1;
   border-radius: 5px;
 }
 

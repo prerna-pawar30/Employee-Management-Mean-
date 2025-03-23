@@ -1,119 +1,78 @@
-/* Container Layout */
-.leave-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
+/* Global Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa;
 }
 
-/* Form & History Cards */
-.leave-form, .leave-history {
-  width: 60%;
-  background: #ffffff;
-  padding: 30px;
+.container {
+  max-width: 1200px;
+}
+
+.card {
   border-radius: 12px;
-  border: 1px solid #e0e0e0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-/* Titles */
-.leave-form h3, .leave-history h4 {
-  font-weight: 600;
-  text-align: center;
+.card:hover {
+  transform: scale(1.02);
 }
 
-/* Form Inputs */
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  font-weight: 600;
-  margin-bottom: 8px;
-  display: block;
-}
-
+/* Form Styles */
 .form-control {
   border-radius: 8px;
-  border: 1px solid #ccc;
   padding: 10px;
-  font-size: 16px;
 }
 
-textarea.form-control {
-  resize: none;
-}
-
-/* Error Messages */
-.error-msg {
-  color: red;
-  font-size: 13px;
-  margin-top: 5px;
-}
-
-/* Buttons */
 .btn-primary {
-  background: #007bff;
+  background-color: #007bff;
   border: none;
   padding: 12px;
-  font-size: 16px;
-  font-weight: 600;
+  font-weight: bold;
   border-radius: 8px;
-  transition: 0.3s;
 }
 
 .btn-primary:hover {
-  background: #0056b3;
+  background-color: #0056b3;
 }
 
-/* Leave History Table */
+/* Table Styling */
 .table {
-  width: 100%;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
 }
 
 .table thead {
-  background: #007bff;
+  background-color: #343a40;
   color: white;
 }
 
-.table th, .table td {
-  padding: 14px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 123, 255, 0.1);
 }
 
-.table tbody tr:hover {
-  background: #f8f9fa;
-}
-
-/* Status Badges */
+/* Badge Styling */
 .badge {
-  padding: 6px 14px;
-  border-radius: 15px;
   font-size: 14px;
-  font-weight: bold;
-}
-
-.badge-success {
-  background: #28a745;
-  color: white;
-}
-
-.badge-warning {
-  background: #ffc107;
-  color: black;
-}
-
-.badge-danger {
-  background: #dc3545;
-  color: white;
+  padding: 6px 10px;
+  border-radius: 12px;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .leave-form, .leave-history {
-    width: 90%;
+  .row {
+    flex-direction: column;
+  }
+
+  .col-md-5, .col-md-7 {
+    width: 100%;
+  }
+
+  .btn-primary {
+    font-size: 16px;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
   }
 }

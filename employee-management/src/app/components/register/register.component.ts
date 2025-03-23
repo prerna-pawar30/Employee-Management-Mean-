@@ -80,7 +80,7 @@ export class RegisterComponent {
       }
     });
 
-    this.authService.register(value.name!, value.email!, value.password!)
+    this.authService.register(value.name!, value.email!, value.password!, 'defaultRole')
       .subscribe({
         next: () => {
           Swal.close();

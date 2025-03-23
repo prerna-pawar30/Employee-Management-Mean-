@@ -8,11 +8,13 @@ import { CheckInOutComponent } from './components/check-in-out/check-in-out.comp
 import { RegisterComponent } from './components/register/register.component';
 import { authGaurd } from './core/auth-guard';
 import { adminGaurd } from './core/admin-guard';
-import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
 import { EmployeeleaveComponent } from './components/employee-leave-form/employee-leave.component';
 import { LeaveComponent } from './components/leave-employee-admin/leave-employee.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
-import { PayrollComponent } from './components/payroll/payroll.component';
+
+import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
+import { EmpProfileComponent } from './components/emp-profile/emp-profile.component';
+
 
 export const routes: Routes = [
     {
@@ -30,6 +32,19 @@ export const routes: Routes = [
     },
     
     {
+        path:'admin-profile',
+        component:AdminProfileComponent,
+        canActivate:[adminGaurd],
+    },
+
+    {
+        path:'emp-profile',
+        component:EmpProfileComponent,
+        canActivate:[authGaurd],
+    },
+
+
+    {
         path:'admin-dashboard',
         component:AdminDashboardComponent,
         canActivate:[adminGaurd]
@@ -41,11 +56,7 @@ export const routes: Routes = [
         canActivate:[authGaurd]
     },
 
-    {
-        path:'admin-profile',
-        component:AdminProfileComponent,
-        // canActivate:[adminGaurd]
-    },
+   
 
     {
         path:'employee-list', 
@@ -80,7 +91,7 @@ export const routes: Routes = [
         path:'side-bar', 
         component:SideBarComponent
     },
-    { path: 'payroll', component: PayrollComponent },
+   
     
 ];
 
