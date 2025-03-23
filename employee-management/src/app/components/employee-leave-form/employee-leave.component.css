@@ -1,55 +1,27 @@
-/* Container Layout */
 .leave-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
 }
 
-/* Form & History Cards */
 .leave-form, .leave-history {
-  width: 60%;
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 12px;
-  border: 1px solid #e0e0e0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 600px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
 }
 
-/* Titles */
-.leave-form h3, .leave-history h4 {
-  font-weight: 600;
-  text-align: center;
-}
-
-/* Form Inputs */
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  font-weight: 600;
-  margin-bottom: 8px;
-  display: block;
-}
-
-.form-control {
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  font-size: 16px;
-}
-
-textarea.form-control {
-  resize: none;
-}
-
-/* Error Messages */
 .error-msg {
   color: red;
-  font-size: 13px;
-  margin-top: 5px;
+  font-size: 0.85rem;
 }
+
+.badge-success { background-color: #28a745; color: white; }
+.badge-warning { background-color: #ffc107; color: black; }
+.badge-danger { background-color: #dc3545; color: white; }
+
 
 /* Buttons */
 .btn-primary {

@@ -15,7 +15,7 @@ export class AuthService {
   constructor() {}
 http = inject(HttpClient);
 
-  register(name:string,email:string,password:string){
+  register(name: string, email: string, password: string, p0: string){
     return this.http.post(environment.apiUrl+"/auth/register",{
       name,
       email,
@@ -31,7 +31,7 @@ http = inject(HttpClient);
   }
 
   get isLoggedIn(): boolean {
-    return typeof window !== "undefined" && localStorage.getItem("token") !== null;
+    return typeof window !!== "undefined" && localStorage.getItem("token") !== null;
   }
   
   get isAdmin(): boolean {
