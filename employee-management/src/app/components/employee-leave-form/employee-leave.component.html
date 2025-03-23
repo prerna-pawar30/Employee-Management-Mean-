@@ -1,22 +1,19 @@
 <div class="container mt-5">
-  <app-side-bar></app-side-bar> 
+  <app-side-bar></app-side-bar>
   <div class="leave-container">
-    
-    <!-- Leave Request Form -->
+
     <div class="leave-form shadow-lg">
       <h3 class="text-center mb-4">Request Leave</h3>
       <form #leaveForm="ngForm" (ngSubmit)="submitLeaveRequest()" class="needs-validation" novalidate>
-        
-        <!-- Employee ID -->
+
         <div class="form-group">
           <label>Employee ID</label>
           <input type="text" [(ngModel)]="newLeaveRequest.employeeId" name="employeeId" class="form-control" readonly />
         </div>
 
-        <!-- Leave Type -->
         <div class="form-group">
           <label>Leave Type</label>
-          <select [(ngModel)]="newLeaveRequest.type" name="leaveType" class="form-control" required #leaveType="ngModel">
+          <select [(ngModel)]="newLeaveRequest.leaveType" name="leaveType" class="form-control" required #leaveType="ngModel">
             <option value="" disabled selected>Select Leave Type</option>
             <option *ngFor="let leave of leaveTypes" [value]="leave.type">
               {{ leave.type }} (Available: {{ leave.available - leave.booked }})
@@ -25,28 +22,30 @@
           <div *ngIf="leaveType.invalid && leaveType.touched" class="error-msg">Please select a leave type.</div>
         </div>
 
-        <!-- Leave Reason -->
         <div class="form-group">
           <label>Leave Reason</label>
           <textarea [(ngModel)]="newLeaveRequest.reason" name="reason" class="form-control" rows="3" placeholder="Enter Leave Reason" required #reason="ngModel"></textarea>
           <div *ngIf="reason.invalid && reason.touched" class="error-msg">Leave reason is required.</div>
         </div>
 
-        <!-- Leave Date -->
         <div class="form-group">
-          <label>Leave Date</label>
-          <input type="date" [(ngModel)]="newLeaveRequest.date" name="date" class="form-control" required #date="ngModel" />
-          <div *ngIf="date.invalid && date.touched" class="error-msg">Leave date is required.</div>
+          <label>From Date</label>
+          <input type="date" [(ngModel)]="newLeaveRequest.fromDate" name="fromDate" class="form-control" required #fromDate="ngModel" />
+          <div *ngIf="fromDate.invalid && fromDate.touched" class="error-msg">From date is required.</div>
         </div>
 
-        <!-- Submit Button -->
+        <div class="form-group">
+          <label>To Date</label>
+          <input type="date" [(ngModel)]="newLeaveRequest.toDate" name="toDate" class="form-control" required #toDate="ngModel" />
+          <div *ngIf="toDate.invalid && toDate.touched" class="error-msg">To date is required.</div>
+        </div>
+
         <button type="submit" class="btn btn-primary w-100 mt-3" [disabled]="leaveForm.invalid">
           Submit Leave Request
         </button>
       </form>
     </div>
 
-    <!-- Leave History -->
     <div class="leave-history shadow-lg">
       <h4 class="text-center mb-3">Leave History</h4>
       <p *ngIf="leaveRequests.length === 0" class="text-center text-danger">No leave history found.</p>
@@ -55,21 +54,23 @@
           <tr>
             <th>Type</th>
             <th>Reason</th>
-            <th>Date</th>
+            <th>From Date</th>
+            <th>To Date</th>
             <th>Status</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let leave of leaveRequests">
-            <td>{{ leave.type || 'N/A' }}</td>
+            <td>{{ leave.leaveType || 'N/A' }}</td>
             <td>{{ leave.reason || 'N/A' }}</td>
-            <td>{{ leave.date || 'N/A' }}</td>
+            <td>{{ leave.fromDate | date }}</td>
+            <td>{{ leave.toDate | date }}</td>
             <td>
               <span class="badge" [ngClass]="{
-                'badge-success': leave.status === 'approved',
-                'badge-warning': leave.status === 'pending',
-                'badge-danger': leave.status === 'rejected'
-              }">
+                  'badge-success': leave.status === 'approved',
+                  'badge-warning': leave.status === 'pending',
+                  'badge-danger': leave.status === 'rejected'
+                }">
                 {{ leave.status | titlecase }}
               </span>
             </td>

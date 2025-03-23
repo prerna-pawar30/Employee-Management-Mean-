@@ -1,154 +1,65 @@
-/* General Container */
 .container {
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Work History Section */
+.work-history {
+  margin-top: 20px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.btn {
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.current-duration span {
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.hours-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+@media (max-width: 768px) {
+  .col-lg-4,
+  .col-lg-8 {
+    width: 100%;
+  }
+
+  .button-group {
     flex-direction: column;
     align-items: center;
   }
-  
-  /* Check-in Card */
-  .checkin-card {
-    width: 60%;
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e0e0e0;
+
+  .work-history .d-flex {
+    flex-direction: column;
+    gap: 10px;
   }
-  
-  /* User Info */
-  .user-info {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 20px;
-  }
-  
-  /* Button Group */
-  .button-group {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 20px;
-  }
-  
-  .btn-primary, .btn-danger {
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 8px;
-    transition: 0.3s;
-  }
-  
-  .btn-primary:hover {
-    background: #0056b3;
-  }
-  
-  .btn-danger:hover {
-    background: #b30000;
-  }
-  
-  /* Info Section */
-  .info-section p {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 10px;
-  }
-  
-  .current-duration span {
-    font-size: 18px;
-    font-weight: bold;
-    color: #007bff;
-  }
-  
-  /* Work History Section */
-  .work-history {
-    margin-top: 20px;
-  }
-  
-  .history-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-  
-  .month-selector label {
-    font-weight: bold;
-    margin-right: 10px;
-  }
-  
-  .month-selector .form-control {
-    display: inline-block;
-    width: auto;
-    font-size: 14px;
-    padding: 5px 10px;
-  }
-  
-  .history-actions .btn {
-    padding: 8px 12px;
-    font-size: 14px;
-    margin-left: 5px;
-  }
-  
-  /* Work History Table */
-  .table {
-    width: 100%;
-    margin-top: 10px;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  
-  .table thead {
-    background: #007bff;
-    color: white;
-  }
-  
-  .table th, .table td {
-    padding: 14px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .table tbody tr:hover {
-    background: #f8f9fa;
-  }
-  
-  /* Total Hours View */
-  .total-hours-card {
-    width: 50%;
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-  }
-  
-  .hours-text {
-    font-size: 24px;
-    font-weight: bold;
-    color: #007bff;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .checkin-card, .total-hours-card {
-      width: 90%;
-    }
-  
-    .button-group {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .history-header {
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-  
-    .history-actions {
-      display: flex;
-      gap: 5px;
-    }
-  }
-  
+}

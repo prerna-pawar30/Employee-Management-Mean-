@@ -10,6 +10,7 @@ import { AuthService } from '../../services/auth.service';
 import { environment } from '../../../environments/environment.prod';
 import { RouterLink } from '@angular/router';
 import { SideBarComponent } from "../side-bar/side-bar.component";
+import Swal from 'sweetalert2';
 
 interface WorkRecord {
   date: string;
@@ -37,6 +38,7 @@ isCheckedIn: boolean = false;
   selectedMonth: string = '';
   months: string[] = [];
   filteredWorkRecords: WorkRecord[] = [];
+  isPaused: boolean | undefined;
 
   constructor(
     @Inject(AuthService) public authService: AuthService,
@@ -61,6 +63,15 @@ isCheckedIn: boolean = false;
     this.fetchWorkRecords();
   }
 
+  generateMonthsList() {
+    const today = new Date();
+    for (let i = 0; i < 12; i++) {
+      const monthDate = new Date(today.getFullYear(), today.getMonth() - i, 1);
+      this.months.push(monthDate.toLocaleString('default', { month: 'long', year: 'numeric' }));
+    }
+    this.selectedMonth = this.months[0]; // Default to current month
+  }
+
   startStopwatch() {
     if (!this.isCheckedIn) {
       this.checkIn();
@@ -69,13 +80,26 @@ isCheckedIn: boolean = false;
       this.elapsedTime += 1000;
     }, 1000);
   }
-
   stopStopwatch() {
-    clearInterval(this.timer);
-    if (this.isCheckedIn) {
-      this.checkOut();
-    }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to stop working?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, stop work!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        clearInterval(this.timer);
+        if (this.isCheckedIn) {
+          this.checkOut();
+          Swal.fire('Stopped!', 'Your work session has ended.', 'success');
+        }
+      }
+    });
   }
+  
 
   checkIn() {
     if (!this.employeeId) return;
@@ -104,21 +128,60 @@ isCheckedIn: boolean = false;
     );
   }
 
-  fetchWorkRecords() {
+  pauseWork() {
     if (!this.employeeId) return;
 
+    this.checkInOutService.pauseWork(this.employeeId).subscribe(
+      () => {
+        this.isPaused = true;
+        clearInterval(this.timer);
+      },
+      (error) => console.error(error)
+    );
+  }
+
+  resumeWork() {
+    if (!this.employeeId) return;
+
+    this.checkInOutService.resumeWork(this.employeeId).subscribe(
+      () => {
+        this.isPaused = false;
+        this.startStopwatch();
+      },
+      (error) => console.error(error)
+    );
+  }
+
+  
+  fetchWorkRecords() {
+    if (!this.employeeId) return;
+  
     this.http.get(`${environment.apiUrl}/api/check-in-out/history/${this.employeeId}`).subscribe(
       (res: any) => {
         console.log("History API Response:", res); // Debugging
         if (res.history) {
-          this.workRecords = res.history.map((record: any) => ({
-            date: new Date(record.checkInTime).toISOString().split('T')[0],
-            checkInTime: new Date(record.checkInTime),
-            checkOutTime: record.checkOutTime ? new Date(record.checkOutTime) : null,
-            duration: record.checkOutTime
-              ? new Date(record.checkOutTime).getTime() - new Date(record.checkInTime).getTime()
-              : 0
-          }));
+          this.workRecords = res.history.map((record: any) => {
+            const checkInTime = new Date(record.checkInTime);
+            const checkOutTime = record.checkOutTime ? new Date(record.checkOutTime) : null;
+  
+            let duration;
+            if (checkOutTime) {
+              duration = checkOutTime.getTime() - checkInTime.getTime();
+            } else if (this.isCheckedIn) {
+              // Calculate ongoing work duration
+              duration = new Date().getTime() - checkInTime.getTime();
+            } else {
+              duration = 0;
+            }
+  
+            return {
+              date: checkInTime.toISOString().split('T')[0],
+              checkInTime,
+              checkOutTime,
+              duration
+            };
+          });
+  
           this.filterWorkRecordsByMonth();
         } else {
           this.workRecords = [];
@@ -129,6 +192,7 @@ isCheckedIn: boolean = false;
       (error) => console.error("Error fetching history:", error)
     );
   }
+  
 
   formatTime(milliseconds: number): string {
     let totalSeconds = Math.floor(milliseconds / 1000);
