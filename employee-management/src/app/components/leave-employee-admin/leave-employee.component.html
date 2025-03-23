@@ -1,4 +1,6 @@
 <div class="leave-container">
+  <!-- Sidebar -->
+  <app-side-bar></app-side-bar>
 
   <!-- Main Content -->
   <div class="content">
@@ -16,6 +18,10 @@
           <mat-label>Search Leave Requests</mat-label>
           <input matInput (keyup)="applyFilter($event)" placeholder="Search by employee, email, or reason" />
         </mat-form-field>
+
+        <div class="action-buttons">
+          <button mat-raised-button color="primary" (click)="exportToExcel()">Download Report</button>
+        </div>
 
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
           
