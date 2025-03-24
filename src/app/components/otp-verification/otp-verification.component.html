@@ -1,20 +1,24 @@
-<!-- <div class="form-container">
-  <form (ngSubmit)="verifyOTP()">
-    <h2>Verify OTP</h2>
-    <input type="text" [(ngModel)]="otp" name="otp" placeholder="Enter OTP" required />
-    <button type="submit">Verify</button>
-  </form>
-</div> -->
+ 
 
+<div class="otp-container">
+  <h2>OTP Verification</h2>
+  <p>Please enter the 6-digit OTP sent to your email: <strong>{{ email }}</strong></p>
 
-<div class="form-container">
-  <form (ngSubmit)="verifyOTP()">
-    <h2>Verify OTP</h2>
+  <!-- OTP Input -->
+  <div class="otp-input">
+    <input type="text" [(ngModel)]="otp" maxlength="6" placeholder="Enter OTP" required />
+  </div>
 
-    <p class="timer">OTP Expires in: <strong>{{ timeLeft }}</strong></p>
+  <!-- Countdown Timer -->
+  <p *ngIf="otpExpiryTime > 0">Time Remaining: {{ formatTime(otpExpiryTime) }}</p>
+  <p *ngIf="otpExpiryTime <= 0" class="error">OTP has expired. Please request a new one.</p>
 
-    <input type="text" [(ngModel)]="otp" name="otp" placeholder="Enter OTP" required />
+  <!-- Verify Button -->
+  <button (click)="verifyOTP()" [disabled]="otp.length !== 6">Verify OTP</button>
 
-    <button type="submit">Verify</button>
-  </form>
+  <!-- Resend OTP -->
+  <p>
+    Didn’t receive OTP? <a href="/resend-otp">Resend OTP</a>
+  </p>
 </div>
+

@@ -102,10 +102,10 @@ export const routes: Routes = [
         component:ResetPasswordComponent,
     },
 
-    { 
-     path: '**', 
-     redirectTo: 'forgot-password'
-    },
+    // { 
+    //  path: '**', 
+    //  redirectTo: 'forgot-password'
+    // },
     {
         path:'otp-verification',
         component:OtpVerificationComponent,
