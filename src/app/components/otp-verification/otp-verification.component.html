@@ -1,0 +1,20 @@
+<!-- <div class="form-container">
+  <form (ngSubmit)="verifyOTP()">
+    <h2>Verify OTP</h2>
+    <input type="text" [(ngModel)]="otp" name="otp" placeholder="Enter OTP" required />
+    <button type="submit">Verify</button>
+  </form>
+</div> -->
+
+
+<div class="form-container">
+  <form (ngSubmit)="verifyOTP()">
+    <h2>Verify OTP</h2>
+
+    <p class="timer">OTP Expires in: <strong>{{ timeLeft }}</strong></p>
+
+    <input type="text" [(ngModel)]="otp" name="otp" placeholder="Enter OTP" required />
+
+    <button type="submit">Verify</button>
+  </form>
+</div>
