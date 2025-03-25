@@ -1,0 +1,119 @@
+/* Container Layout */
+.leave-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+/* Form & History Cards */
+.leave-form, .leave-history {
+  width: 60%;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Titles */
+.leave-form h3, .leave-history h4 {
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Form Inputs */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 16px;
+}
+
+textarea.form-control {
+  resize: none;
+}
+
+/* Error Messages */
+.error-msg {
+  color: red;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* Buttons */
+.btn-primary {
+  background: #007bff;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background: #0056b3;
+}
+
+/* Leave History Table */
+.table {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table thead {
+  background: #007bff;
+  color: white;
+}
+
+.table th, .table td {
+  padding: 14px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+/* Status Badges */
+.badge {
+  padding: 6px 14px;
+  border-radius: 15px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.badge-success {
+  background: #28a745;
+  color: white;
+}
+
+.badge-warning {
+  background: #ffc107;
+  color: black;
+}
+
+.badge-danger {
+  background: #dc3545;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .leave-form, .leave-history {
+    width: 90%;
+  }
+}

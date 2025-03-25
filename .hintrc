@@ -6,29 +6,15 @@
     "axe/forms": [
       "default",
       {
-        "label": "off",
-        "select-name": "off"
+        "label": "off"
       }
     ],
     "disown-opener": "off",
+>>>>>>> 5f746c2334587231ae2ae4e42891ce411a06173b
     "axe/name-role-value": [
       "default",
       {
         "button-name": "off"
-      }
-    ],
-    "compat-api/css": [
-      "default",
-      {
-        "ignore": [
-          "backdrop-filter"
-        ]
-      }
-    ],
-    "axe/structure": [
-      "default",
-      {
-        "list": "off"
       }
     ]
   }

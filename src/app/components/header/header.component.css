@@ -1,0 +1,147 @@
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 15px; 
+}
+
+.toggle-btn {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+  background: none;
+  border: none;
+  transition: transform 0.3s ease-in-out;
+}
+
+.toggle-btn:hover {
+  transform: scale(1.1);
+}
+
+
+.spacer {
+  flex-grow: 1;
+}
+
+
+.profile button {
+  background: none !important;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.profile button:hover {
+  transform: scale(1.1);
+}
+
+
+.sidebar {
+  width: 70px;
+  height: 100vh;
+  background-color: #007bff;
+  color: white;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  transition: width 0.3s ease-in-out;
+  padding-top: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar.open {
+  width: 250px;
+}
+
+
+.sidebar .nav-links {
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.Left-bar{
+  margin-left: 30px;
+}
+
+
+.sidebar .nav-links li {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.3s;
+  justify-content: center;
+}
+
+.sidebar.open .nav-links li {
+  justify-content: flex-start;
+  padding-left: 20px;
+}
+
+.sidebar .nav-links li a {
+  text-decoration: none;
+  color: white;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.sidebar.open .nav-links li a {
+  justify-content: flex-start;
+}
+
+
+.sidebar .nav-links li i {
+  font-size: 1.5rem;
+  transition: margin 0.3s ease-in-out;
+}
+
+.sidebar.open .nav-links li i {
+  margin-right: 10px;
+}
+
+
+.sidebar .nav-links li:hover {
+  background-color:#007bff;
+  border-radius: 5px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+  }
+
+  .sidebar.open {
+    width: 220px;
+  }
+}
+
+
