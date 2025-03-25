@@ -166,7 +166,7 @@ isCheckedIn: boolean = false;
   
             let duration;
             if (checkOutTime) {
-              duration = checkOutTime.getTime() - checkInTime.getTime();
+              duration = this.formatTime(this.elapsedTime);
             } else if (this.isCheckedIn) {
               // Calculate ongoing work duration
               duration = new Date().getTime() - checkInTime.getTime();
