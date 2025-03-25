@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
+interface LeaveRequest {
+  email: string;
+  status: string;
+  // Add other properties as needed
+}
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -29,5 +35,10 @@ export class LeaveService {
   updateLeaveStatus(leaveId: string, status: string): Observable<any> {
     return this.http.put(`${this.apiUrl}/update/${leaveId}`, { status });
   }
+
+  getApprovedLeavesForUser(leaveRequests: LeaveRequest[], email: string): LeaveRequest[] {
+    return leaveRequests.filter(leave => leave.email === email && leave.status === 'approved');
+  }
+
 }
 
