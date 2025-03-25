@@ -1,75 +1,81 @@
-/* Center the form */
-.form-container {
-    width: 100%;
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  /* Heading styles */
-  .form-container h2 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: #333;
-  }
-  
-  /* Input field styling */
-  .form-container input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    text-align: center;
-    outline: none;
-    transition: border 0.3s ease-in-out;
-  }
-  
-  .form-container input:focus {
-    border-color: #007bff;
-  }
-  
-  /* Button styling */
-  .form-container button {
-    width: 100%;
-    padding: 10px;
-    background: #007bff;
-    border: none;
-    color: white;
-    font-size: 18px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .form-container button:hover {
-    background: #0056b3;
-  }
-  
-  /* Responsive design */
-  @media (max-width: 500px) {
-    .form-container {
-      width: 90%;
-      padding: 15px;
-    }
-  
-    .form-container h2 {
-      font-size: 20px;
-    }
-  
-    .form-container button {
-      font-size: 16px;
-    }
+/* otp-verification.component.css */
 
-    .timer {
-        font-size: 18px;
-        color: red;
-        margin-bottom: 10px;
-      }
-  }
-  
+.otp-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  text-align: center;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.otp-container h2 {
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 22px;
+}
+
+.otp-container p {
+  font-size: 14px;
+  color: #555;
+}
+
+.otp-input {
+  margin: 15px 0;
+}
+
+.otp-input input {
+  width: 100%;
+  font-size: 18px;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  text-align: center;
+  letter-spacing: 5px;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.otp-input input:focus {
+  border-color: #007bff;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px;
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
