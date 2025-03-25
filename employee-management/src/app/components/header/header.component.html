@@ -1,0 +1,68 @@
+<mat-toolbar color="primary" class="header">
+  <div class="left-section">
+    <div *ngIf="authService.isLoggedIn" class="toggle-btn" (click)="toggleSidebar()">☰</div>
+    <span class="logo" *ngIf="isSidebarOpen">
+     
+     
+    </span>
+    
+  </div>
+
+  <div class="Left-bar">
+    @if (!authService.isLoggedIn) {
+      Employee Management System
+    } @else {
+      @if (authService.isAdmin) {
+        Admin Dashboard
+      } @else {
+        Employee Dashboard
+      }
+    }
+   </div>
+  <span class="spacer"></span>
+<nav class="nav-links">
+  <div class="profile">
+    <button mat-icon-button [matMenuTriggerFor]="profileMenu">
+      <i class="fa-solid fa-user"></i>
+    </button>
+    <mat-menu #profileMenu="matMenu">
+      @if (authService.isAdmin) {
+        <button mat-menu-item  routerLink="/admin-profile">
+          {{ authService.userName }} 
+        </button>
+      }@else {
+        <button mat-menu-item  routerLink="/emp-profile">
+          {{ authService.userName }} 
+        </button>
+      }
+      
+      <button *ngIf="authService.isLoggedIn" mat-menu-item (click)="logout()">Logout</button>
+      <ng-container *ngIf="!authService.isLoggedIn">
+        <button mat-menu-item routerLink="/login">Login</button>
+        <button mat-menu-item routerLink="/register">Register</button>
+      </ng-container>
+    </mat-menu>
+  </div>
+</nav>
+</mat-toolbar>
+
+<aside *ngIf="authService.isLoggedIn" class="sidebar" [class.open]="isSidebarOpen">
+  <div class="logo">
+    <h2 *ngIf="isSidebarOpen">Profile</h2>
+  </div>
+  <ul class="nav-links">
+    @if (authService.isAdmin) {
+      <li><a routerLink="/admin-dashboard"><i class="fas fa-tachometer-alt"></i> <span *ngIf="isSidebarOpen">Dashboard</span></a></li>
+      <!-- <li><a routerLink="/checkIn"><i class="fas fa-clock"></i> <span *ngIf="isSidebarOpen">Check-in/Check-out</span></a></li> -->
+      <!-- <li><a routerLink="/employee-leave-form"><i class="fas fa-calendar-alt"></i> <span *ngIf="isSidebarOpen">Leave Requests</span></a></li> -->
+      <li><a routerLink="/add-employee"><i class="fas fa-user-plus"></i> <span *ngIf="isSidebarOpen">Add Employee</span></a></li>
+      <li><a routerLink="/employee-list"><i class="fas fa-user-plus"></i> <span *ngIf="isSidebarOpen">View Employee</span></a></li>
+    }@else {
+      <li><a routerLink="/employee-dashboard"><i class="fas fa-tachometer-alt"></i> <span *ngIf="isSidebarOpen">Dashboard</span></a></li>
+      <li><a routerLink="/checkIn"><i class="fas fa-clock"></i> <span *ngIf="isSidebarOpen">Check-in/Check-out</span></a></li>
+      <li><a routerLink="/employee-leave-form"><i class="fas fa-calendar-alt"></i> <span *ngIf="isSidebarOpen">Leave Requests</span></a></li>
+      <li><a routerLink="/add-employee"><i class="fas fa-user-plus"></i> <span *ngIf="isSidebarOpen">Add Employee</span></a></li>
+    }
+   
+  </ul>
+</aside>

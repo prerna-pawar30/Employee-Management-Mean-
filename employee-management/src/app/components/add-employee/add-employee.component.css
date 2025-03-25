@@ -1,0 +1,17 @@
+/* Center and emphasize the header */
+h5 {
+  font-weight: bold;
+}
+
+/* Improve spacing and style for labels */
+label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* Optional: Set a max-width for the form container */
+.container {
+  max-width: 800px;
+  margin-bottom: 20%;
+}
