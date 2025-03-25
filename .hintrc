@@ -6,13 +6,6 @@
     "axe/forms": [
       "default",
       {
-<<<<<<< HEAD
-        "label": "off",
-        "select-name": "off"
-      }
-    ],
-    "button-type": "off",
-=======
         "label": "off"
       }
     ],
@@ -23,22 +16,6 @@
       {
         "button-name": "off"
       }
-<<<<<<< HEAD
-    ],
-    "axe/text-alternatives": [
-      "default",
-      {
-        "image-alt": "off"
-      }
-    ],
-    "axe/structure": [
-      "default",
-      {
-        "list": "off",
-        "listitem": "off"
-      }
-=======
->>>>>>> 5f746c2334587231ae2ae4e42891ce411a06173b
     ]
   }
 }
