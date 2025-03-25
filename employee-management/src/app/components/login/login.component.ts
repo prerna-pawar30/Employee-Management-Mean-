@@ -1,79 +1,143 @@
+// import { HttpClient } from '@angular/common/http';
+// import { Component, inject } from '@angular/core';
+// import { Router } from '@angular/router';
+// import { FormsModule } from '@angular/forms';
+// import Swal from 'sweetalert2';
+// import { AuthService } from '../../services/auth.service';
+// // import { NavbarLogoutComponent } from "../navbar-logout/navbar-logout.component";
+
+// @Component({
+//   selector: 'app-login',
+//   standalone: true,
+//   imports: [FormsModule],
+//   templateUrl: './login.component.html',
+//   styleUrls: ['./login.component.css'],
+// })
+// export class LoginComponent {
+//   userobj: any = { email: '', password: '' };
+//   router = inject(Router);
+//   http = inject(HttpClient);
+
+//   constructor() {}
+
+//   authService = inject(AuthService);
+
+//   onLogin() {
+//     Swal.fire({
+//       title: 'Logging in...',
+//       text: 'Please wait while we verify your credentials',
+//       allowOutsideClick: false,
+//       didOpen: () => {
+//         Swal.showLoading();
+//       }
+//     });
+  
+//     console.log('Sending login request with:', this.userobj); // Debugging log
+  
+//     this.authService.login(this.userobj.email, this.userobj.password).subscribe(
+//       (res: any) => {
+//         Swal.close();
+//         console.log(res, "response obj");
+  
+//         localStorage.setItem('authToken', res.token);
+//         localStorage.setItem('loginUser', JSON.stringify(res.user)); // Store user details
+  
+//         Swal.fire({
+//           title: 'Login Successful!',
+//           text: res.message,
+//           icon: 'success',
+//           timer: 4000,
+//           showConfirmButton: false
+//         });
+  
+//         this.router.navigateByUrl("/");
+//       },
+//       (error) => {
+//         Swal.close();
+//         console.error('Login failed:', error); // Debugging log
+//         Swal.fire({
+//           title: 'Login Failed',
+//           text: error.error?.message || 'Server error',
+//           icon: 'error',
+//           confirmButtonText: 'Try Again'
+//         });
+//       }
+//     );
+//   }
+// }  
+
+
+
+import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
-import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../services/auth.service';
+// import { NavbarLogoutComponent } from "../navbar-logout/navbar-logout.component";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    RouterModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule
-  ],
+  imports: [FormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  formbuilder = inject(FormBuilder);
-  authService = inject(AuthService);
+  userobj: any = { email: '', password: '' };
   router = inject(Router);
+  http = inject(HttpClient);
 
-  loginForm = this.formbuilder.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required]
-  });
+  constructor() {}
 
-  errorMessage: string = '';
+  authService = inject(AuthService);
 
-  login() {
-    if (this.loginForm.invalid) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Invalid Input',
-        text: 'Please enter a valid email and password!',
-      });
-      return;
-    }
-
-    this.authService.login(this.loginForm.value.email!, this.loginForm.value.password!)
-      .subscribe({
-        next: (result: any) => {
-          console.log(result);
-          localStorage.setItem("token", result.token);
-          localStorage.setItem("user", JSON.stringify(result.user));
-
-          Swal.fire({
-            icon: 'success',
-            title: 'Login Successful!',
-            text: `Welcome back, ${result.user.name}!`,
-            timer: 2000,
-            showConfirmButton: false
-          });
-
-          if (result.user.isAdmin) {
-            this.router.navigateByUrl("/admin-dashboard");
-          } else {
-            this.router.navigateByUrl("/employee-dashboard");
-          }
-        },
-        error: () => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Login Failed',
-            text: 'Invalid email or password!',
-          });
+  onLogin() {
+    Swal.fire({
+      title: 'Logging in...',
+      text: 'Please wait while we verify your credentials',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
+  
+    this.authService.login(this.userobj.email, this.userobj.password).subscribe(
+      (res: any) => {
+        Swal.close();
+        console.log("Login Response:", res);
+  
+        // Store user details in local storage
+        localStorage.setItem('authToken', res.token);
+        localStorage.setItem('loginUser', JSON.stringify(res.user));
+  
+        Swal.fire({
+          title: 'Login Successful!',
+          text: res.message,
+          icon: 'success',
+          timer: 4000,
+          showConfirmButton: false
+        });
+  
+        // Redirect Based on Role
+        if (res.user.role === 'admin') {
+          this.router.navigateByUrl("/admin-dashboard");
+        } else if (res.user.role === 'employee') {
+          this.router.navigateByUrl("/employee-dashboard");
+        } else {
+          this.router.navigateByUrl("/"); // Default route
         }
-      });
+      },
+      (error) => {
+        Swal.close();
+        console.error('Login failed:', error);
+        Swal.fire({
+          title: 'Login Failed',
+          text: error.error?.message || 'Server error',
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        });
+      }
+    );
   }
-}
+}  
