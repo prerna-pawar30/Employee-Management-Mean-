@@ -1,43 +1,35 @@
-<div class="login-container">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Login</mat-card-title>
-    </mat-card-header>
+<div class="form-container">
+  <form>
+    <h2>Login</h2>
 
-    <mat-card-content>
-      <form [formGroup]="loginForm" (ngSubmit)="login()">
-        <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email" type="email" required>
-          <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
-            Email is required
-          </mat-error>
-          <mat-error *ngIf="loginForm.controls['email'].hasError('email')">
-            Please enter a valid email
-          </mat-error>
-        </mat-form-field>
+    <div class="form-group">
+      <input
+        type="email"
+        [(ngModel)]="userobj.email"
+        name="email"
+        placeholder="Email"
+        required
+      />
+    </div>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Password</mat-label>
-          <input matInput formControlName="password" type="password" required>
-          <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
-            Password is required
-          </mat-error>
-        </mat-form-field>
+    <div class="form-group">
+      <input
+        type="password"
+        [(ngModel)]="userobj.password"
+        name="password"
+        placeholder="Password"
+        required
+      />
+    </div>
 
-        <div class="error-message" *ngIf="errorMessage">
-          {{ errorMessage }}
-        </div>
+    <button type="button" (click)="onLogin()">Login</button>
 
-        <div class="button-container">
-          <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
-            Login
-          </button>          
-          <button mat-button type="button" routerLink="/register">
-            Register
-          </button>
-        </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
+    <div>
+      <p><a href="/forgot-password">Forget Password?</a></p>
+    </div>
+
+    <div>
+      <p>Don’t have an account? <a href="/register">Register</a></p>
+    </div>
+  </form>
 </div>
