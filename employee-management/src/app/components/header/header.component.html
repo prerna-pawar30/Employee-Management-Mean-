@@ -53,10 +53,9 @@
   <ul class="nav-links">
     @if (authService.isAdmin) {
       <li><a routerLink="/admin-dashboard"><i class="fas fa-tachometer-alt"></i> <span *ngIf="isSidebarOpen">Dashboard</span></a></li>
-      <!-- <li><a routerLink="/checkIn"><i class="fas fa-clock"></i> <span *ngIf="isSidebarOpen">Check-in/Check-out</span></a></li> -->
-      <!-- <li><a routerLink="/employee-leave-form"><i class="fas fa-calendar-alt"></i> <span *ngIf="isSidebarOpen">Leave Requests</span></a></li> -->
       <li><a routerLink="/add-employee"><i class="fas fa-user-plus"></i> <span *ngIf="isSidebarOpen">Add Employee</span></a></li>
       <li><a routerLink="/employee-list"><i class="fas fa-user-plus"></i> <span *ngIf="isSidebarOpen">View Employee</span></a></li>
+      <li><a routerLink="/leave-employee"><i class="fas fa-calendar-alt"></i><span *ngIf="isSidebarOpen">Leave Report</span></a></li>
     }@else {
       <li><a routerLink="/employee-dashboard"><i class="fas fa-tachometer-alt"></i> <span *ngIf="isSidebarOpen">Dashboard</span></a></li>
       <li><a routerLink="/checkIn"><i class="fas fa-clock"></i> <span *ngIf="isSidebarOpen">Check-in/Check-out</span></a></li>

@@ -4,15 +4,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { SideBarComponent } from "../side-bar/side-bar.component";
+// import { SideBarComponent } from "../side-bar/side-bar.component";
 
 @Component({
   selector: 'app-leave',
   templateUrl: './employee-leave.component.html',
-  styleUrls: ['./employee-leave.component.css'],
+  styleUrls: ['./employee-leave.component.css'], // Ensure this file exists
   standalone: true,
   imports: [CommonModule, FormsModule, MatSnackBarModule]
 })
+
 export class EmployeeleaveComponent implements OnInit {
   constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
 
@@ -42,7 +43,6 @@ export class EmployeeleaveComponent implements OnInit {
   
   loadUserDetails() {
     if (typeof window === 'undefined') {
-      // Running on server, localStorage is not available
       return;
     }
   
@@ -80,13 +80,13 @@ export class EmployeeleaveComponent implements OnInit {
       this.snackBar.open('Please fill all required fields', 'Close', { duration: 3000 });
       return;
     }
-      // Validate reason (Minimum 10 characters)
+      
       if (this.newLeaveRequest.reason.length < 10) {
         this.snackBar.open('Reason must be at least 10 characters long.', 'Close', { duration: 3000 });
         return;
       }
   
-      // Validate Dates (Must be in the future)
+     
       const today = new Date();
       const fromDate = new Date(this.newLeaveRequest.fromDate);
       const toDate = new Date(this.newLeaveRequest.toDate);
@@ -143,7 +143,7 @@ export class EmployeeleaveComponent implements OnInit {
         (data) => {
           console.log('Leave requests received:', data);
           this.leaveRequests = data;
-          this.calculateApprovedLeaves();
+          this.calculateApprovedLeaves(this.newLeaveRequest.email);
         },
         (error) => {
           console.error('Error fetching leave requests:', error);
@@ -151,22 +151,37 @@ export class EmployeeleaveComponent implements OnInit {
       );
   }
 
-
-  calculateApprovedLeaves() {
+  calculateApprovedLeaves(loggedInUserEmail: string) {
+    if (!this.leaveRequests || !Array.isArray(this.leaveRequests)) {
+      return;
+    }
+  
+    const officialHolidays = ['2024-01-01', '2024-12-25']; // Example public holidays
+    const isWeekend = (date: Date) => date.getDay() === 0 || date.getDay() === 6; // Sunday(0) & Saturday(6)
+  
     this.approvedLeaves = this.leaveRequests
-      .filter(leave => leave.status === 'approved')
+      .filter(leave => 
+        leave.email?.trim().toLowerCase() === loggedInUserEmail.trim().toLowerCase() &&
+        leave.status?.trim().toLowerCase() === "approved"
+      )
       .reduce((total, leave) => {
-        const from = new Date(leave.fromDate);
-        const to = new Date(leave.toDate);
+        if (!leave.fromDate || !leave.toDate) return total;
   
-        // Reset time to 00:00:00 to avoid time discrepancies
-        from.setHours(0, 0, 0, 0);
-        to.setHours(0, 0, 0, 0);
+        let fromDate = new Date(leave.fromDate);
+        let toDate = new Date(leave.toDate);
   
-        // Calculate difference in days (including start date)
-        const days = Math.round((to.getTime() - from.getTime()) / (1000 * 3600 * 24)) + 1;
-        
-        return total + Math.max(1, days);
+        if (isNaN(fromDate.getTime()) || isNaN(toDate.getTime())) return total;
+  
+        let leaveDays = 0;
+        while (fromDate <= toDate) {
+          const dateStr = fromDate.toISOString().split('T')[0];
+          if (!isWeekend(fromDate) && !officialHolidays.includes(dateStr)) {
+            leaveDays++;
+          }
+          fromDate.setDate(fromDate.getDate() + 1);
+        }
+  
+        return total + leaveDays;
       }, 0);
   
     this.remainingLeaves = Math.max(0, this.totalLeaves - this.approvedLeaves);
