@@ -2,18 +2,20 @@ import { Component, inject } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink } from '@angular/router';
-import { Location } from '@angular/common';
+import { MatMenuModule } from '@angular/material/menu';
 import { AuthService } from '../../services/auth.service';
+import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
-  imports: [MatToolbarModule, MatIconModule],
+  styleUrl: './header.component.css',
+  imports: [MatToolbarModule, MatIconModule, RouterLink, CommonModule, MatMenuModule]
 })
 export class HeaderComponent {
-  authService = inject(AuthService);
   router = inject(Router);
-  location = inject(Location);
+  authService = inject(AuthService);
+  isSidebarOpen = false;  // Sidebar state
 
   async logout(): Promise<void> {
     try {
@@ -24,7 +26,7 @@ export class HeaderComponent {
     }
   }
 
-  goBack(): void {
-    this.location.back();
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
   }
 }

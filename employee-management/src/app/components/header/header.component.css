@@ -1,9 +1,10 @@
+/* Header Styles */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
-  background-color: #007bff;
+  background-color: #9763f0;
   color: white;
   font-family: 'Arial', sans-serif;
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
@@ -13,13 +14,14 @@
   z-index: 1000;
 }
 
-
+/* Left Section (Toggle + Logo) */
 .left-section {
   display: flex;
   align-items: center;
-  gap: 15px; 
+  gap: 15px; /* Adds space between toggle button and logo */
 }
 
+/* Toggle Button */
 .toggle-btn {
   font-size: 1.5rem;
   cursor: pointer;
@@ -33,14 +35,14 @@
   transform: scale(1.1);
 }
 
-
+/* Spacer for Dynamic Alignment */
 .spacer {
   flex-grow: 1;
 }
 
-
+/* Profile Icon */
 .profile button {
-  background: none !important;
+  background: none !important; /* Removes background */
   border: none;
   color: white;
   font-size: 1.5rem;
@@ -51,11 +53,11 @@
   transform: scale(1.1);
 }
 
-
+/* Sidebar */
 .sidebar {
   width: 70px;
   height: 100vh;
-  background-color: #007bff;
+  background-color: #9a61fe;
   color: white;
   position: fixed;
   left: 0;
@@ -73,7 +75,7 @@
   width: 250px;
 }
 
-
+/* Sidebar Navigation Links */
 .sidebar .nav-links {
   width: 100%;
   list-style: none;
@@ -84,8 +86,7 @@
 .Left-bar{
   margin-left: 30px;
 }
-
-
+/* Sidebar Items */
 .sidebar .nav-links li {
   width: 100%;
   padding: 15px;
@@ -116,7 +117,7 @@
   justify-content: flex-start;
 }
 
-
+/* Sidebar Icons */
 .sidebar .nav-links li i {
   font-size: 1.5rem;
   transition: margin 0.3s ease-in-out;
@@ -126,13 +127,13 @@
   margin-right: 10px;
 }
 
-
+/* Sidebar Hover Effects */
 .sidebar .nav-links li:hover {
-  background-color:#007bff;
+  background-color: #774de1;
   border-radius: 5px;
 }
 
-
+/* Responsive Design */
 @media screen and (max-width: 768px) {
   .sidebar {
     width: 60px;

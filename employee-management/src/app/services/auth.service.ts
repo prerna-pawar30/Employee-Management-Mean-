@@ -149,7 +149,7 @@ export class AuthService {
   
 
   get isLoggedIn(): boolean {
-    return typeof window !== 'undefined' && localStorage.getItem('token') !== null;
+    return typeof window !== 'undefined' && localStorage.getItem('authToken') !== null;
   }
 
   get isAdmin (): boolean {
@@ -171,7 +171,7 @@ export class AuthService {
 
   get userName(): string | null {
     if (typeof window !== 'undefined') {
-      let userData = localStorage.getItem('user');
+      let userData = localStorage.getItem('loginUser');
       if (userData) {
         return JSON.parse(userData).name;
       }
@@ -181,7 +181,7 @@ export class AuthService {
 
   get userEmail(): string | null {
     if (typeof window !== 'undefined') {
-      let userData = localStorage.getItem('user');
+      let userData = localStorage.getItem('loginUser');
       if (userData) {
         return JSON.parse(userData).email;
       }
@@ -201,8 +201,8 @@ export class AuthService {
 
   logout() {
     if (typeof window !== 'undefined') {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('loginUser');
     }
   }
 
