@@ -46,7 +46,7 @@ export class EmployeeleaveComponent implements OnInit {
       return;
     }
   
-    const userString = localStorage.getItem('user');
+    const userString = localStorage.getItem('loginUser');
 
     if (!userString) {
       console.warn('No user data found in localStorage.');

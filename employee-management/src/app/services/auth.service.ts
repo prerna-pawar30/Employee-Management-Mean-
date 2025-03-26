@@ -191,7 +191,7 @@ export class AuthService {
 
   getCurrentUser(): { _id: string; name: string; email: string; mobile: string } | null {
     if (typeof window !== 'undefined') {
-      const userData = localStorage.getItem('user');
+      const userData = localStorage.getItem('loginUser');
       if (userData) {
         return JSON.parse(userData);
       }
@@ -208,7 +208,7 @@ export class AuthService {
 
   get userId(): string | null {
     if (typeof window !== 'undefined') {
-      let userData = localStorage.getItem('user');
+      let userData = localStorage.getItem('loginUser');
       if (userData) {
         return JSON.parse(userData)._id;
       }
