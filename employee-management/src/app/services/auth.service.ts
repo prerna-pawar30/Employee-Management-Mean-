@@ -152,15 +152,22 @@ export class AuthService {
     return typeof window !== 'undefined' && localStorage.getItem('token') !== null;
   }
 
-  get isAdmin(): boolean {
+  get isAdmin (): boolean {
     if (typeof window !== 'undefined') {
-      let userData = localStorage.getItem('user');
-      if (userData) {
-        return JSON.parse(userData).isAdmin;
+      let authToken = localStorage.getItem('authToken');
+      if (authToken) {
+        // Decode the authToken
+        let decodedToken = JSON.parse(atob(authToken.split('.')[1]));
+  
+        // Check if isAdmin exists in decoded token and return its value
+        if (decodedToken && decodedToken.isAdmin !== undefined) {
+          return decodedToken.isAdmin;
+        }
       }
     }
-    return false;
+    return false; // Default to false if no isAdmin found or localStorage is unavailable
   }
+  
 
   get userName(): string | null {
     if (typeof window !== 'undefined') {

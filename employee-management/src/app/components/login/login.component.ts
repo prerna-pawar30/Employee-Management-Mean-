@@ -119,14 +119,27 @@ export class LoginComponent {
           showConfirmButton: false
         });
   
+       const token= localStorage.getItem("authToken");
+       console.log("token", token);
+       
         // Redirect Based on Role
-        if (res.user.role === 'admin') {
-          this.router.navigateByUrl("/admin-dashboard");
-        } else if (res.user.role === 'employee') {
-          this.router.navigateByUrl("/employee-dashboard");
+        if (token) {
+          const tokenPayload = JSON.parse(atob(token.split(".")[1])); // Decode JWT payload
+          const isAdmin = tokenPayload.isAdmin; // Extract isAdmin value
+        
+          if (isAdmin) {
+            console.log("Redirecting to Admin Dashboard...");
+            this.router.navigateByUrl("/admin-dashboard");
+          } else {
+            console.log("Redirecting to Employee Dashboard...");
+            this.router.navigateByUrl("/employee-dashboard");
+          }
         } else {
-          this.router.navigateByUrl("/"); // Default route
+          console.log("Redirecting to Default Route...");
+          this.router.navigateByUrl("/");
         }
+        
+        
       },
       (error) => {
         Swal.close();

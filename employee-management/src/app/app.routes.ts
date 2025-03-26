@@ -155,7 +155,7 @@ export const routes: Routes = [
     {
         path:'employee-dashboard',
         component:EmployeeDashboardComponent,
-        canActivate:[authGaurd]
+         canActivate:[authGaurd]
     },
 
    
@@ -182,7 +182,7 @@ export const routes: Routes = [
     {
        path:'leave-employee',
        component:LeaveComponent,
-       canActivate: [authGaurd]
+    //    canActivate: [authGaurd]
     },
     {
         path:'employee-leave-form',
